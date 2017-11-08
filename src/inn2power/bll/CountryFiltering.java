@@ -1,6 +1,7 @@
 package inn2power.bll;
 
 import be.Company;
+import inn2power.bll.ICompanyFilter;
 
 /**
  *
@@ -8,15 +9,16 @@ import be.Company;
  */
 public class CountryFiltering implements ICompanyFilter
 {
+
     private String country;
-    
+
     public CountryFiltering(String country)
     {
         this.country = country;
     }
 
     @Override
-    public boolean meetCriteria(Company company) 
+    public boolean meetCriteria(Company company)
     {
         return company.getCountry().equalsIgnoreCase(country);
     }

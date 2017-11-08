@@ -17,182 +17,182 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <SplitPane dividerPositions="0.22828507795100222" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <items>
-        <AnchorPane>
-               <children>
-                  <Accordion layoutY="46.0">
-                    <panes>
-                      <TitledPane animated="false" prefHeight="207.0" prefWidth="216.0" text="Region">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <CheckBox fx:id="regionNational" mnemonicParsing="false" text="National">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox fx:id="regionBordering" layoutY="27.0" mnemonicParsing="false" text="Bordering">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox fx:id="regionContinent" layoutY="54.0" mnemonicParsing="false" text="Continent">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox fx:id="regionSemiInternational" layoutY="81.0" mnemonicParsing="false" text="Semi-international">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox fx:id="regionInternational" layoutY="108.0" mnemonicParsing="false" text="International">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                 </children>
-                              </AnchorPane>
-                        </content>
-                      </TitledPane>
-                      <TitledPane animated="false" text="??? ???">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <CheckBox mnemonicParsing="false" text="Filter option 1">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox layoutY="27.0" mnemonicParsing="false" text="Filter option 2">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox layoutY="50.0" mnemonicParsing="false" text="Filter option 3">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox layoutY="77.0" mnemonicParsing="false" text="Filter option 4">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox layoutY="104.0" mnemonicParsing="false" text="Filter option 5">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                 </children>
-                              </AnchorPane>
-                        </content>
-                      </TitledPane>
-                      <TitledPane animated="false" text="??? ??? ???">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <CheckBox mnemonicParsing="false" text="Filter option 1">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox layoutY="27.0" mnemonicParsing="false" text="Filter option 2">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox layoutY="54.0" mnemonicParsing="false" text="Filter option 3">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox layoutY="81.0" mnemonicParsing="false" text="Filter option 4">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                    <CheckBox layoutY="108.0" mnemonicParsing="false" text="Filter option 5">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </CheckBox>
-                                 </children>
-                              </AnchorPane>
-                        </content>
-                      </TitledPane>
-                    </panes>
-                  </Accordion>
-                  <Button fx:id="txt" layoutX="158.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnSearchName" prefHeight="26.0" prefWidth="54.0" text="Search" />
-                  <TextField fx:id="txtSearch" layoutY="13.0" promptText="Search in Table..." />
-               </children>
-        </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <content>
-                        <AnchorPane>
-                           <children>
-                              <TableView fx:id="tableView" prefHeight="573.0" prefWidth="690.0" tableMenuButtonVisible="true">
-                                <columns>
-                                  <TableColumn fx:id="tcId" prefWidth="33.0" text="ID" />
-                                  <TableColumn fx:id="tcName" prefWidth="117.0" text="Name" />
-                                    <TableColumn fx:id="tcCountry" prefWidth="129.0" text="Country" />
-                                    <TableColumn fx:id="tcAddress" prefWidth="118.0" text="Address" />
-                                    <TableColumn fx:id="tcWebsite" prefWidth="119.0" text="Website" />
-                                    <TableColumn fx:id="tcCoorcinate" prefWidth="114.0" text="Coordinate" />
-                                    <TableColumn fx:id="tcIsSME" prefWidth="48.0" text="isSME?" />
-                                </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </AnchorPane>
-      </items>
-    </SplitPane>
-  </children>
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.MainWindowController">
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="New" />
+                        <MenuItem mnemonicParsing="false" text="Open…" />
+                        <Menu mnemonicParsing="false" text="Open Recent" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" text="Save As…" />
+                        <MenuItem mnemonicParsing="false" text="Revert" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Preferences…" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Quit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Undo" />
+                        <MenuItem mnemonicParsing="false" text="Redo" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Cut" />
+                        <MenuItem mnemonicParsing="false" text="Copy" />
+                        <MenuItem mnemonicParsing="false" text="Paste" />
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Select All" />
+                        <MenuItem mnemonicParsing="false" text="Unselect All" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <SplitPane dividerPositions="0.22828507795100222" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+            <items>
+                <AnchorPane>
+                    <children>
+                        <Accordion layoutY="46.0">
+                            <panes>
+                                <TitledPane animated="false" prefHeight="207.0" prefWidth="216.0" text="Region">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                            <children>
+                                                <CheckBox fx:id="regionNational" mnemonicParsing="false" text="National">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox fx:id="regionBordering" layoutY="27.0" mnemonicParsing="false" text="Bordering">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox fx:id="regionContinent" layoutY="54.0" mnemonicParsing="false" text="Continent">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox fx:id="regionSemiInternational" layoutY="81.0" mnemonicParsing="false" text="Semi-international">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox fx:id="regionInternational" layoutY="108.0" mnemonicParsing="false" text="International">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </TitledPane>
+                                <TitledPane animated="false" text="??? ???">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                            <children>
+                                                <CheckBox mnemonicParsing="false" text="Filter option 1">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox layoutY="27.0" mnemonicParsing="false" text="Filter option 2">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox layoutY="50.0" mnemonicParsing="false" text="Filter option 3">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox layoutY="77.0" mnemonicParsing="false" text="Filter option 4">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox layoutY="104.0" mnemonicParsing="false" text="Filter option 5">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </TitledPane>
+                                <TitledPane animated="false" text="??? ??? ???">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                            <children>
+                                                <CheckBox mnemonicParsing="false" text="Filter option 1">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox layoutY="27.0" mnemonicParsing="false" text="Filter option 2">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox layoutY="54.0" mnemonicParsing="false" text="Filter option 3">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox layoutY="81.0" mnemonicParsing="false" text="Filter option 4">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                                <CheckBox layoutY="108.0" mnemonicParsing="false" text="Filter option 5">
+                                                    <padding>
+                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                    </padding>
+                                                </CheckBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </TitledPane>
+                            </panes>
+                        </Accordion>
+                        <Button fx:id="txt" layoutX="158.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnSearchName" prefHeight="26.0" prefWidth="54.0" text="Search" />
+                        <TextField fx:id="txtSearch" layoutY="13.0" promptText="Search in Table..." />
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                    <children>
+                        <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <content>
+                                <AnchorPane>
+                                    <children>
+                                        <TableView fx:id="tableView" prefHeight="573.0" prefWidth="690.0" tableMenuButtonVisible="true">
+                                            <columns>
+                                                <TableColumn fx:id="tcId" prefWidth="33.0" text="ID" />
+                                                <TableColumn fx:id="tcName" prefWidth="117.0" text="Name" />
+                                                <TableColumn fx:id="tcCountry" prefWidth="129.0" text="Country" />
+                                                <TableColumn fx:id="tcAddress" prefWidth="118.0" text="Address" />
+                                                <TableColumn fx:id="tcWebsite" prefWidth="119.0" text="Website" />
+                                                <TableColumn fx:id="tcCoorcinate" prefWidth="114.0" text="Coordinate" />
+                                                <TableColumn fx:id="tcIsSME" prefWidth="48.0" text="isSME?" />
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
 </VBox>
