@@ -1,8 +1,7 @@
 package inn2power.bll;
 
 import be.Company;
-import dal.CompanyDAO;
-import inn2power.bll.ICompanyFilter;
+import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +12,23 @@ import java.util.List;
  */
 public class Filtering
 {
+    DataAccess data;
+    
+    public Filtering()
+    {
+        try {
+            data = new DataAccess();
+        } catch (IOException e) {
+        }
+    }
+
 
     public void countrySearch() throws IOException
     {
-        List<Company> allCompanies = new CompanyDAO().getAllCompanies();
+        List<Company> allCompanies = data.getAllCompanies();
 
         List<ICompanyFilter> filters = new ArrayList();
-        filters.add(new CountryFiltering("Phillipines"));
+        filters.add(new CountryFiltering("Philippines"));
 
         List<Company> filteredList;
         filteredList = companyFiltering(allCompanies, filters);
@@ -53,7 +62,6 @@ public class Filtering
                 filteredList.add(company);
             }
         }
-
         return filteredList;
     }
 

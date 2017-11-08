@@ -58,4 +58,11 @@ public class BllManager
         });
         return companyNames;
     }
+    
+    public void countrySearch() throws IOException
+    {
+        Filtering filtering = new Filtering();
+        
+        filtering.countrySearch();
+    }
 }
