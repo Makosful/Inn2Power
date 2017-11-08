@@ -37,59 +37,57 @@ import javafx.scene.input.MouseEvent;
 public class TableViewController implements Initializable {
     
     @FXML
-    private TableView<Company> tableCompany;
+    private TableView<Company> tableView;
     @FXML
-    private TableColumn<Company, String> columnName;
+    private TableColumn<Company, String> tcName;
     @FXML
-    private TableColumn<Company, String> columnAdress;
+    private TableColumn<Company, String> tcAddress;
     @FXML
-    private TableColumn<Company, String> columnId;
+    private TableColumn<Company, String> tcId;
       
     @FXML
-    private TextField textFieldNameInput;
+    private TextField txtSearch;
     
-    
+    /*
+    @FXML
+    private Button btnSearch;
+    */
+
     private ObservableList<Company> search = FXCollections.observableArrayList();
     
-    
     BllManager ip = new BllManager();
-    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
             
-        columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        columnAdress.setCellValueFactory(new PropertyValueFactory<>("Address"));
-        columnId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        tcName.setCellValueFactory(new PropertyValueFactory<>("Name:"));
+        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address:"));
+        tcId.setCellValueFactory(new PropertyValueFactory<>("ID:"));
         
-        
-    
         try {
-            tableCompany.setItems(ip.getAllCompaniesExample());
-            tableCompany.getSortOrder().add(columnName);
-            tableCompany.getSortOrder().add(columnAdress);
-            tableCompany.getSortOrder().add(columnId);
+            tableView.setItems(ip.getAllCompaniesExample());
+            tableView.getSortOrder().add(tcName);
+            tableView.getSortOrder().add(tcAddress);
+            tableView.getSortOrder().add(tcId);
             
         } catch (IOException ex) {
             Logger.getLogger(TableViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }  
     
-    
     @FXML
     private void btnSearchName(ActionEvent event) throws IOException 
     {
-               
-        columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        columnAdress.setCellValueFactory(new PropertyValueFactory<>("Address"));
-        columnId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
         
-        tableCompany.setItems(ip.getSearchResult(textFieldNameInput.getText()));
+        tableView.setItems(ip.getSearchResult(txtSearch.getText()));
         
         RelationDAO r = new RelationDAO();
       
         for(Relation re : r.getAllRelations()){
-            if(re.getSource().getName().equals(tableCompany.getItems().get(0).getName())){
+            if(re.getSource().getName().equals(tableView.getItems().get(0).getName())){
                 System.out.println(re.getSource().getName());
             };
         }

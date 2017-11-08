@@ -165,7 +165,7 @@
                       </TitledPane>
                     </panes>
                   </Accordion>
-                  <Button layoutX="158.0" layoutY="13.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Search" />
+                  <Button fx:id="txt" layoutX="158.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnSearchName" prefHeight="26.0" prefWidth="54.0" text="Search" />
                   <TextField fx:id="txtSearch" layoutY="13.0" promptText="Search in Table..." />
                </children>
         </AnchorPane>
