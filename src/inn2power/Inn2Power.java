@@ -2,6 +2,7 @@ package inn2power;
 
 import be.*;
 import dal.*;
+import inn2power.bll.Filtering;
 import java.io.IOException;
 import java.util.List;
 
@@ -29,13 +30,16 @@ public class Inn2Power
      */
     private static void getAllCompaniesExample() throws IOException
     {
+        Filtering f = new Filtering();
+        f.countrySearch();
+        
         CompanyDAO cDAO = new CompanyDAO();
-
+        
         List<Company> companies = cDAO.getAllCompanies();
 
         companies.forEach((company) ->
         {
-            System.out.println(company.getName());
+           // System.out.println(company.getName());
         });
     }
 

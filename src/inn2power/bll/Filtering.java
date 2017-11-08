@@ -20,13 +20,14 @@ public class Filtering
     public void countrySearch() throws IOException
     {
         List<Company> allCompanies = new CompanyDAO().getAllCompanies();
-        
+      
         List<ICompanyFilter> filters = new ArrayList();
-        filters.add(new CountryFiltering("Phillipines"));
+        filters.add(new CountryFiltering("Philippines"));
+        filters.add(new CompanySMEFilter(false)); 
         
         List<Company> filteredList;
         filteredList = companyFiltering(allCompanies, filters);
-        
+       
         for (Company company : filteredList)
         {
             System.out.println(company.getName());
