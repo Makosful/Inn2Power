@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package inn2powertool;
+package inn2power.gui.controller;
 
 import be.Company;
 import be.Relation;
@@ -34,7 +34,7 @@ import javafx.scene.input.MouseEvent;
  *
  * @author B
  */
-public class FXMLDocumentController implements Initializable {
+public class TableViewController implements Initializable {
     
     @FXML
     private TableView<Company> tableCompany;
@@ -71,7 +71,7 @@ public class FXMLDocumentController implements Initializable {
             tableCompany.getSortOrder().add(columnId);
             
         } catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TableViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }  
     
