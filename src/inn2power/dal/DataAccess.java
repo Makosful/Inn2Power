@@ -24,7 +24,7 @@ public class DataAccess
         rDAO = new RelationDAO();
     }
 
-    public List<Company> mapToItem()
+    public List<Company> getAllCompanies()
     {
         return cDAO.getAllCompanies();
     }
