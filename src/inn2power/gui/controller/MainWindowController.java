@@ -17,19 +17,24 @@ import javafx.event.ActionEvent;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+
+import javafx.scene.Scene;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  *
  * @author B
  */
-public class MainWindowController implements Initializable
-{
+public class MainWindowController implements Initializable {
+
     @FXML
     private TableView<Company> tableView;
     @FXML
@@ -61,12 +66,10 @@ public class MainWindowController implements Initializable
     @FXML
     private TableColumn<?, ?> tcIsSME;
 
+    BllManager bm = new BllManager();
     private CheckBox[] boxes = new CheckBox[5];
     
-    
-    BllManager bm = new BllManager();
-     
-    @Override
+
     public void initialize(URL url, ResourceBundle rb)
     {
         /**
@@ -90,34 +93,52 @@ public class MainWindowController implements Initializable
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
 
-        try
-        {
+
+        AutoTextChange();
+
+        tcName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+
+
+        try {
             tableView.setItems(bm.getAllCompaniesExample());
             System.out.println(bm.getAllCompaniesExample().size());
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
-
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     private void checkbox(){}
 
-    
+
+
+    private void AutoTextChange() {
+        txtSearch.textProperty().addListener(new ChangeListener<String>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                    String oldText, String newText) {
+                UpdatedSearch();
+                System.out.println("The text changed from: " + oldText + " to: " + newText);
+            }
+        });
+    }
+
+
     @FXML
-    private void btnSearchName(ActionEvent event) throws IOException
-    {
+    private void btnSearchName() throws IOException {
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        
-        
+
+        UpdatedSearch();
+    }
+
+    private void UpdatedSearch() {
         tableView.setItems(bm.getSearchResult(txtSearch.getText()));
-        
-        //tableView.setItems(ip.getSearchResult(txtSearch.getText()));
     }
 }
