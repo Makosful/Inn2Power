@@ -23,7 +23,7 @@ public class Filtering
     }
     
     
-    public List<Company> addFilters(boolean et, boolean to, boolean tre, boolean fire, boolean fem) throws IOException
+    public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
     {
                   
                 
@@ -31,12 +31,13 @@ public class Filtering
 
         List<ICompanyFilter> filters = new ArrayList();
         
-        if(et == true){
+        if(national == true){
              filters.add(new CountryFiltering("Brazil"));
-        }else if(to == true){
-           // filters.add(new CompanySMEFilter(true));
         }
-       
+        
+
+        // filters.add(new CompanySMEFilter(true));
+   
         
         List<Company> filteredList;
         filteredList = companyFiltering(allCompanies, filters);

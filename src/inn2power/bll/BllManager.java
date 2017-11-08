@@ -63,13 +63,13 @@ public class BllManager
     }
     
     
-    public ObservableList filterBox(boolean et, boolean to, boolean tre, boolean fire, boolean fem) throws IOException
+    public ObservableList filterBox(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
     {
         Filtering filtering = new Filtering();
         
         companyNames.clear();
         List<Company> filteredList;
-        filteredList = filtering.addFilters(et, to, tre, fire, fem);
+        filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
 
         for (Company company : filteredList)
         {

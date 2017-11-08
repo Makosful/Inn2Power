@@ -2,38 +2,31 @@ package inn2power.gui.controller;
 
 import be.Company;
 import inn2power.bll.BllManager;
-import inn2power.dal.DataAccess;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-
-import javafx.scene.Scene;
-
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
  * @author B
  */
-public class MainWindowController implements Initializable {
+public class MainWindowController implements Initializable
+{
 
     @FXML
     private TableView<Company> tableView;
@@ -43,7 +36,15 @@ public class MainWindowController implements Initializable {
     private TableColumn<Company, String> tcAddress;
     @FXML
     private TableColumn<Company, String> tcId;
-    @FXML 
+    @FXML
+    private TableColumn<?, ?> tcCountry;
+    @FXML
+    private TableColumn<?, ?> tcWebsite;
+    @FXML
+    private TableColumn<?, ?> tcCoorcinate;
+    @FXML
+    private TableColumn<?, ?> tcIsSME;
+    @FXML
     private TextField txtSearch;
     @FXML
     private CheckBox regionNational;
@@ -58,21 +59,20 @@ public class MainWindowController implements Initializable {
     @FXML
     private Button txt;
     @FXML
-    private TableColumn<?, ?> tcCountry;
+    private SplitPane splitPane;
     @FXML
-    private TableColumn<?, ?> tcWebsite;
-    @FXML
-    private TableColumn<?, ?> tcCoorcinate;
-    @FXML
-    private TableColumn<?, ?> tcIsSME;
+    private AnchorPane apLeft;
 
     BllManager bm = new BllManager();
-   
-    private boolean[] CheckBoxes = new boolean[5];
 
+   
+    
+
+    @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        
+
+        boolean[] CheckBoxes = new boolean[5];
         CheckBox[] boxes = {regionNational, regionBordering, regionContinent, regionSemiInternational, regionInternational};
         for(int i = 0; i < boxes.length; i++){
             boxes[i].selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -93,30 +93,26 @@ public class MainWindowController implements Initializable {
             });
         }
         
-        
-        
-        tcName.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
-        tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
-
-
-        AutoTextChange();
-
 
         try {
             updateTable(bm.getAllCompaniesExample());
-          
-            tableView.getSortOrder().add(tcName);
-            tableView.getSortOrder().add(tcAddress);
-            tableView.getSortOrder().add(tcId);
         } catch (IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        tableView.getSortOrder().add(tcName);
+        tableView.getSortOrder().add(tcAddress);
+        tableView.getSortOrder().add(tcId);
+
+        // Locks the splitPane's devider to the left anchorPane, where the
+        // search functionality is
+        splitPane.setResizableWithParent(apLeft, Boolean.FALSE);
+
+        AutoTextChange();
+     
     }
-    
 
-
-
+ 
     private void AutoTextChange() {
         txtSearch.textProperty().addListener(new ChangeListener<String>()
         {
@@ -128,17 +124,16 @@ public class MainWindowController implements Initializable {
                 } catch (IOException ex) {
                     Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("The text changed from: " + oldText + " to: " + newText);
+                //System.out.println("The text changed from: " + oldText + " to: " + newText);
             }
         });
     }
 
-
     @FXML
-    private void btnSearchName() throws IOException {
-        tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
-        tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+    private void btnSearchName() throws IOException
+    {
+
+
 
         updateTable(bm.getSearchResult(txtSearch.getText()));
     }
@@ -151,5 +146,8 @@ public class MainWindowController implements Initializable {
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
     
         tableView.setItems(companies);
+
     }
+
+
 }
