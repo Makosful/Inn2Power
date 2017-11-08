@@ -5,8 +5,6 @@ import inn2power.bll.BllManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -34,6 +32,14 @@ public class MainWindowController implements Initializable
     @FXML
     private TableColumn<Company, String> tcId;
     @FXML
+    private TableColumn<?, ?> tcCountry;
+    @FXML
+    private TableColumn<?, ?> tcWebsite;
+    @FXML
+    private TableColumn<?, ?> tcCoorcinate;
+    @FXML
+    private TableColumn<?, ?> tcIsSME;
+    @FXML
     private TextField txtSearch;
     @FXML
     private CheckBox regionNational;
@@ -47,14 +53,6 @@ public class MainWindowController implements Initializable
     private CheckBox regionInternational;
     @FXML
     private Button txt;
-    @FXML
-    private TableColumn<?, ?> tcCountry;
-    @FXML
-    private TableColumn<?, ?> tcWebsite;
-    @FXML
-    private TableColumn<?, ?> tcCoorcinate;
-    @FXML
-    private TableColumn<?, ?> tcIsSME;
 
     BllManager bm = new BllManager();
     private CheckBox[] boxes = new CheckBox[5];
@@ -71,14 +69,14 @@ public class MainWindowController implements Initializable
         try
         {
             tableView.setItems(bm.getAllCompaniesExample());
-            System.out.println(bm.getAllCompaniesExample().size());
+            System.out.println("Amount of companies: " + bm.getAllCompaniesExample().size());
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
         }
         catch (IOException ex)
         {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
     }
 
