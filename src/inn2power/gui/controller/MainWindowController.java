@@ -11,6 +11,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,29 +33,45 @@ public class MainWindowController implements Initializable
     private TableColumn<Company, String> tcAddress;
     @FXML
     private TableColumn<Company, String> tcId;
-
     @FXML
     private TextField txtSearch;
+    @FXML
+    private CheckBox regionNational;
+    @FXML
+    private CheckBox regionBordering;
+    @FXML
+    private CheckBox regionContinent;
+    @FXML
+    private CheckBox regionSemiInternational;
+    @FXML
+    private CheckBox regionInternational;
+    @FXML
+    private Button txt;
+    @FXML
+    private TableColumn<?, ?> tcCountry;
+    @FXML
+    private TableColumn<?, ?> tcWebsite;
+    @FXML
+    private TableColumn<?, ?> tcCoorcinate;
+    @FXML
+    private TableColumn<?, ?> tcIsSME;
 
-    /*
-     * @FXML private Button btnSearch;
-     */
-    //private ObservableList<Company> search = FXCollections.observableArrayList();
     BllManager bm = new BllManager();
+    private CheckBox[] boxes = new CheckBox[5];
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-
         AutoTextChange();
 
-        tcName.setCellValueFactory(new PropertyValueFactory<>("Name:"));
-        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address:"));
-        tcId.setCellValueFactory(new PropertyValueFactory<>("ID:"));
+        tcName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
 
         try
         {
             tableView.setItems(bm.getAllCompaniesExample());
+            System.out.println(bm.getAllCompaniesExample().size());
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
@@ -62,6 +80,10 @@ public class MainWindowController implements Initializable
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void checkbox()
+    {
     }
 
     private void AutoTextChange()
