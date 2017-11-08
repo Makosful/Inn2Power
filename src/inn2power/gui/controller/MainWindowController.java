@@ -2,7 +2,6 @@ package inn2power.gui.controller;
 
 import be.Company;
 import inn2power.bll.BllManager;
-import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class MainWindowController implements Initializable
 {
+
     @FXML
     private TableView<Company> tableView;
     @FXML
@@ -39,7 +39,6 @@ public class MainWindowController implements Initializable
     /*
      * @FXML private Button btnSearch;
      */
-    
     private ObservableList<Company> search = FXCollections.observableArrayList();
 
     BllManager bm = new BllManager();
@@ -71,10 +70,9 @@ public class MainWindowController implements Initializable
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        
-        
+
         tableView.setItems(bm.getSearchResult(txtSearch.getText()));
-        
+
         //tableView.setItems(ip.getSearchResult(txtSearch.getText()));
     }
 }
