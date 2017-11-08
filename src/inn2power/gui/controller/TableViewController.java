@@ -1,9 +1,8 @@
 package inn2power.gui.controller;
 
-import inn2power.bll.BllManager;
 import be.Company;
-import be.Relation;
-import dal.RelationDAO;
+import inn2power.bll.BllManager;
+import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -76,15 +75,19 @@ public class TableViewController implements Initializable
 
         tableView.setItems(ip.getSearchResult(txtSearch.getText()));
 
-        RelationDAO r = new RelationDAO();
+        DataAccess data = new DataAccess();
 
-        for (Relation re : r.getAllRelations())
+        data.getAllRelations().stream().map((re) ->
         {
             if (re.getSource().getName().equals(tableView.getItems().get(0).getName()))
             {
                 System.out.println(re.getSource().getName());
-            };
-        }
+            }
+            return re;
+        }).forEachOrdered((_item) ->
+        {
+            ;
+        });
     }
 
 }

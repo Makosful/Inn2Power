@@ -1,7 +1,6 @@
 package inn2power.bll;
 
 import be.Company;
-import inn2power.bll.ICompanyFilter;
 
 /**
  *
@@ -10,7 +9,7 @@ import inn2power.bll.ICompanyFilter;
 public class CountryFiltering implements ICompanyFilter
 {
 
-    private String country;
+    private final String country;
 
     public CountryFiltering(String country)
     {
