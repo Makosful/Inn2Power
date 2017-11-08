@@ -42,7 +42,7 @@ public class MainWindowController implements Initializable
     
     private ObservableList<Company> search = FXCollections.observableArrayList();
 
-    BllManager ip = new BllManager();
+    BllManager bm = new BllManager();
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -53,7 +53,7 @@ public class MainWindowController implements Initializable
 
         try
         {
-            tableView.setItems(ip.getAllCompaniesExample());
+            tableView.setItems(bm.getAllCompaniesExample());
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
@@ -73,7 +73,7 @@ public class MainWindowController implements Initializable
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
         
         
-        tableView.setItems(ip.getSearchResult(txtSearch.getText()));
+        tableView.setItems(bm.getSearchResult(txtSearch.getText()));
         
         //tableView.setItems(ip.getSearchResult(txtSearch.getText()));
     }
