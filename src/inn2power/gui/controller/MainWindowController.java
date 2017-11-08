@@ -9,8 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -40,8 +38,7 @@ public class MainWindowController implements Initializable
     /*
      * @FXML private Button btnSearch;
      */
-    private ObservableList<Company> search = FXCollections.observableArrayList();
-
+    //private ObservableList<Company> search = FXCollections.observableArrayList();
     BllManager bm = new BllManager();
 
     @Override
