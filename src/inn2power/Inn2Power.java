@@ -1,5 +1,6 @@
 package inn2power;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,8 +27,10 @@ public class Inn2Power extends Application
 
     /**
      * @param args the command line arguments
+     *
+     * @throws java.io.IOException
      */
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
         launch(args);
     }
