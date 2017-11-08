@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="416.0" prefWidth="507.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9" fx:controller="inn2powertool.FXMLDocumentController">
+    <children>
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <TableView fx:id="tableCompany" layoutY="34.0" prefHeight="382.0" prefWidth="501.0">
+        <columns>
+          <TableColumn fx:id="columnName" prefWidth="135.3333078622818" text="CompanyName" />
+          <TableColumn fx:id="columnAdress" prefWidth="132.66676330566406" text="CompanyAddress" />
+          <TableColumn fx:id="columnId" prefWidth="132.66676330566406" text="CompanyId" />
+        </columns>
+      </TableView>
+      <Button layoutX="176.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnSearchName" text="Search" />
+      <TextField fx:id="textFieldNameInput" layoutX="14.0" layoutY="7.0" />
+    </children>
+</AnchorPane>
