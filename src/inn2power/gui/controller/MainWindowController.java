@@ -67,8 +67,8 @@ public class MainWindowController implements Initializable {
     private TableColumn<?, ?> tcIsSME;
 
     BllManager bm = new BllManager();
-    private CheckBox[] boxes = new CheckBox[5];
-    
+   
+    private boolean[] CheckBoxes = new boolean[5];
 
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -76,13 +76,19 @@ public class MainWindowController implements Initializable {
         CheckBox[] boxes = {regionNational, regionBordering, regionContinent, regionSemiInternational, regionInternational};
         for(int i = 0; i < boxes.length; i++){
             boxes[i].selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> ov,
-                Boolean old_val, Boolean new_val) {
-                    if(new_val == true){
-                        for(int q = 0;q < boxes.length; q++){
-                            System.out.println(boxes[q].selectedProperty());
-                        }
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
+                    
+                    for(int q = 0;q < boxes.length; q++){
+                      CheckBoxes[q] = boxes[q].selectedProperty().getValue();
                     }
+
+                    try {
+                        updateTable(bm.filterBox(CheckBoxes[0], CheckBoxes[1], CheckBoxes[2], CheckBoxes[3], CheckBoxes[4]));
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
                 }
             });
         }
@@ -96,13 +102,9 @@ public class MainWindowController implements Initializable {
 
         AutoTextChange();
 
-        tcName.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
-        tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
-
 
         try {
-            tableView.setItems(bm.getAllCompaniesExample());
+            updateTable(bm.getAllCompaniesExample());
           
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
@@ -120,8 +122,12 @@ public class MainWindowController implements Initializable {
         {
             @Override
             public void changed(ObservableValue<? extends String> observable,
-                    String oldText, String newText) {
-                UpdatedSearch();
+                String oldText, String newText) {
+                try {
+                    btnSearchName();
+                } catch (IOException ex) {
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 System.out.println("The text changed from: " + oldText + " to: " + newText);
             }
         });
@@ -134,10 +140,16 @@ public class MainWindowController implements Initializable {
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
 
-        UpdatedSearch();
+        updateTable(bm.getSearchResult(txtSearch.getText()));
     }
 
-    private void UpdatedSearch() {
-        tableView.setItems(bm.getSearchResult(txtSearch.getText()));
+    
+    private void updateTable(ObservableList companies){
+    
+        tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+    
+        tableView.setItems(companies);
     }
 }

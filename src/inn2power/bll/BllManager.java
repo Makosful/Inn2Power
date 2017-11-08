@@ -58,6 +58,27 @@ public class BllManager
     {
         Filtering filtering = new Filtering();
         
-        filtering.countrySearch();
+        //filtering.countrySearch();
+        Logger.getLogger(BllManager.class.getName());
     }
+    
+    
+    public ObservableList filterBox(boolean et, boolean to, boolean tre, boolean fire, boolean fem) throws IOException
+    {
+        Filtering filtering = new Filtering();
+        
+        companyNames.clear();
+        List<Company> filteredList;
+        filteredList = filtering.addFilters(et, to, tre, fire, fem);
+
+        for (Company company : filteredList)
+        {
+            companyNames.add(company);
+        }
+  
+        return companyNames;
+        
+    }
+    
+    
 }
