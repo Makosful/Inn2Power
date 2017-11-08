@@ -8,15 +8,16 @@ import be.Company;
  */
 public class CountryFiltering implements ICompanyFilter
 {
-    private String country;
-    
+
+    private final String country;
+
     public CountryFiltering(String country)
     {
         this.country = country;
     }
 
     @Override
-    public boolean meetCriteria(Company company) 
+    public boolean meetCriteria(Company company)
     {
         return company.getCountry().equalsIgnoreCase(country);
     }
