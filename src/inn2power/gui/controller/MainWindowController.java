@@ -72,7 +72,7 @@ public class MainWindowController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb)
     {
-        /**
+        
         CheckBox[] boxes = {regionNational, regionBordering, regionContinent, regionSemiInternational, regionInternational};
         for(int i = 0; i < boxes.length; i++){
             boxes[i].selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -80,14 +80,14 @@ public class MainWindowController implements Initializable {
                 Boolean old_val, Boolean new_val) {
                     if(new_val == true){
                         for(int q = 0;q < boxes.length; q++){
-                            
+                            System.out.println(boxes[q].selectedProperty());
                         }
                     }
                 }
             });
         }
         
-        **/
+        
         
         tcName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
@@ -103,7 +103,7 @@ public class MainWindowController implements Initializable {
 
         try {
             tableView.setItems(bm.getAllCompaniesExample());
-            System.out.println(bm.getAllCompaniesExample().size());
+          
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
@@ -112,7 +112,6 @@ public class MainWindowController implements Initializable {
         }
     }
     
-    private void checkbox(){}
 
 
 
