@@ -1,33 +1,16 @@
 package inn2power;
 
+import be.*;
+import dal.*;
 import java.io.IOException;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import java.util.List;
 
 /**
  *
  * @author Axl
  */
-public class Inn2Power extends Application
+public class Inn2Power
 {
-
-    public Inn2Power()
-    {
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception
-    {
-        Parent root = FXMLLoader.load(getClass().getResource("gui/view/MainWindow.fxml"));
-
-        Scene scene = new Scene(root);
-
-        stage.setScene(scene);
-        stage.show();
-    }
 
     /**
      * @param args the command line arguments
@@ -36,7 +19,24 @@ public class Inn2Power extends Application
      */
     public static void main(String[] args) throws IOException
     {
-        launch(args);
+        getAllCompaniesExample();
+    }
+
+    /**
+     * An example on how to get the name of all companies individually
+     *
+     * @throws IOException
+     */
+    private static void getAllCompaniesExample() throws IOException
+    {
+        CompanyDAO cDAO = new CompanyDAO();
+
+        List<Company> companies = cDAO.getAllCompanies();
+
+        companies.forEach((company) ->
+        {
+            System.out.println(company.getName());
+        });
     }
 
 }
