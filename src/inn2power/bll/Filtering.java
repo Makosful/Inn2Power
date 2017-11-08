@@ -29,10 +29,11 @@ public class Filtering
 
         List<ICompanyFilter> filters = new ArrayList();
         filters.add(new CountryFiltering("Philippines"));
-
+        filters.add(new CompanySMEFilter(true));
+        
         List<Company> filteredList;
         filteredList = companyFiltering(allCompanies, filters);
-       
+
         for (Company company : filteredList)
         {
             System.out.println(company.getName());
