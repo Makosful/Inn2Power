@@ -11,10 +11,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -53,6 +55,10 @@ public class MainWindowController implements Initializable
     private CheckBox regionInternational;
     @FXML
     private Button txt;
+    @FXML
+    private SplitPane splitPane;
+    @FXML
+    private AnchorPane apLeft;
 
     BllManager bm = new BllManager();
     private CheckBox[] boxes = new CheckBox[5];
@@ -60,6 +66,10 @@ public class MainWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        // Locks the splitPane's devider to the left anchorPane, where the
+        // search functionality is
+        splitPane.setResizableWithParent(apLeft, Boolean.FALSE);
+
         AutoTextChange();
 
         tcName.setCellValueFactory(new PropertyValueFactory<>("Name"));
@@ -69,10 +79,10 @@ public class MainWindowController implements Initializable
         try
         {
             tableView.setItems(bm.getAllCompaniesExample());
-            System.out.println("Amount of companies: " + bm.getAllCompaniesExample().size());
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
+            System.out.println(tableView.getItems().size());
         }
         catch (IOException ex)
         {
@@ -93,7 +103,8 @@ public class MainWindowController implements Initializable
                                 String oldText, String newText)
             {
                 UpdatedSearch();
-                System.out.println("The text changed from: " + oldText + " to: " + newText);
+                //System.out.println("The text changed from: " + oldText + " to: " + newText);
+                System.out.println(tableView.getItems().size());
             }
         });
     }
