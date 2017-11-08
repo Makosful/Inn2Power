@@ -34,7 +34,6 @@ public class BllManager
 
     public ObservableList getAllCompaniesExample() throws IOException
     {
-
         companies.forEach((company) ->
         {
             companyNames.add(company);
