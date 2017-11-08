@@ -1,8 +1,7 @@
 package inn2power.bll;
 
 import be.Company;
-import dal.CompanyDAO;
-import inn2power.bll.ICompanyFilter;
+import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ public class Filtering
 
     public void countrySearch() throws IOException
     {
-        List<Company> allCompanies = new CompanyDAO().getAllCompanies();
+        List<Company> allCompanies = new DataAccess().getAllCompanies();
 
         List<ICompanyFilter> filters = new ArrayList();
         filters.add(new CountryFiltering("Phillipines"));
