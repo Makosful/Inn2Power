@@ -15,7 +15,6 @@ import javafx.collections.ObservableList;
  */
 public class BllManager
 {
-
     private ObservableList<Company> companyNames = FXCollections.observableArrayList();
     private DataAccess data;
     private List<Company> companies;
@@ -43,18 +42,15 @@ public class BllManager
         return companyNames;
     }
 
-    public ObservableList getSearchResult(String searchText) throws IOException
+    public ObservableList getSearchResult(String searchText)
     {
-
         companyNames.clear();
         companies.forEach((company) ->
         {
-            if ((company.getName()).contains(searchText))
+            if ((company.getName().toLowerCase()).contains(searchText.toLowerCase()))
             {
                 companyNames.add(company);
-
             }
-
         });
         return companyNames;
     }
