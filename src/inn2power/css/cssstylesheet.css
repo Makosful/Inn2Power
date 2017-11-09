@@ -10,6 +10,19 @@ and open the template in the editor.
 #lblLink {
     -fx-font: 16px "Serif";
     -fx-font-style: italic;
-    -fx-underline: true;
     -fx-text-fill: #0000EE;
 }
+
+#lblLink:hover {
+    -fx-cursor: pointer;
+    -fx-cursor: hand;
+    -fx-underline: true;
+}
+/* Virker ikke, men kan beholdes for nem tilgang af koder.
+#lblLink:active {
+    -fx-text-fill: #FFFF00;
+}
+#lblLink:visited {
+    -fx-text-fill: #00FF00;
+}
+*/
