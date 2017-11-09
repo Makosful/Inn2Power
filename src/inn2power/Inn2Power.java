@@ -15,6 +15,10 @@ import javafx.stage.Stage;
 public class Inn2Power extends Application
 {
 
+    public Inn2Power()
+    {
+    }
+
     @Override
     public void start(Stage stage) throws Exception
     {
