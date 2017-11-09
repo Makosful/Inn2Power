@@ -1,5 +1,6 @@
 package inn2power.gui.controller;
 
+
 import be.Company;
 import inn2power.bll.BllManager;
 import java.io.IOException;
@@ -11,15 +12,23 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  *
@@ -71,7 +80,35 @@ public class MainWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+    
+        tableView.setRowFactory( tv -> {
+        TableRow<Company> row = new TableRow<>();
+        row.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                
+                try {
+                    Company rowData = row.getItem();
+                    Stage primeStage = (Stage)tableView.getScene().getWindow();
+                    FXMLLoader fxLoader = new FXMLLoader(this.getClass().getResource("/inn2power/gui/view/CompanyWindow.fxml"));
+                    Parent root = fxLoader.load();
 
+                    CompanyWindowController controller = fxLoader.getController();
+                    controller.loadCompany(rowData);
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.initOwner(primeStage);
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            });
+            return row;
+
+        });
+        
         boolean[] CheckBoxes = new boolean[5];
         CheckBox[] boxes = {regionNational, regionBordering, regionContinent, regionSemiInternational, regionInternational};
         for(int i = 0; i < boxes.length; i++){
@@ -149,5 +186,7 @@ public class MainWindowController implements Initializable
 
     }
 
+    
+    
 
 }
