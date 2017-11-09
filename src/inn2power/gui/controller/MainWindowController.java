@@ -2,7 +2,9 @@ package inn2power.gui.controller;
 
 import be.Company;
 import inn2power.bll.BllManager;
-import inn2power.dal.DataAccess;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +15,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -43,6 +48,30 @@ public class MainWindowController implements Initializable
     private ObservableList<Company> search = FXCollections.observableArrayList();
 
     BllManager ip = new BllManager();
+    @FXML
+    private CheckBox regionNational;
+    @FXML
+    private CheckBox regionBordering;
+    @FXML
+    private CheckBox regionContinent;
+    @FXML
+    private CheckBox regionSemiInternational;
+    @FXML
+    private CheckBox regionInternational;
+    @FXML
+    private Button txt;
+    @FXML
+    private TableColumn<?, ?> tcCountry;
+    @FXML
+    private TableColumn<?, ?> tcWebsite;
+    @FXML
+    private TableColumn<?, ?> tcCoorcinate;
+    @FXML
+    private TableColumn<?, ?> tcIsSME;
+    @FXML
+    private ComboBox<String> comboBoxCountries;
+    
+    ObservableList<String> countries;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -50,6 +79,13 @@ public class MainWindowController implements Initializable
         tcName.setCellValueFactory(new PropertyValueFactory<>("Name:"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address:"));
         tcId.setCellValueFactory(new PropertyValueFactory<>("ID:"));
+                          
+        try {
+            countries = ip.countryNameList();
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        comboBoxCountries.setItems(countries.sorted());
 
         try
         {
@@ -63,6 +99,8 @@ public class MainWindowController implements Initializable
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+         
     }
 
     @FXML
@@ -77,4 +115,5 @@ public class MainWindowController implements Initializable
         
         //tableView.setItems(ip.getSearchResult(txtSearch.getText()));
     }
+
 }

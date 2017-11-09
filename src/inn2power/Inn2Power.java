@@ -1,5 +1,6 @@
 package inn2power;
 
+import inn2power.gui.controller.MainWindowController;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

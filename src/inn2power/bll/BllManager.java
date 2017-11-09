@@ -61,4 +61,10 @@ public class BllManager
         
         filtering.countrySearch();
     }
+    
+    public ObservableList<String> countryNameList() throws IOException
+    {
+        CountryNameList cnl = new CountryNameList();
+        return cnl.allCountriesCorrect();
+    }
 }
