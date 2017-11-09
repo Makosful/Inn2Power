@@ -21,28 +21,23 @@ public class Filtering
         } catch (IOException e) {
         }
     }
-    
-    
-    public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
+
+
+    public void countrySearch() throws IOException
     {
-                  
-                
         List<Company> allCompanies = data.getAllCompanies();
 
         List<ICompanyFilter> filters = new ArrayList();
-        
-        if(national == true){
-             filters.add(new CountryFiltering("Brazil"));
-        }
-        
-
-        // filters.add(new CompanySMEFilter(true));
-   
+        filters.add(new CountryFiltering("Philippines"));
+        filters.add(new CompanySMEFilter(true));
         
         List<Company> filteredList;
         filteredList = companyFiltering(allCompanies, filters);
 
-        return filteredList;
+        for (Company company : filteredList)
+        {
+            System.out.println(company.getName());
+        }
     }
 
     public List<Company> companyFiltering(List<Company> allCompanies, List<ICompanyFilter> filters)

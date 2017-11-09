@@ -59,9 +59,9 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <SplitPane fx:id="splitPane" dividerPositions="0.24387527839643652" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+        <SplitPane dividerPositions="0.24610244988864144" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <items>
-                <AnchorPane fx:id="apLeft">
+                <AnchorPane>
                     <children>
                         <Accordion layoutY="46.0">
                             <panes>
@@ -173,11 +173,11 @@
                 </AnchorPane>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                     <children>
-                        <ScrollPane fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <content>
                                 <AnchorPane>
                                     <children>
-                                        <TableView fx:id="tableView" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <TableView fx:id="tableView" prefHeight="573.0" prefWidth="690.0" tableMenuButtonVisible="true">
                                             <columns>
                                                 <TableColumn fx:id="tcId" prefWidth="33.0" text="ID" />
                                                 <TableColumn fx:id="tcName" prefWidth="117.0" text="Name" />
