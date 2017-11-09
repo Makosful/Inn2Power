@@ -10,10 +10,12 @@ import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -58,11 +60,39 @@ public class MainWindowController implements Initializable
     @FXML
     private CheckBox regionInternational;
     @FXML
-    private Button txt;
-    @FXML
     private SplitPane splitPane;
     @FXML
     private AnchorPane apLeft;
+    @FXML
+    private Label lblStartId;
+    @FXML
+    private Label lblTargetId;
+    @FXML
+    private Label lblStartName;
+    @FXML
+    private Label lblTargetName;
+    @FXML
+    private Label lblStartCountry;
+    @FXML
+    private Label lblTargetCountry;
+    @FXML
+    private Label lblStartAdress;
+    @FXML
+    private Label lblTargetAdress;
+    @FXML
+    private Label lblStartUrl;
+    @FXML
+    private Label lblTargetUrl;
+    @FXML
+    private Label lblStartCoords;
+    @FXML
+    private Label lblTargetCoords;
+    @FXML
+    private Label lblstartSME;
+    @FXML
+    private Label lblTargetSME;
+    @FXML
+    private Button txt1;
     //</editor-fold>
 
     // OBject references
@@ -123,8 +153,7 @@ public class MainWindowController implements Initializable
 
         // Locks the splitPane's devider to the left anchorPane, where the
         // search functionality is
-        splitPane.setResizableWithParent(apLeft, Boolean.FALSE);
-
+        splitPane.setResizableWithParent(apLeft, false);
         AutoTextChange();
 
     }
@@ -159,7 +188,6 @@ public class MainWindowController implements Initializable
      *
      * @throws IOException
      */
-    @FXML
     private void btnSearchName() throws IOException
     {
 
@@ -180,6 +208,16 @@ public class MainWindowController implements Initializable
 
         tableView.setItems(companies);
 
+    }
+
+    @FXML
+    private void setStartCompany(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void setTargetCompany(ActionEvent event)
+    {
     }
 
 }
