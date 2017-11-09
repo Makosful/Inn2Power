@@ -1,6 +1,5 @@
 package inn2power.gui.controller;
 
-
 import be.Company;
 import inn2power.bll.BllManager;
 import java.io.IOException;
@@ -36,7 +35,6 @@ import javafx.stage.Stage;
  */
 public class MainWindowController implements Initializable
 {
-
     // <editor-fold defaultstate="collapsed" desc=" FXML Variable names">
     @FXML
     private TableView<Company> tableView;
@@ -107,7 +105,6 @@ public class MainWindowController implements Initializable
             }
             });
             return row;
-
         });
         
         boolean[] CheckBoxes = new boolean[5];
@@ -125,8 +122,6 @@ public class MainWindowController implements Initializable
                     } catch (IOException ex) {
                         Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
-                    
                 }
             });
         }
@@ -136,7 +131,7 @@ public class MainWindowController implements Initializable
         } catch (IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         tableView.getSortOrder().add(tcName);
         tableView.getSortOrder().add(tcAddress);
         tableView.getSortOrder().add(tcId);
@@ -159,7 +154,6 @@ public class MainWindowController implements Initializable
                 } catch (IOException ex) {
                     Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //System.out.println("The text changed from: " + oldText + " to: " + newText);
             }
         });
     }
@@ -169,7 +163,6 @@ public class MainWindowController implements Initializable
     {
         updateTable(bm.getSearchResult(txtSearch.getText()));
     }
-
     
     private void updateTable(ObservableList companies){
     
@@ -179,5 +172,4 @@ public class MainWindowController implements Initializable
     
         tableView.setItems(companies);
     }
-
 }
