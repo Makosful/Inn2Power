@@ -5,7 +5,6 @@ import bll.Inn2PowerException;
 import dal.*;
 import java.io.IOException;
 import java.util.List;
-import javafx.collections.ObservableList;
 
 /**
  * This class will be used to access all data from the CSV files through the
@@ -18,13 +17,11 @@ public class DataAccess
 
     CompanyDAO cDAO;
     RelationDAO rDAO;
-    CSVReader reader;
 
     public DataAccess() throws IOException
     {
         cDAO = new CompanyDAO();
         rDAO = new RelationDAO();
-        reader = new CSVReader();
     }
 
     public List<Company> getAllCompanies()
@@ -76,14 +73,5 @@ public class DataAccess
     {
         return rDAO.getAllRelations();
     }
-
-    /**
-     * Gets a list of all the countries.
-     *
-     * @return A list containing all the countries
-     */
-    public ObservableList<String> getAllCountries()
-    {
-        return reader.getAllCountries();
-    }
+    
 }

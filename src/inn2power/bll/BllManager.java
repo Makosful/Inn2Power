@@ -34,6 +34,7 @@ public class BllManager
 
     public ObservableList getAllCompaniesExample() throws IOException
     {
+
         companies.forEach((company) ->
         {
             companyNames.add(company);
@@ -58,27 +59,12 @@ public class BllManager
     {
         Filtering filtering = new Filtering();
         
-        //filtering.countrySearch();
-        Logger.getLogger(BllManager.class.getName());
+        filtering.countrySearch();
     }
     
-    
-    public ObservableList filterBox(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
+    public ObservableList<String> countryNameList() throws IOException
     {
-        Filtering filtering = new Filtering();
-        
-        companyNames.clear();
-        List<Company> filteredList;
-        filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
-
-        for (Company company : filteredList)
-        {
-            companyNames.add(company);
-        }
-  
-        return companyNames;
-        
+        CountryNameList cnl = new CountryNameList();
+        return cnl.allCountriesCorrect();
     }
-    
-    
 }

@@ -1,5 +1,6 @@
 package inn2power;
 
+import inn2power.gui.controller.MainWindowController;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +14,6 @@ import javafx.stage.Stage;
  */
 public class Inn2Power extends Application
 {
-
-    public Inn2Power()
-    {
-    }
 
     @Override
     public void start(Stage stage) throws Exception

@@ -17,8 +17,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+<<<<<<< HEAD
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+=======
 import javafx.scene.control.ComboBox;
+>>>>>>> 8b774eda3af77d46996c762653942847a1c784bb
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -60,17 +64,15 @@ public class MainWindowController implements Initializable
     @FXML
     private CheckBox regionInternational;
     @FXML
-    private TableColumn<?, ?> tcCountry;
+<<<<<<< HEAD
+    private SplitPane splitPane;
     @FXML
-    private TableColumn<?, ?> tcWebsite;
+    private AnchorPane apLeft;
     @FXML
-    private TableColumn<?, ?> tcCoorcinate;
     private Label lblStartId;
     @FXML
-    private TableColumn<?, ?> tcIsSME;
     private Label lblTargetId;
     @FXML
-    private ComboBox<String> comboBoxCountries;
     private Label lblStartName;
     @FXML
     private Label lblTargetName;
@@ -96,8 +98,25 @@ public class MainWindowController implements Initializable
     private Label lblTargetSME;
     @FXML
     private Button txt1;
+    //</editor-fold>
+
+    // OBject references
+    BllManager bm = new BllManager();
+=======
+    private Button txt;
+    @FXML
+    private TableColumn<?, ?> tcCountry;
+    @FXML
+    private TableColumn<?, ?> tcWebsite;
+    @FXML
+    private TableColumn<?, ?> tcCoorcinate;
+    @FXML
+    private TableColumn<?, ?> tcIsSME;
+    @FXML
+    private ComboBox<String> comboBoxCountries;
     
     ObservableList<String> countries;
+>>>>>>> 8b774eda3af77d46996c762653942847a1c784bb
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -120,18 +139,74 @@ public class MainWindowController implements Initializable
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
 
-        splitPane.setResizableWithParent(apLeft, false);
         }
         catch (IOException ex)
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
+<<<<<<< HEAD
+
+        tableView.getSortOrder().add(tcName);
+        tableView.getSortOrder().add(tcAddress);
+        tableView.getSortOrder().add(tcId);
+
+        // Locks the splitPane's devider to the left anchorPane, where the
+        // search functionality is
+        splitPane.setResizableWithParent(apLeft, false);
+        AutoTextChange();
+
+    }
+
+    /**
+     * Adds an observer to the search bar, allowing the app to search the
+     * database on the fly
+     */
+    private void AutoTextChange()
+    {
+        txtSearch.textProperty().addListener(new ChangeListener<String>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldText, String newText)
+            {
+                try
+                {
+                    btnSearchName();
+                }
+                catch (IOException ex)
+                {
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //System.out.println("The text changed from: " + oldText + " to: " + newText);
+            }
+        });
+    }
+
+    /**
+     * The search button
+     *
+     * @throws IOException
+     */
+    private void btnSearchName() throws IOException
+    {
+
+        updateTable(bm.getSearchResult(txtSearch.getText()));
+    }
+
+    /**
+     * Updates the table with the search results
+     *
+     * @param companies
+     */
+    private void updateTable(ObservableList companies)
+=======
         
          
     }
 
     @FXML
     private void btnSearchName(ActionEvent event) throws IOException
+>>>>>>> 8b774eda3af77d46996c762653942847a1c784bb
     {
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
