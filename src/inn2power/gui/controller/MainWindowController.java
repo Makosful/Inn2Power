@@ -7,6 +7,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -102,50 +104,64 @@ public class MainWindowController implements Initializable
      */
     private ObservableList<Company> search = FXCollections.observableArrayList();
     ObservableList<String> countries;
-    BllManager ip = new BllManager();
+    BllManager bm = new BllManager();
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        tcName.setCellValueFactory(new PropertyValueFactory<>("Name:"));
-        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address:"));
-        tcId.setCellValueFactory(new PropertyValueFactory<>("ID:"));
+        tcName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
 
         try
         {
-            countries = ip.countryNameList();
+            countries = bm.countryNameList();
+            tableView.setItems(bm.getAllCompaniesExample());
+            tableView.getSortOrder().add(tcName);
+            tableView.getSortOrder().add(tcAddress);
+            tableView.getSortOrder().add(tcId);
+
+            splitPane.setResizableWithParent(apLeft, false);
+            autoTextChange();
         }
         catch (IOException ex)
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
         comboBoxCountries.setItems(countries.sorted());
-
-        try
-        {
-            tableView.setItems(ip.getAllCompaniesExample());
-            tableView.getSortOrder().add(tcName);
-            tableView.getSortOrder().add(tcAddress);
-            tableView.getSortOrder().add(tcId);
-
-            splitPane.setResizableWithParent(apLeft, false);
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
-    private void btnSearchName(ActionEvent event) throws IOException
+    /**
+     * Adds an observer to the search bar, allowing the app to search the
+     * database on the fly
+     */
+    private void autoTextChange()
     {
+        txtSearch.textProperty().addListener(new ChangeListener<String>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldText, String newText)
+            {
+                updateTable(bm.getSearchResult(txtSearch.getText()));
+            }
+        });
+    }
+
+    /**
+     * Updates the table with the search results
+     *
+     * @param companies
+     */
+    private void updateTable(ObservableList companies)
+    {
+
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
 
-        tableView.setItems(ip.getSearchResult(txtSearch.getText()));
+        tableView.setItems(companies);
 
-        //tableView.setItems(ip.getSearchResult(txtSearch.getText()));
     }
 
     @FXML
