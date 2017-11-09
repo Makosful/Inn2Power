@@ -315,7 +315,7 @@
                             <content>
                                 <AnchorPane>
                                     <children>
-                                        <TableView fx:id="tableView" prefHeight="573.0" prefWidth="690.0" tableMenuButtonVisible="true">
+                                        <TableView fx:id="tableView" tableMenuButtonVisible="true">
                                             <columns>
                                                 <TableColumn fx:id="tcId" prefWidth="33.0" text="ID" />
                                                 <TableColumn fx:id="tcName" prefWidth="117.0" text="Name" />

@@ -30,6 +30,7 @@ import javafx.scene.layout.AnchorPane;
 public class MainWindowController implements Initializable
 {
 
+    //<editor-fold defaultstate="collapsed" desc="FXML Variables">
     @FXML
     private TableView<Company> tableView;
     @FXML
@@ -94,6 +95,7 @@ public class MainWindowController implements Initializable
     private TextField txtSearch;
     @FXML
     private AnchorPane apLeft;
+    //</editor-fold>
 
     /*
      * @FXML private Button btnSearch;
