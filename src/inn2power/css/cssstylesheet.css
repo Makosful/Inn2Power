@@ -1,0 +1,15 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 9, 2017, 2:33:07 PM
+    Author     : Storm
+*/
+#lblLink {
+    -fx-font: 16px "Serif";
+    -fx-font-style: italic;
+    -fx-underline: true;
+    -fx-text-fill: #0000EE;
+}

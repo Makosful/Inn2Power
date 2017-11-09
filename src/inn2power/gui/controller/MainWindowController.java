@@ -37,6 +37,7 @@ import javafx.stage.Stage;
 public class MainWindowController implements Initializable
 {
 
+    // <editor-fold defaultstate="collapsed" desc=" FXML Variable names">
     @FXML
     private TableView<Company> tableView;
     @FXML
@@ -72,15 +73,13 @@ public class MainWindowController implements Initializable
     @FXML
     private AnchorPane apLeft;
 
-    BllManager bm = new BllManager();
+// </editor-fold>
 
-   
-    
+    BllManager bm = new BllManager();
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-    
         tableView.setRowFactory( tv -> {
         TableRow<Company> row = new TableRow<>();
         row.setOnMouseClicked(event -> {
@@ -97,6 +96,8 @@ public class MainWindowController implements Initializable
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
+                    //The Cascading Style Sheet (Initially to manipulate lblLink to a visual hyperlink)
+                    scene.getStylesheets().add("inn2power/css/cssstylesheet.css");
                     stage.initOwner(primeStage);
                     stage.initModality(Modality.WINDOW_MODAL);
                     stage.show();
@@ -129,7 +130,6 @@ public class MainWindowController implements Initializable
                 }
             });
         }
-        
 
         try {
             updateTable(bm.getAllCompaniesExample());
@@ -146,9 +146,7 @@ public class MainWindowController implements Initializable
         splitPane.setResizableWithParent(apLeft, Boolean.FALSE);
 
         AutoTextChange();
-     
     }
-
  
     private void AutoTextChange() {
         txtSearch.textProperty().addListener(new ChangeListener<String>()
@@ -169,9 +167,6 @@ public class MainWindowController implements Initializable
     @FXML
     private void btnSearchName() throws IOException
     {
-
-
-
         updateTable(bm.getSearchResult(txtSearch.getText()));
     }
 
@@ -183,10 +178,6 @@ public class MainWindowController implements Initializable
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
     
         tableView.setItems(companies);
-
     }
-
-    
-    
 
 }
