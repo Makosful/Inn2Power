@@ -4,8 +4,8 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -195,7 +195,7 @@
       </AnchorPane>
         <SplitPane fx:id="splitPane" dividerPositions="0.0" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <items>
-                <AnchorPane>
+                <AnchorPane fx:id="apLeft">
                     <children>
                         <TextField fx:id="txtSearch" layoutX="10.0" layoutY="10.0" prefWidth="270.0" promptText="Search in Table..." />
                         <Button layoutX="10.0" layoutY="50.0" mnemonicParsing="false" onAction="#setStartCompany" prefHeight="20.0" prefWidth="130.0" text="Set Start Company" />

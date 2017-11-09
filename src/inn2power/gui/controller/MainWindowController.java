@@ -2,9 +2,6 @@ package inn2power.gui.controller;
 
 import be.Company;
 import inn2power.bll.BllManager;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,12 +14,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -30,6 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class MainWindowController implements Initializable
 {
+
     @FXML
     private TableView<Company> tableView;
     @FXML
@@ -38,17 +38,6 @@ public class MainWindowController implements Initializable
     private TableColumn<Company, String> tcAddress;
     @FXML
     private TableColumn<Company, String> tcId;
-
-    @FXML
-    private TextField txtSearch;
-
-    /*
-     * @FXML private Button btnSearch;
-     */
-    
-    private ObservableList<Company> search = FXCollections.observableArrayList();
-
-    BllManager ip = new BllManager();
     @FXML
     private CheckBox regionNational;
     @FXML
@@ -65,12 +54,15 @@ public class MainWindowController implements Initializable
     private TableColumn<?, ?> tcWebsite;
     @FXML
     private TableColumn<?, ?> tcCoorcinate;
+    @FXML
     private Label lblStartId;
     @FXML
     private TableColumn<?, ?> tcIsSME;
+    @FXML
     private Label lblTargetId;
     @FXML
     private ComboBox<String> comboBoxCountries;
+    @FXML
     private Label lblStartName;
     @FXML
     private Label lblTargetName;
@@ -96,8 +88,19 @@ public class MainWindowController implements Initializable
     private Label lblTargetSME;
     @FXML
     private Button txt1;
-    
+    @FXML
+    private SplitPane splitPane;
+    @FXML
+    private TextField txtSearch;
+    @FXML
+    private AnchorPane apLeft;
+
+    /*
+     * @FXML private Button btnSearch;
+     */
+    private ObservableList<Company> search = FXCollections.observableArrayList();
     ObservableList<String> countries;
+    BllManager ip = new BllManager();
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -105,10 +108,13 @@ public class MainWindowController implements Initializable
         tcName.setCellValueFactory(new PropertyValueFactory<>("Name:"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address:"));
         tcId.setCellValueFactory(new PropertyValueFactory<>("ID:"));
-                          
-        try {
+
+        try
+        {
             countries = ip.countryNameList();
-        } catch (IOException ex) {
+        }
+        catch (IOException ex)
+        {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
         comboBoxCountries.setItems(countries.sorted());
@@ -120,26 +126,23 @@ public class MainWindowController implements Initializable
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
 
-        splitPane.setResizableWithParent(apLeft, false);
+            splitPane.setResizableWithParent(apLeft, false);
         }
         catch (IOException ex)
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-         
+
     }
 
-    @FXML
     private void btnSearchName(ActionEvent event) throws IOException
     {
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        
-        
+
         tableView.setItems(ip.getSearchResult(txtSearch.getText()));
-        
+
         //tableView.setItems(ip.getSearchResult(txtSearch.getText()));
     }
 
