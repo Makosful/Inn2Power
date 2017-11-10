@@ -75,12 +75,12 @@ public class BllManager
         
         companyNames.clear();
         List<Company> filteredList;
-        //filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
+        filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
 
-       // for (Company company : filteredList)
-       // {
-          //  companyNames.add(company);
-        //}
+       for (Company company : filteredList)
+       {
+           companyNames.add(company);
+       }
   
         return companyNames;
         

@@ -40,6 +40,28 @@ public class Filtering
         }
     }
 
+    public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
+    {
+                  
+                
+        List<Company> allCompanies = data.getAllCompanies();
+
+        List<ICompanyFilter> filters = new ArrayList();
+        
+        if(national == true){
+             filters.add(new CountryFiltering("Brazil"));
+        }
+        
+
+        // filters.add(new CompanySMEFilter(true));
+   
+        
+        List<Company> filteredList;
+        filteredList = companyFiltering(allCompanies, filters);
+
+        return filteredList;
+    }
+    
     public List<Company> companyFiltering(List<Company> allCompanies, List<ICompanyFilter> filters)
     {
         // ArrayList which countries are added to, according to if there is a
