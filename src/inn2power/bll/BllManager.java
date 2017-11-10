@@ -74,4 +74,20 @@ public class BllManager
     {
         filtering.addCountryFilter(country);
     }
+
+    public ObservableList filterBox(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
+    {
+
+        companyNames.clear();
+        List<Company> filteredList;
+        //filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
+
+        // for (Company company : filteredList)
+        // {
+        //  companyNames.add(company);
+        //}
+        return companyNames;
+
+    }
+
 }

@@ -127,11 +127,11 @@ public class MainWindowController implements Initializable
                       CheckBoxes[q] = boxes[q].selectedProperty().getValue();
                     }
 
-                   // try {
-                     //   updateTable(bm.filterBox(CheckBoxes[0], CheckBoxes[1], CheckBoxes[2], CheckBoxes[3], CheckBoxes[4]));
-                   // } catch (IOException ex) {
-                   //     Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                   // }
+                    try {
+                       updateTable(bm.filterBox(CheckBoxes[0], CheckBoxes[1], CheckBoxes[2], CheckBoxes[3], CheckBoxes[4]));
+                     } catch (IOException ex) {
+                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                     }
                 }
             });
         }
