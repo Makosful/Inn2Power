@@ -14,9 +14,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
@@ -78,19 +78,17 @@ public class MainWindowController implements Initializable
     @FXML
     private Label lblTargetAdress;
     @FXML
-    private Label lblStartUrl;
+    private Hyperlink linkStartURL;
     @FXML
-    private Label lblTargetUrl;
+    private Hyperlink linkTargetURL;
     @FXML
     private Label lblStartCoords;
     @FXML
     private Label lblTargetCoords;
     @FXML
-    private Label lblstartSME;
+    private Label lblStartSME;
     @FXML
     private Label lblTargetSME;
-    @FXML
-    private Button txt1;
     @FXML
     private SplitPane splitPane;
     @FXML
@@ -167,11 +165,65 @@ public class MainWindowController implements Initializable
     @FXML
     private void setStartCompany(ActionEvent event)
     {
+        try
+        {
+            Company comp = tableView.getSelectionModel().getSelectedItem();
+            lblStartId.setText(comp.getId() + "");
+            lblStartName.setText(comp.getName());
+            lblStartCountry.setText(comp.getCountry());
+            lblStartAdress.setText(comp.getAddress());
+            //lblStartUrl.setText(comp.getWebsite()); // Feel free to delete.Used toset the now removed label
+            lblStartCoords.setText(comp.getLat() + "" + comp.getLng());
+            lblStartSME.setText(comp.getIsSME() + "");
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("No company selected.");
+        }
     }
 
     @FXML
     private void setTargetCompany(ActionEvent event)
     {
+        try
+        {
+            Company comp = tableView.getSelectionModel().getSelectedItem();
+            lblTargetId.setText(comp.getId() + "");
+            lblTargetName.setText(comp.getName());
+            lblTargetCountry.setText(comp.getCountry());
+            lblTargetAdress.setText(comp.getAddress());
+            //lblTargetUrl.setText(comp.getWebsite()); // Usedto set the label. Feelfree to remove
+            lblTargetCoords.setText(comp.getLat() + "" + comp.getLng());
+            lblTargetSME.setText(comp.getIsSME() + "");
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("No company selected.");
+        }
+    }
+
+    @FXML
+    private void clearStartCompany(ActionEvent event)
+    {
+        lblStartId.setText("0");
+        lblStartName.setText("No company selected");
+        lblStartCountry.setText("");
+        lblStartAdress.setText("");
+        // Spot reserved for setting the Start URL
+        lblStartCoords.setText("(0.0; 0.0)");
+        lblStartSME.setText("Yes");
+    }
+
+    @FXML
+    private void clearTargetCompany(ActionEvent event)
+    {
+        lblTargetId.setText("0");
+        lblTargetName.setText("No company selected");
+        lblTargetCountry.setText("");
+        lblTargetAdress.setText("");
+        // Spot reserved for setting the Target URL
+        lblTargetCoords.setText("(0.0; 0.0)");
+        lblTargetSME.setText("Yes");
     }
 
 }

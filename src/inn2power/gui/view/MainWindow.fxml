@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -140,13 +141,13 @@
                         <VBox>
                            <children>
                               <Label text="Website:" />
-                              <Label fx:id="lblStartUrl" text="Website" />
+                              <Hyperlink fx:id="linkStartURL" text="Hyperlink" />
                            </children>
                         </VBox>
                         <VBox>
                            <children>
                               <Label text="Website:" />
-                              <Label fx:id="lblTargetUrl" text="Website" />
+                              <Hyperlink fx:id="linkTargetURL" text="Hyperlink" />
                            </children>
                         </VBox>
                      </children>
@@ -172,7 +173,7 @@
                         <VBox>
                            <children>
                               <Label text="Is SME:" />
-                              <Label fx:id="lblstartSME" text="Yes" />
+                              <Label fx:id="lblStartSME" text="Yes" />
                            </children>
                         </VBox>
                         <VBox>
@@ -199,8 +200,8 @@
                     <children>
                         <TextField fx:id="txtSearch" layoutX="10.0" layoutY="10.0" prefWidth="270.0" promptText="Search in Table..." />
                         <Button layoutX="10.0" layoutY="50.0" mnemonicParsing="false" onAction="#setStartCompany" prefHeight="20.0" prefWidth="130.0" text="Set Start Company" />
-                  <Button fx:id="txt1" layoutX="150.0" layoutY="50.0" mnemonicParsing="false" onAction="#setTargetCompany" prefHeight="20.0" prefWidth="130.0" text="Set Target Company" />
-                        <Accordion layoutX="10.0" layoutY="90.0" prefWidth="270.0">
+                  <Button layoutX="150.0" layoutY="50.0" mnemonicParsing="false" onAction="#setTargetCompany" prefHeight="20.0" prefWidth="130.0" text="Set Target Company" />
+                        <Accordion layoutX="10.0" layoutY="130.0" prefWidth="270.0">
                             <panes>
                                 <TitledPane animated="false" text="??? ???">
                                     <content>
@@ -304,6 +305,8 @@
                             </panes>
                         </Accordion>
                   <ComboBox id="comboBoxCountries" fx:id="comboBoxCountries" layoutX="19.0" layoutY="428.0" prefWidth="150.0" promptText="Countries" />
+                  <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#clearStartCompany" prefHeight="20.0" prefWidth="130.0" text="Clear Start" />
+                  <Button layoutX="150.0" layoutY="80.0" mnemonicParsing="false" onAction="#clearTargetCompany" prefHeight="20.0" prefWidth="130.0" text="Clear Target" />
                     </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
