@@ -1,5 +1,6 @@
 package inn2power.gui.controller;
 
+//<editor-fold defaultstate="collapsed" desc="Imports">
 import be.Company;
 import inn2power.bll.BllManager;
 import java.awt.Desktop;
@@ -34,6 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+//</editor-fold>
 
 /**
  *
@@ -201,8 +203,7 @@ public class MainWindowController implements Initializable
             Stage primeStage;
             primeStage = (Stage) tableView.getScene().getWindow();
             FXMLLoader fxLoader;
-            fxLoader = new FXMLLoader(this.getClass().getResource(
-                    "/inn2power/gui/view/CompanyWindow.fxml"));
+            fxLoader = new FXMLLoader(this.getClass().getResource("/inn2power/gui/view/CompanyWindow.fxml"));
             Parent root = fxLoader.load();
 
             CompanyWindowController controller;
@@ -211,8 +212,7 @@ public class MainWindowController implements Initializable
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            scene.getStylesheets()
-                    .add("inn2power/css/cssstylesheet.css");
+            scene.getStylesheets().add("inn2power/css/cssstylesheet.css");
             stage.initOwner(primeStage);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
@@ -273,8 +273,7 @@ public class MainWindowController implements Initializable
             linkStartURL.setText("Visit Website");
             //lblStartCoords.setText(comp.getLat() + "" + comp.getLng());
             //lblStartSME.setText(comp.getIsSME() + "");
-            sourceWebsite = comp.getWebsite();
-            
+            sourceWebsite = comp.getWebsite();            
         }
         catch (NullPointerException e)
         {
