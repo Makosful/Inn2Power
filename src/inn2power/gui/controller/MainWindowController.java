@@ -299,7 +299,7 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * Sets the currently selected company as the targetcompany
+     * Sets the currently selected company as the target company
      *
      * @param event
      */
@@ -382,11 +382,8 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleCountrySearch(ActionEvent event)
     {
-        String selectedItem = comboBoxCountries
-                .getSelectionModel()
-                .getSelectedItem();
+        String selectedItem = comboBoxCountries.getSelectionModel().getSelectedItem();
         bm.filteredList();
         bm.addCountryFilter(selectedItem);
-
     }
 }
