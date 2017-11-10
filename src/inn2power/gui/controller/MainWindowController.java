@@ -2,7 +2,10 @@ package inn2power.gui.controller;
 
 import be.Company;
 import inn2power.bll.BllManager;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -26,6 +30,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -47,6 +52,14 @@ public class MainWindowController implements Initializable
     @FXML
     private TableColumn<Company, String> tcId;
     @FXML
+    private TableColumn<Company, String> tcCountry;
+    @FXML
+    private TableColumn<Company, String> tcWebsite;
+    @FXML
+    private TableColumn<Company, String> tcCoorcinate;
+    @FXML
+    private TableColumn<Company, String> tcIsSME;
+    @FXML
     private CheckBox regionNational;
     @FXML
     private CheckBox regionBordering;
@@ -57,15 +70,7 @@ public class MainWindowController implements Initializable
     @FXML
     private CheckBox regionInternational;
     @FXML
-    private TableColumn<?, ?> tcCountry;
-    @FXML
-    private TableColumn<?, ?> tcWebsite;
-    @FXML
-    private TableColumn<?, ?> tcCoorcinate;
-    @FXML
     private Label lblStartId;
-    @FXML
-    private TableColumn<?, ?> tcIsSME;
     @FXML
     private Label lblTargetId;
     @FXML
@@ -86,9 +91,7 @@ public class MainWindowController implements Initializable
     private Hyperlink linkStartURL;
     @FXML
     private Hyperlink linkTargetURL;
-    @FXML
     private Label lblStartCoords;
-    @FXML
     private Label lblTargetCoords;
     @FXML
     private Label lblStartSME;
@@ -104,7 +107,8 @@ public class MainWindowController implements Initializable
 
     private ObservableList<String> countries;
     private BllManager bm;
-
+    private String sourceWebsite;
+    private String targetWebsite;
     /**
      * Constructor
      *
@@ -115,7 +119,6 @@ public class MainWindowController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         bm = new BllManager();
-
         
         boolean[] CheckBoxes = new boolean[5];
         CheckBox[] boxes = {regionNational, regionBordering, regionContinent, regionSemiInternational, regionInternational};
@@ -135,8 +138,6 @@ public class MainWindowController implements Initializable
                 }
             });
         }
-        
-        
         
         tableView.setRowFactory(tv ->
         {
@@ -186,6 +187,7 @@ public class MainWindowController implements Initializable
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
+            tableView.getSortOrder().add(tcWebsite);
 
             splitPane.setResizableWithParent(apLeft, false);
             autoTextChange();
@@ -224,6 +226,7 @@ public class MainWindowController implements Initializable
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        tcWebsite.setCellValueFactory(new PropertyValueFactory<>("Website"));
 
         tableView.setItems(companies);
     }
@@ -241,11 +244,13 @@ public class MainWindowController implements Initializable
             Company comp = tableView.getSelectionModel().getSelectedItem();
             lblStartId.setText(comp.getId() + "");
             lblStartName.setText(comp.getName());
-            lblStartCountry.setText(comp.getCountry());
+            //lblStartCountry.setText(comp.getCountry());
             lblStartAdress.setText(comp.getAddress());
-            //lblStartUrl.setText(comp.getWebsite()); // Feel free to delete.Used toset the now removed label
-            lblStartCoords.setText(comp.getLat() + "" + comp.getLng());
-            lblStartSME.setText(comp.getIsSME() + "");
+            linkStartURL.setText("Visit Website");
+            //lblStartCoords.setText(comp.getLat() + "" + comp.getLng());
+            //lblStartSME.setText(comp.getIsSME() + "");
+            sourceWebsite = comp.getWebsite();
+            
         }
         catch (NullPointerException e)
         {
@@ -266,11 +271,12 @@ public class MainWindowController implements Initializable
             Company comp = tableView.getSelectionModel().getSelectedItem();
             lblTargetId.setText(comp.getId() + "");
             lblTargetName.setText(comp.getName());
-            lblTargetCountry.setText(comp.getCountry());
+            //lblTargetCountry.setText(comp.getCountry());
             lblTargetAdress.setText(comp.getAddress());
-            //lblTargetUrl.setText(comp.getWebsite()); // Usedto set the label. Feelfree to remove
-            lblTargetCoords.setText(comp.getLat() + "" + comp.getLng());
-            lblTargetSME.setText(comp.getIsSME() + "");
+            linkTargetURL.setText("Visit Website");
+            //lblTargetCoords.setText(comp.getLat() + "" + comp.getLng());
+            //lblTargetSME.setText(comp.getIsSME() + "");
+            targetWebsite = comp.getWebsite();
         }
         catch (NullPointerException e)
         {
@@ -311,15 +317,25 @@ public class MainWindowController implements Initializable
         lblTargetCoords.setText("(0.0; 0.0)");
         lblTargetSME.setText("Yes");
     }
-    
+
     @FXML
-    private void searchStartURL(ActionEvent event)
-    {
-        
-    }
-    @FXML
-    private void searchTargetURL(ActionEvent event)
-    {
-        
+    private void visitWebsite(MouseEvent event) {
+        System.out.println(sourceWebsite);
+        try {
+            try {
+                if(((Control)event.getSource()).getId().equals("linkStartURL"))
+                {
+                    Desktop.getDesktop().browse(new URI(sourceWebsite));
+                }
+                else
+                {
+                    Desktop.getDesktop().browse(new URI(targetWebsite));
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

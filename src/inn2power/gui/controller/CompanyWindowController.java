@@ -25,10 +25,6 @@ import javafx.scene.control.Label;
  * @author B
  */
 public class CompanyWindowController implements Initializable {
-
-
-
-
     
     @FXML
     private Label lblName;
@@ -39,26 +35,19 @@ public class CompanyWindowController implements Initializable {
     @FXML
     private Label lblLink;
 
-
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-            
-        
     }    
     
     public void loadCompany(Company company){
-
             lblName.setText(company.getName());
             lblAddress.setText(company.getAddress());
             lblCountry.setText(company.getCountry());
             lblLink.setText(company.getWebsite());
-
-
     }
 
     public void goToWebsite() throws URISyntaxException, IOException{

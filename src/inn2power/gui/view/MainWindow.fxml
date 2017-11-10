@@ -141,13 +141,13 @@
                         <VBox>
                            <children>
                               <Label text="Website:" />
-                              <Hyperlink fx:id="linkStartURL" onMouseClicked="#searchStartURL" text="Visit website" />
+                              <Hyperlink fx:id="linkStartURL" onMouseClicked="#visitWebsite" text="Visit website" />
                            </children>
                         </VBox>
                         <VBox>
                            <children>
                               <Label text="Website:" />
-                              <Hyperlink fx:id="linkTargetURL" onMouseClicked="#searchTargetURL" text="Visit website" />
+                              <Hyperlink fx:id="linkTargetURL" onMouseClicked="#visitWebsite" text="Visit website" />
                            </children>
                         </VBox>
                      </children>
