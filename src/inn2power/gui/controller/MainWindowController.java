@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +37,6 @@ import javafx.stage.Stage;
 public class MainWindowController implements Initializable
 {
 
-    // <editor-fold defaultstate="collapsed" desc=" FXML Variable names">
     //<editor-fold defaultstate="collapsed" desc="FXML Variables">
     @FXML
     private TableView<Company> tableView;
@@ -104,16 +102,20 @@ public class MainWindowController implements Initializable
     private AnchorPane apLeft;
     //</editor-fold>
 
-    /*
-     * @FXML private Button btnSearch;
-     */
-    private ObservableList<Company> search = FXCollections.observableArrayList();
-    ObservableList<String> countries;
-    BllManager bm = new BllManager();
+    private ObservableList<String> countries;
+    private BllManager bm;
 
+    /**
+     * Constructor
+     *
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        bm = new BllManager();
+
         tableView.setRowFactory(tv ->
         {
             TableRow<Company> row = new TableRow<>();
@@ -199,6 +201,11 @@ public class MainWindowController implements Initializable
 
     }
 
+    /**
+     * Sets the currently selected company as the starting company
+     *
+     * @param event
+     */
     @FXML
     private void setStartCompany(ActionEvent event)
     {
@@ -219,6 +226,11 @@ public class MainWindowController implements Initializable
         }
     }
 
+    /**
+     * Sets the currently selected company as the targetcompany
+     *
+     * @param event
+     */
     @FXML
     private void setTargetCompany(ActionEvent event)
     {
@@ -239,6 +251,11 @@ public class MainWindowController implements Initializable
         }
     }
 
+    /**
+     * Clears the current starting company
+     *
+     * @param event
+     */
     @FXML
     private void clearStartCompany(ActionEvent event)
     {
@@ -251,6 +268,11 @@ public class MainWindowController implements Initializable
         lblStartSME.setText("Yes");
     }
 
+    /**
+     * Clears the current target company
+     *
+     * @param event
+     */
     @FXML
     private void clearTargetCompany(ActionEvent event)
     {
