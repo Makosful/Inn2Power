@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
  */
 public class BllManager
 {
+
     private ObservableList<Company> companyNames = FXCollections.observableArrayList();
     private DataAccess data;
     private List<Company> companies;
@@ -57,15 +58,20 @@ public class BllManager
         });
         return companyNames;
     }
-    
+
     public void countrySearch() throws IOException
-    {  
+    {
         filtering.countrySearch();
     }
-    
+
     public ObservableList<String> countryNameList() throws IOException
     {
         CountryNameList cnl = new CountryNameList();
         return cnl.allCountriesCorrect();
+    }
+
+    public void addCountryFilter(String country)
+    {
+        filtering.addCountryFilter(country);
     }
 }
