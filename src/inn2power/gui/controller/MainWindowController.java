@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +37,6 @@ import javafx.stage.Stage;
 public class MainWindowController implements Initializable
 {
 
-    // <editor-fold defaultstate="collapsed" desc=" FXML Variable names">
     //<editor-fold defaultstate="collapsed" desc="FXML Variables">
     @FXML
     private TableView<Company> tableView;
@@ -104,16 +102,42 @@ public class MainWindowController implements Initializable
     private AnchorPane apLeft;
     //</editor-fold>
 
-    /*
-     * @FXML private Button btnSearch;
-     */
-    private ObservableList<Company> search = FXCollections.observableArrayList();
-    ObservableList<String> countries;
-    BllManager bm = new BllManager();
+    private ObservableList<String> countries;
+    private BllManager bm;
 
+    /**
+     * Constructor
+     *
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        bm = new BllManager();
+
+        
+        boolean[] CheckBoxes = new boolean[5];
+        CheckBox[] boxes = {regionNational, regionBordering, regionContinent, regionSemiInternational, regionInternational};
+        for(int i = 0; i < boxes.length; i++){
+            boxes[i].selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
+                    
+                    for(int q = 0;q < boxes.length; q++){
+                      CheckBoxes[q] = boxes[q].selectedProperty().getValue();
+                    }
+
+                   // try {
+                     //   updateTable(bm.filterBox(CheckBoxes[0], CheckBoxes[1], CheckBoxes[2], CheckBoxes[3], CheckBoxes[4]));
+                   // } catch (IOException ex) {
+                   //     Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                   // }
+                }
+            });
+        }
+        
+        
+        
         tableView.setRowFactory(tv ->
         {
             TableRow<Company> row = new TableRow<>();
@@ -146,6 +170,14 @@ public class MainWindowController implements Initializable
             });
             return row;
         });
+
+        try
+        {
+            updateTable(countries);
+        }
+        catch (Exception e)
+        {
+        }
 
         try
         {
@@ -196,6 +228,11 @@ public class MainWindowController implements Initializable
         tableView.setItems(companies);
     }
 
+    /**
+     * Sets the currently selected company as the starting company
+     *
+     * @param event
+     */
     @FXML
     private void setStartCompany(ActionEvent event)
     {
@@ -216,6 +253,11 @@ public class MainWindowController implements Initializable
         }
     }
 
+    /**
+     * Sets the currently selected company as the targetcompany
+     *
+     * @param event
+     */
     @FXML
     private void setTargetCompany(ActionEvent event)
     {
@@ -236,6 +278,11 @@ public class MainWindowController implements Initializable
         }
     }
 
+    /**
+     * Clears the current starting company
+     *
+     * @param event
+     */
     @FXML
     private void clearStartCompany(ActionEvent event)
     {
@@ -248,6 +295,11 @@ public class MainWindowController implements Initializable
         lblStartSME.setText("Yes");
     }
 
+    /**
+     * Clears the current target company
+     *
+     * @param event
+     */
     @FXML
     private void clearTargetCompany(ActionEvent event)
     {
