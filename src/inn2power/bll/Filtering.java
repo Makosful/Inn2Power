@@ -12,25 +12,28 @@ import java.util.List;
  */
 public class Filtering
 {
+
     DataAccess data;
-    
+    List<ICompanyFilter> filters = new ArrayList();
+
     public Filtering()
     {
-        try {
+        try
+        {
             data = new DataAccess();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
         }
     }
-
 
     public void countrySearch() throws IOException
     {
         List<Company> allCompanies = data.getAllCompanies();
 
-        List<ICompanyFilter> filters = new ArrayList();
         filters.add(new CountryFiltering("Philippines"));
         filters.add(new CompanySMEFilter(true));
-        
+
         List<Company> filteredList;
         filteredList = companyFiltering(allCompanies, filters);
 
@@ -64,6 +67,12 @@ public class Filtering
             }
         }
         return filteredList;
+    }
+
+    // Adds country to filter.
+    public void addCountryFilter(String country)
+    {
+        filters.add(new CountryFiltering(country));
     }
 
 }
