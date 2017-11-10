@@ -18,6 +18,7 @@ and open the template in the editor.
     -fx-cursor: hand;
     -fx-underline: true;
 }
+
 /* Virker ikke, men kan beholdes for nem tilgang af koder.
 #lblLink:active {
     -fx-text-fill: #FFFF00;
