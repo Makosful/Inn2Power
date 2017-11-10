@@ -10,7 +10,7 @@ and open the template in the editor.
 /***************************************/
 // THE FOLLOWING IS FOR Main Window fxml
 .table-view .column-header-background{
-    -fx-background-color: linear-gradient(#323232 0%, #666666 100%);
+    -fx-background-color: linear-gradient(#848484 0%, #666666 100%);
 }
 
 .table-view .column-header-background .label{
@@ -33,7 +33,7 @@ and open the template in the editor.
 }
 
 .table-row-cell:odd {
-    -fx-background-color: -fx-table-cell-border-color, #999999;
+    -fx-background-color: -fx-table-cell-border-color, #848484;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em; 
 }
