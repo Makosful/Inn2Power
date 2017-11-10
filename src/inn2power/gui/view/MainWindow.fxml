@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.MainWindowController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.MainWindowController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -141,33 +141,18 @@
                         <VBox>
                            <children>
                               <Label text="Website:" />
-                              <Hyperlink fx:id="linkStartURL" text="Hyperlink" />
+                              <Hyperlink fx:id="linkStartURL" onMouseClicked="#searchStartURL" text="Visit website" />
                            </children>
                         </VBox>
                         <VBox>
                            <children>
                               <Label text="Website:" />
-                              <Hyperlink fx:id="linkTargetURL" text="Hyperlink" />
+                              <Hyperlink fx:id="linkTargetURL" onMouseClicked="#searchTargetURL" text="Visit website" />
                            </children>
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" spacing="20.0">
-                     <children>
-                        <VBox>
-                           <children>
-                              <Label text="Coordinates:" />
-                              <Label fx:id="lblStartCoords" text="Lat: 0 - Long: 0" />
-                           </children>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <Label text="Coordinates:" />
-                              <Label fx:id="lblTargetCoords" text="Lat: 0 - Long: 0" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </VBox>
+                  <VBox alignment="CENTER" spacing="20.0" />
                   <VBox alignment="CENTER" spacing="20.0">
                      <children>
                         <VBox>
@@ -324,10 +309,13 @@
                                                 <TableColumn fx:id="tcName" prefWidth="117.0" text="Name" />
                                                 <TableColumn fx:id="tcCountry" prefWidth="129.0" text="Country" />
                                                 <TableColumn fx:id="tcAddress" prefWidth="118.0" text="Address" />
-                                                <TableColumn fx:id="tcWebsite" prefWidth="119.0" text="Website" />
-                                                <TableColumn fx:id="tcCoorcinate" prefWidth="114.0" text="Coordinate" />
+                                                <TableColumn fx:id="tcWebsite" prefWidth="119.0" text="Website (URL)" />
+                                                <TableColumn fx:id="tcCoorcinate" prefWidth="114.0" text="Coordinates" />
                                                 <TableColumn fx:id="tcIsSME" prefWidth="48.0" text="isSME?" />
                                             </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
                                         </TableView>
                                     </children>
                                 </AnchorPane>
