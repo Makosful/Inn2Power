@@ -122,38 +122,7 @@ public class MainWindowController implements Initializable
     {
         bm = new BllManager();
         
-        boolean[] CheckBoxes = new boolean[5];
-        CheckBox[] boxes =
-        {
-            regionNational, regionBordering, regionContinent, regionSemiInternational, regionInternational
-        };
-        for (int i = 0; i < boxes.length; i++)
-        {
-            boxes[i].selectedProperty().addListener(new ChangeListener<Boolean>()
-            {
-                public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val)
-                {
-
-                    for (int q = 0; q < boxes.length; q++)
-                    {
-                        CheckBoxes[q] = boxes[q].selectedProperty().getValue();
-                    }
-
-                    try
-                    {
-                        updateTable(bm.filterBox(CheckBoxes[0],
-                                                 CheckBoxes[1],
-                                                 CheckBoxes[2],
-                                                 CheckBoxes[3],
-                                                 CheckBoxes[4]));
-                    }
-                    catch (IOException ex)
-                    {
-                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-        }
+        checkBoxes();
 
         tableView.setRowFactory(tv ->
         {
@@ -192,7 +161,55 @@ public class MainWindowController implements Initializable
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        comboBoxCountries();
+    }
+    /**
+     * Adds the countries to the combobox.
+     */
+    public void comboBoxCountries()
+    {
         comboBoxCountries.setItems(countries.sorted());
+    }
+    
+    // TODO - Ejeren af dette kode.
+    public void checkBoxes()
+    {
+        boolean[] CheckBoxes = new boolean[5];
+        CheckBox[] boxes =
+        {
+            regionNational, 
+            regionBordering, 
+            regionContinent, 
+            regionSemiInternational, 
+            regionInternational
+        };
+        for (int i = 0; i < boxes.length; i++)
+        {
+            boxes[i].selectedProperty().addListener(new ChangeListener<Boolean>()
+            {
+                public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val)
+                {
+
+                    for (int q = 0; q < boxes.length; q++)
+                    {
+                        CheckBoxes[q] = boxes[q].selectedProperty().getValue();
+                    }
+
+                    try
+                    {
+                        updateTable(bm.filterBox(CheckBoxes[0],
+                                                 CheckBoxes[1],
+                                                 CheckBoxes[2],
+                                                 CheckBoxes[3],
+                                                 CheckBoxes[4]));
+                    }
+                    catch (IOException ex)
+                    {
+                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+        }
     }
 
     private void openRowInWindow(TableRow<Company> row)
