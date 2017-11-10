@@ -156,32 +156,7 @@ public class MainWindowController implements Initializable
             {
                 if (event.getClickCount() == 2 && (!row.isEmpty()))
                 {
-                    try
-                    {
-                        Company rowData = row.getItem();
-                        Stage primeStage;
-                        primeStage = (Stage) tableView.getScene().getWindow();
-                        FXMLLoader fxLoader;
-                        fxLoader = new FXMLLoader(this.getClass().getResource(
-                                "/inn2power/gui/view/CompanyWindow.fxml"));
-                        Parent root = fxLoader.load();
-
-                        CompanyWindowController controller;
-                        controller = fxLoader.getController();
-                        controller.loadCompany(rowData);
-                        Stage stage = new Stage();
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        scene.getStylesheets()
-                                .add("inn2power/css/cssstylesheet.css");
-                        stage.initOwner(primeStage);
-                        stage.initModality(Modality.WINDOW_MODAL);
-                        stage.show();
-                    }
-                    catch (IOException ex)
-                    {
-                        System.out.println("Could not read StyleSheet");
-                    }
+                    openRowInWindow(row);
                 }
             });
             return row;
@@ -211,6 +186,36 @@ public class MainWindowController implements Initializable
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
         comboBoxCountries.setItems(countries.sorted());
+    }
+
+    private void openRowInWindow(TableRow<Company> row)
+    {
+        try
+        {
+            Company rowData = row.getItem();
+            Stage primeStage;
+            primeStage = (Stage) tableView.getScene().getWindow();
+            FXMLLoader fxLoader;
+            fxLoader = new FXMLLoader(this.getClass().getResource(
+                    "/inn2power/gui/view/CompanyWindow.fxml"));
+            Parent root = fxLoader.load();
+
+            CompanyWindowController controller;
+            controller = fxLoader.getController();
+            controller.loadCompany(rowData);
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.getStylesheets()
+                    .add("inn2power/css/cssstylesheet.css");
+            stage.initOwner(primeStage);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+        }
+        catch (IOException ex)
+        {
+            System.out.println("Could not read StyleSheet");
+        }
     }
 
     /**
