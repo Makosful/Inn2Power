@@ -26,3 +26,9 @@ and open the template in the editor.
     -fx-text-fill: #00FF00;
 }
 */
+
+#companyGrid {
+    -fx-vgap: 1;
+    -fx-hgap: 1;
+    -fx-padding: 1;
+}

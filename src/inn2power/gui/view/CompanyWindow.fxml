@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane id="AnchorPane" prefHeight="150.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.CompanyWindowController">
    <children>
-      <GridPane layoutX="14.0" layoutY="14.0">
+      <GridPane fx:id="companyGrid" layoutX="14.0" layoutY="14.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -20,14 +22,70 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Company name:" />
-            <Label fx:id="lblName" text="name" GridPane.columnIndex="1" />
-            <Label text="Company country:" GridPane.rowIndex="1" />
-            <Label fx:id="lblCountry" text="country" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Company address" GridPane.rowIndex="2" />
-            <Label fx:id="lblAddress" text="address" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Company URL:" GridPane.rowIndex="3" />
-            <Label fx:id="lblLink" onMouseClicked="#goToWebsite" text="link" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Pane>
+               <children>
+                  <Label text="Company name:" />
+               </children>
+               <padding>
+                  <Insets right="25.0" />
+               </padding>
+            </Pane>
+            <Pane GridPane.rowIndex="1">
+               <children>
+                  <Label text="Company country:" />
+               </children>
+               <padding>
+                  <Insets right="25.0" />
+               </padding>
+            </Pane>
+            <Pane GridPane.rowIndex="2">
+               <children>
+                  <Label text="Company address" />
+               </children>
+               <padding>
+                  <Insets right="25.0" />
+               </padding>
+            </Pane>
+            <Pane GridPane.rowIndex="3">
+               <children>
+                  <Label text="Company URL:" />
+               </children>
+               <padding>
+                  <Insets right="25.0" />
+               </padding>
+            </Pane>
+            <Pane GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="lblName" text="name" />
+               </children>
+               <GridPane.margin>
+                  <Insets left="25.0" />
+               </GridPane.margin>
+            </Pane>
+            <Pane GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="lblCountry" text="country" />
+               </children>
+               <GridPane.margin>
+                  <Insets left="25.0" />
+               </GridPane.margin>
+            </Pane>
+            <Pane GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="lblAddress" text="address" />
+               </children>
+               <GridPane.margin>
+                  <Insets left="25.0" />
+               </GridPane.margin>
+            </Pane>
+            <Pane GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+               <children>
+                  <Label fx:id="lblLink" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#goToWebsite" text="link" />
+               </children>
+               <GridPane.margin>
+                  <Insets left="25.0" />
+               </GridPane.margin>
+            </Pane>
          </children>
       </GridPane>
    </children>
