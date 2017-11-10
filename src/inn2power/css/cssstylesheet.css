@@ -7,6 +7,55 @@ and open the template in the editor.
     Created on : Nov 9, 2017, 2:33:07 PM
     Author     : Storm
 */
+/***************************************/
+// THE FOLLOWING IS FOR Main Window fxml
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#323232 0%, #666666 100%);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: white;
+}
+
+.table-row-cell:even {
+    -fx-background-color: -fx-table-cell-border-color, #666666;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: -fx-table-cell-border-color, #999999;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; 
+}
+
+.table-row-cell:selected {
+    -fx-text-fill: gray;
+    -fx-background-color: #1B537D;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+.root {
+    -fx-focus-color: #1B537D;
+}
+
+/* UNNECESSARY, USED ROOT INSTEAD.
+.changefocuscolor {
+    -fx-focus-color: #1B537D;
+}*/
+
+/***************************************/
+// THE FOLLOWING IS FOR Company Window fxml
 #lblLink {
     -fx-font: 16px "Serif";
     -fx-font-style: italic;
@@ -18,7 +67,6 @@ and open the template in the editor.
     -fx-cursor: hand;
     -fx-underline: true;
 }
-
 /* Virker ikke, men kan beholdes for nem tilgang af koder.
 #lblLink:active {
     -fx-text-fill: #FFFF00;
