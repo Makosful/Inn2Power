@@ -1,0 +1,28 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 9, 2017, 2:33:07 PM
+    Author     : Storm
+*/
+#lblLink {
+    -fx-font: 16px "Serif";
+    -fx-font-style: italic;
+    -fx-text-fill: #0000EE;
+}
+
+#lblLink:hover {
+    -fx-cursor: pointer;
+    -fx-cursor: hand;
+    -fx-underline: true;
+}
+/* Virker ikke, men kan beholdes for nem tilgang af koder.
+#lblLink:active {
+    -fx-text-fill: #FFFF00;
+}
+#lblLink:visited {
+    -fx-text-fill: #00FF00;
+}
+*/

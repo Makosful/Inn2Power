@@ -13,17 +13,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  *
@@ -31,7 +39,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class MainWindowController implements Initializable
 {
-
+    // <editor-fold defaultstate="collapsed" desc=" FXML Variable names">
     //<editor-fold defaultstate="collapsed" desc="FXML Variables">
     @FXML
     private TableView<Company> tableView;
@@ -102,15 +110,40 @@ public class MainWindowController implements Initializable
      */
     private ObservableList<Company> search = FXCollections.observableArrayList();
     ObservableList<String> countries;
+    
     BllManager bm = new BllManager();
-
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        tcName.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
-        tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        tableView.setRowFactory( tv -> {
+        TableRow<Company> row = new TableRow<>();
+        row.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                
+                try {
+                    Company rowData = row.getItem();
+                    Stage primeStage = (Stage)tableView.getScene().getWindow();
+                    FXMLLoader fxLoader = new FXMLLoader(this.getClass().getResource("/inn2power/gui/view/CompanyWindow.fxml"));
+                    Parent root = fxLoader.load();
 
+                    CompanyWindowController controller = fxLoader.getController();
+                    controller.loadCompany(rowData);
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    //The Cascading Style Sheet (Initially to manipulate lblLink to a visual hyperlink)
+                    scene.getStylesheets().add("inn2power/css/cssstylesheet.css");
+                    stage.initOwner(primeStage);
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            });
+            return row;
+        });
+        
         try
         {
             countries = bm.countryNameList();
@@ -128,7 +161,7 @@ public class MainWindowController implements Initializable
         }
         comboBoxCountries.setItems(countries.sorted());
     }
-
+                    
     /**
      * Adds an observer to the search bar, allowing the app to search the
      * database on the fly
@@ -153,15 +186,15 @@ public class MainWindowController implements Initializable
      */
     private void updateTable(ObservableList companies)
     {
-
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
 
+
         tableView.setItems(companies);
-
+     
     }
-
+ 
     @FXML
     private void setStartCompany(ActionEvent event)
     {
@@ -201,7 +234,7 @@ public class MainWindowController implements Initializable
             System.out.println("No company selected.");
         }
     }
-
+    
     @FXML
     private void clearStartCompany(ActionEvent event)
     {
@@ -213,7 +246,6 @@ public class MainWindowController implements Initializable
         lblStartCoords.setText("(0.0; 0.0)");
         lblStartSME.setText("Yes");
     }
-
     @FXML
     private void clearTargetCompany(ActionEvent event)
     {
@@ -225,5 +257,4 @@ public class MainWindowController implements Initializable
         lblTargetCoords.setText("(0.0; 0.0)");
         lblTargetSME.setText("Yes");
     }
-
 }
