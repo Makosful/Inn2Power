@@ -59,9 +59,16 @@ public class BllManager
         return companyNames;
     }
 
-    public void countrySearch() throws IOException
+    public ObservableList<Company> filteredList()
     {
-        filtering.countrySearch();
+        companyNames.clear();
+        
+        for (Company company : filtering.filteredList())
+        {
+            companyNames.add(company);
+        }
+
+        return companyNames;
     }
 
     public ObservableList<String> countryNameList() throws IOException

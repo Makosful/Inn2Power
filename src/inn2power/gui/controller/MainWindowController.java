@@ -327,6 +327,8 @@ public class MainWindowController implements Initializable
     private void handleCountrySearch(ActionEvent event)
     {
         String selectedItem = comboBoxCountries.getSelectionModel().getSelectedItem();
+        bm.filteredList();
         bm.addCountryFilter(selectedItem);
+
     }
 }
