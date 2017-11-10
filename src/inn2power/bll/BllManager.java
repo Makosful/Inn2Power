@@ -18,7 +18,9 @@ public class BllManager
     private ObservableList<Company> companyNames = FXCollections.observableArrayList();
     private DataAccess data;
     private List<Company> companies;
-
+    
+    private Filtering filtering;
+    
     public BllManager()
     {
         try
@@ -30,8 +32,9 @@ public class BllManager
             Logger.getLogger(BllManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         companies = data.getAllCompanies();
+        filtering = new Filtering();
     }
-
+    
     public ObservableList getAllCompaniesExample() throws IOException
     {
 
@@ -57,9 +60,8 @@ public class BllManager
     
     public void countrySearch() throws IOException
     {
-        Filtering filtering = new Filtering();
         
-        filtering.countrySearch();
+       // filtering.countrySearch();
     }
     
     public ObservableList<String> countryNameList() throws IOException
@@ -67,4 +69,10 @@ public class BllManager
         CountryNameList cnl = new CountryNameList();
         return cnl.allCountriesCorrect();
     }
+    
+    public void addCountryFilter(String country)
+    {
+        filtering.addCountryFilter(country);
+    }
+            
 }

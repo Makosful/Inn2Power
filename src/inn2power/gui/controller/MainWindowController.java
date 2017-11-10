@@ -2,9 +2,6 @@ package inn2power.gui.controller;
 
 import be.Company;
 import inn2power.bll.BllManager;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -115,5 +112,11 @@ public class MainWindowController implements Initializable
         
         //tableView.setItems(ip.getSearchResult(txtSearch.getText()));
     }
-
+    @FXML
+    public void doAction(ActionEvent event) throws IOException
+    {   
+       String selectedItem = comboBoxCountries.getSelectionModel().getSelectedItem();
+       ip.addCountryFilter(selectedItem);
+       
+    }
 }

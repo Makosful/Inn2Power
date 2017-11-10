@@ -168,7 +168,7 @@
                         </Accordion>
                         <Button fx:id="txt" layoutX="161.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnSearchName" prefHeight="26.0" prefWidth="54.0" text="Search" />
                         <TextField fx:id="txtSearch" layoutY="13.0" promptText="Search in Table..." />
-                  <ComboBox id="comboBoxCountries" fx:id="comboBoxCountries" layoutX="19.0" layoutY="428.0" prefWidth="150.0" promptText="Countries" />
+                  <ComboBox id="comboBoxCountries" fx:id="comboBoxCountries" layoutX="19.0" layoutY="428.0" onAction="#doAction" prefWidth="150.0" promptText="Countries" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
