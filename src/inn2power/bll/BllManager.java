@@ -18,6 +18,7 @@ public class BllManager
     private ObservableList<Company> companyNames = FXCollections.observableArrayList();
     private DataAccess data;
     private List<Company> companies;
+    Filtering filtering;
 
     public BllManager()
     {
@@ -30,6 +31,8 @@ public class BllManager
             Logger.getLogger(BllManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         companies = data.getAllCompanies();
+
+        filtering = new Filtering();
     }
 
     public ObservableList getAllCompaniesExample() throws IOException
@@ -56,9 +59,7 @@ public class BllManager
     }
     
     public void countrySearch() throws IOException
-    {
-        Filtering filtering = new Filtering();
-        
+    {  
         filtering.countrySearch();
     }
     
