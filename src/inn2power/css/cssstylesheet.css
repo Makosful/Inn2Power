@@ -1,14 +1,9 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
     Created on : Nov 9, 2017, 2:33:07 PM
     Author     : Storm
 */
 /***************************************/
-// THE FOLLOWING IS FOR Main Window fxml
+/* THE FOLLOWING IS FOR Main Window fxml*/
 .table-view .column-header-background{
     -fx-background-color: linear-gradient(#848484 0%, #666666 100%);
 }
@@ -35,7 +30,7 @@ and open the template in the editor.
 .table-row-cell:odd {
     -fx-background-color: -fx-table-cell-border-color, #848484;
     -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.0em; 
+    -fx-padding: 0.0em;
 }
 
 .table-row-cell:selected {
@@ -55,7 +50,7 @@ and open the template in the editor.
 }*/
 
 /***************************************/
-// THE FOLLOWING IS FOR Company Window fxml
+/* THE FOLLOWING IS FOR Company Window fxml */
 #lblLink {
     -fx-font: 16px "Serif";
     -fx-font-style: italic;
