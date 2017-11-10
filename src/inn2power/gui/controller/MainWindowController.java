@@ -159,23 +159,28 @@ public class MainWindowController implements Initializable
                     try
                     {
                         Company rowData = row.getItem();
-                        Stage primeStage = (Stage) tableView.getScene().getWindow();
-                        FXMLLoader fxLoader = new FXMLLoader(this.getClass().getResource("/inn2power/gui/view/CompanyWindow.fxml"));
+                        Stage primeStage;
+                        primeStage = (Stage) tableView.getScene().getWindow();
+                        FXMLLoader fxLoader;
+                        fxLoader = new FXMLLoader(this.getClass().getResource(
+                                "/inn2power/gui/view/CompanyWindow.fxml"));
                         Parent root = fxLoader.load();
 
-                        CompanyWindowController controller = fxLoader.getController();
+                        CompanyWindowController controller;
+                        controller = fxLoader.getController();
                         controller.loadCompany(rowData);
                         Stage stage = new Stage();
                         Scene scene = new Scene(root);
                         stage.setScene(scene);
-                        scene.getStylesheets().add("inn2power/css/cssstylesheet.css");
+                        scene.getStylesheets()
+                                .add("inn2power/css/cssstylesheet.css");
                         stage.initOwner(primeStage);
                         stage.initModality(Modality.WINDOW_MODAL);
                         stage.show();
                     }
                     catch (IOException ex)
                     {
-                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("Could not read StyleSheet");
                     }
                 }
             });
