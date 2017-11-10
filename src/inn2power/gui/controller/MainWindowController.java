@@ -145,7 +145,6 @@ public class MainWindowController implements Initializable
             {
                 if (event.getClickCount() == 2 && (!row.isEmpty()))
                 {
-
                     try
                     {
                         Company rowData = row.getItem();
@@ -158,7 +157,6 @@ public class MainWindowController implements Initializable
                         Stage stage = new Stage();
                         Scene scene = new Scene(root);
                         stage.setScene(scene);
-                        //The Cascading Style Sheet (Initially to manipulate lblLink to a visual hyperlink)
                         scene.getStylesheets().add("inn2power/css/cssstylesheet.css");
                         stage.initOwner(primeStage);
                         stage.initModality(Modality.WINDOW_MODAL);
@@ -228,7 +226,6 @@ public class MainWindowController implements Initializable
         tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
 
         tableView.setItems(companies);
-
     }
 
     /**
@@ -313,5 +310,16 @@ public class MainWindowController implements Initializable
         // Spot reserved for setting the Target URL
         lblTargetCoords.setText("(0.0; 0.0)");
         lblTargetSME.setText("Yes");
+    }
+    
+    @FXML
+    private void searchStartURL(ActionEvent event)
+    {
+        
+    }
+    @FXML
+    private void searchTargetURL(ActionEvent event)
+    {
+        
     }
 }
