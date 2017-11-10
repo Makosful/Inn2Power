@@ -322,4 +322,11 @@ public class MainWindowController implements Initializable
     {
         
     }
+    
+    @FXML
+    private void handleCountrySearch(ActionEvent event)
+    {
+        String selectedItem = comboBoxCountries.getSelectionModel().getSelectedItem();
+        bm.addCountryFilter(selectedItem);
+    }
 }
