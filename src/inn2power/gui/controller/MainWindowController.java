@@ -153,6 +153,14 @@ public class MainWindowController implements Initializable
 
         try
         {
+            updateTable(countries);
+        }
+        catch (Exception e)
+        {
+        }
+
+        try
+        {
             countries = bm.countryNameList();
             tableView.setItems(bm.getAllCompaniesExample());
             tableView.getSortOrder().add(tcName);
