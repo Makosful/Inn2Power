@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.MainWindowController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.MainWindowController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -68,7 +68,7 @@
                <children>
                   <VBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Label text="Start Company:" />
+                        <Label text="Source Company:" />
                         <Label text="Target Company:" />
                      </children>
                   </VBox>
@@ -184,7 +184,7 @@
                 <AnchorPane fx:id="apLeft">
                     <children>
                         <TextField fx:id="txtSearch" layoutX="10.0" layoutY="10.0" prefWidth="270.0" promptText="Search in Table..." />
-                        <Button layoutX="10.0" layoutY="50.0" mnemonicParsing="false" onAction="#setStartCompany" prefHeight="20.0" prefWidth="130.0" text="Set Start Company" />
+                        <Button layoutX="10.0" layoutY="50.0" mnemonicParsing="false" onAction="#setStartCompany" prefHeight="20.0" prefWidth="130.0" text="Set Source Company" />
                   <Button layoutX="150.0" layoutY="50.0" mnemonicParsing="false" onAction="#setTargetCompany" prefHeight="20.0" prefWidth="130.0" text="Set Target Company" />
                         <Accordion layoutX="10.0" layoutY="130.0" prefWidth="270.0">
                             <panes>
@@ -289,8 +289,8 @@
                                 </TitledPane>
                             </panes>
                         </Accordion>
-                  <ComboBox id="comboBoxCountries" fx:id="comboBoxCountries" layoutX="19.0" layoutY="428.0" prefWidth="150.0" promptText="Countries" />
-                  <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#clearStartCompany" prefHeight="20.0" prefWidth="130.0" text="Clear Start" />
+                  <ComboBox id="comboBoxCountries" fx:id="comboBoxCountries" layoutX="19.0" layoutY="428.0" onAction="#handleCountrySearch" prefWidth="150.0" promptText="Countries" />
+                  <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#clearStartCompany" prefHeight="20.0" prefWidth="130.0" text="Clear Source" />
                   <Button layoutX="150.0" layoutY="80.0" mnemonicParsing="false" onAction="#clearTargetCompany" prefHeight="20.0" prefWidth="130.0" text="Clear Target" />
                     </children>
                <padding>

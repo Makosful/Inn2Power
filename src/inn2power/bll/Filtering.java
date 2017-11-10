@@ -12,34 +12,56 @@ import java.util.List;
  */
 public class Filtering
 {
+
     DataAccess data;
-    
+    List<ICompanyFilter> filters = new ArrayList();
+
     public Filtering()
     {
-        try {
+        try
+        {
             data = new DataAccess();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
         }
     }
-
-
-    public void countrySearch() throws IOException
+    /**
+     * 
+     * @returns the list, which contains the selected country. 
+     */
+    public List<Company> filteredList()
     {
         List<Company> allCompanies = data.getAllCompanies();
 
+        List<Company> filteredList;
+        filteredList = companyFiltering(allCompanies, filters);
+
+        return filteredList;
+    }
+    
+    public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
+    {
+                  
+                
+        List<Company> allCompanies = data.getAllCompanies();
+
         List<ICompanyFilter> filters = new ArrayList();
-        filters.add(new CountryFiltering("Philippines"));
-        filters.add(new CompanySMEFilter(true));
+        
+        if(national == true){
+             filters.add(new CountryFiltering("Brazil"));
+        }
+        
+
+        // filters.add(new CompanySMEFilter(true));
+   
         
         List<Company> filteredList;
         filteredList = companyFiltering(allCompanies, filters);
 
-        for (Company company : filteredList)
-        {
-            System.out.println(company.getName());
-        }
+        return filteredList;
     }
-
+    
     public List<Company> companyFiltering(List<Company> allCompanies, List<ICompanyFilter> filters)
     {
         // ArrayList which countries are added to, according to if there is a
@@ -64,6 +86,12 @@ public class Filtering
             }
         }
         return filteredList;
+    }
+
+    // Adds country to filter.
+    public void addCountryFilter(String country)
+    {
+        filters.add(new CountryFiltering(country));
     }
 
 }

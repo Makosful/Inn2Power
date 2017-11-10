@@ -119,7 +119,11 @@ public class MainWindowController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         bm = new BllManager();
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 91951b4531a99ac803123792983094e0f3c33581
         boolean[] CheckBoxes = new boolean[5];
         CheckBox[] boxes =
         {
@@ -152,7 +156,11 @@ public class MainWindowController implements Initializable
                 }
             });
         }
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> 91951b4531a99ac803123792983094e0f3c33581
         tableView.setRowFactory(tv ->
         {
             TableRow<Company> row = new TableRow<>();
@@ -342,6 +350,7 @@ public class MainWindowController implements Initializable
         lblTargetSME.setText("Yes");
     }
 
+<<<<<<< HEAD
     @FXML
     private void visitWebsite(MouseEvent event) {
         System.out.println(sourceWebsite);
@@ -361,6 +370,17 @@ public class MainWindowController implements Initializable
         } catch (URISyntaxException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
+=======
+    @FXML
+    private void searchStartURL(ActionEvent event)
+    {
+
+    }
+
+    @FXML
+    private void searchTargetURL(ActionEvent event)
+    {
+
     }
 
     @FXML
@@ -372,5 +392,6 @@ public class MainWindowController implements Initializable
         bm.filteredList();
         bm.addCountryFilter(selectedItem);
 
+>>>>>>> 91951b4531a99ac803123792983094e0f3c33581
     }
 }

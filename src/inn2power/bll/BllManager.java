@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
  */
 public class BllManager
 {
+
     private ObservableList<Company> companyNames = FXCollections.observableArrayList();
     private DataAccess data;
     private List<Company> companies;
@@ -57,15 +58,44 @@ public class BllManager
         });
         return companyNames;
     }
-    
-    public void countrySearch() throws IOException
-    {  
-        filtering.countrySearch();
+
+    public ObservableList<Company> filteredList()
+    {
+        companyNames.clear();
+        
+        for (Company company : filtering.filteredList())
+        {
+            companyNames.add(company);
+        }
+
+        return companyNames;
     }
-    
+
     public ObservableList<String> countryNameList() throws IOException
     {
         CountryNameList cnl = new CountryNameList();
         return cnl.allCountriesCorrect();
     }
+
+    public void addCountryFilter(String country)
+    {
+        filtering.addCountryFilter(country);
+    }
+
+    public ObservableList filterBox(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
+    {
+
+        companyNames.clear();
+        List<Company> filteredList;
+        filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
+
+        for (Company company : filteredList)
+        {
+            companyNames.add(company);
+        }
+
+        return companyNames;
+
+    }
+
 }
