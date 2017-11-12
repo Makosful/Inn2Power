@@ -3,6 +3,7 @@ package inn2power.gui.controller;
 //<editor-fold defaultstate="collapsed" desc="Imports">
 import be.Company;
 import inn2power.bll.BllManager;
+import inn2power.gui.model.WindowModel;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
@@ -109,6 +110,7 @@ public class MainWindowController implements Initializable
 
     private ObservableList<String> countries;
     private BllManager bm;
+    private WindowModel wm;
     private String sourceWebsite;
     private String targetWebsite;
     /**
@@ -121,7 +123,8 @@ public class MainWindowController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         bm = new BllManager();
-        
+        wm = new WindowModel();
+                
         checkBoxes();
 
         tableView.setRowFactory(tv ->
@@ -148,7 +151,8 @@ public class MainWindowController implements Initializable
         try
         {
             countries = bm.countryNameList();
-            tableView.setItems(bm.getAllCompanies());
+            
+            tableView.setItems(wm.getAllCompanies());
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
@@ -200,11 +204,11 @@ public class MainWindowController implements Initializable
 
                     try
                     {
-                        updateTable(bm.filterBox(CheckBoxes[0],
+                                    bm.filterBox(CheckBoxes[0],
                                                  CheckBoxes[1],
                                                  CheckBoxes[2],
                                                  CheckBoxes[3],
-                                                 CheckBoxes[4]));
+                                                 CheckBoxes[4]);
                     }
                     catch (IOException ex)
                     {
@@ -259,7 +263,7 @@ public class MainWindowController implements Initializable
             public void changed(ObservableValue<? extends String> observable,
                                 String oldText, String newText)
             {
-                updateTable(bm.getSearchResult(txtSearch.getText()));
+                wm.Search(txtSearch.getText());
             }
         });
     }

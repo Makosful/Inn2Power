@@ -35,46 +35,6 @@ public class BllManager
 
         filtering = new Filtering();
     }
-
-    
-    /*
-     * @return observablelist with companies
-     * @throws IOException 
-     */
-    public ObservableList<Company> getAllCompanies() throws IOException
-    {
-
-        companies.forEach((company) ->
-        {
-            companyNames.add(company);
-        });
-        
-        return companyNames;
-    }
-
-    
-    
-
-    /**
-     * Selecte the companies that contains the searched text
-     * @param searchText
-     * @return companies as an observablelist
-     */
-    public ObservableList<Company> getSearchResult(String searchText)
-    {
-        companyNames.clear();
-        
-        companies.forEach((company) ->
-        {
-            if ((company.getName().toLowerCase()).contains(searchText.toLowerCase()) || (company.getAddress().toLowerCase().contains(searchText.toLowerCase())))
-            {
-                companyNames.add(company);
-            }
-        });
-        
-        return companyNames;
-    }
-
     
     
     public ObservableList<Company> filteredList()
