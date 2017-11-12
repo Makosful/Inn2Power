@@ -3,6 +3,7 @@ package inn2power.gui.model;
 import inn2power.bll.Search;
 import be.Company;
 import inn2power.bll.BllManager;
+import inn2power.bll.CountryNameList;
 import inn2power.bll.Filtering;
 import inn2power.dal.DataAccess;
 import java.io.IOException;
@@ -82,6 +83,34 @@ public class WindowModel
         companies.clear();
         companies.addAll(filteredList);
     }
+    
+    
+    /**
+     * 
+     * @return
+     * @throws IOException 
+     */    
+    public ObservableList<String> countryNameList() throws IOException
+    {
+        CountryNameList cnl = new CountryNameList();
+        return cnl.allCountriesCorrect();
+    }
+
+    /**
+     * 
+     * @param country 
+     */
+    public void addCountryFilter(String country)
+    {
+        
+        filtering.addCountryFilter(country);
+        companies.clear();
+
+        companies.addAll(filtering.filteredList());
+       
+        
+    }
+    
     
     
 }

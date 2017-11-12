@@ -140,17 +140,17 @@ public class MainWindowController implements Initializable
             return row;
         });
 
-        try
-        {
-            updateTable(countries);
-        }
-        catch (Exception e)
-        {
-        }
 
         try
         {
-            countries = bm.countryNameList();
+            
+            countries = wm.countryNameList();
+            
+            tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+            tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+            tcWebsite.setCellValueFactory(new PropertyValueFactory<>("Website"));
+            
             
             tableView.setItems(wm.getAllCompanies());
             tableView.getSortOrder().add(tcName);
@@ -265,20 +265,7 @@ public class MainWindowController implements Initializable
         });
     }
 
-    /**
-     * Updates and fills the table with company objects
-     *
-     * @param companies
-     */
-    private void updateTable(ObservableList companies)
-    {
-        tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
-        tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        tcWebsite.setCellValueFactory(new PropertyValueFactory<>("Website"));
 
-        tableView.setItems(companies);
-    }
 
     /**
      * Sets the currently selected company as the starting company
@@ -293,7 +280,7 @@ public class MainWindowController implements Initializable
             Company comp = tableView.getSelectionModel().getSelectedItem();
             lblStartId.setText(comp.getId() + "");
             lblStartName.setText(comp.getName());
-            //lblStartCountry.setText(comp.getCountry());
+            lblStartCountry.setText(comp.getCountry());
             lblStartAdress.setText(comp.getAddress());
             linkStartURL.setText("Visit Website");
             //lblStartCoords.setText(comp.getLat() + "" + comp.getLng());
@@ -319,7 +306,7 @@ public class MainWindowController implements Initializable
             Company comp = tableView.getSelectionModel().getSelectedItem();
             lblTargetId.setText(comp.getId() + "");
             lblTargetName.setText(comp.getName());
-            //lblTargetCountry.setText(comp.getCountry());
+            lblTargetCountry.setText(comp.getCountry());
             lblTargetAdress.setText(comp.getAddress());
             linkTargetURL.setText("Visit Website");
             //lblTargetCoords.setText(comp.getLat() + "" + comp.getLng());
@@ -391,7 +378,6 @@ public class MainWindowController implements Initializable
     private void handleCountrySearch(ActionEvent event)
     {
         String selectedItem = comboBoxCountries.getSelectionModel().getSelectedItem();
-        bm.filteredList();
-        bm.addCountryFilter(selectedItem);
+        wm.addCountryFilter(selectedItem);
     }
 }

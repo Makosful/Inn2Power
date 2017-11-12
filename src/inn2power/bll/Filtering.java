@@ -15,12 +15,13 @@ public class Filtering
 
     DataAccess data;
     List<ICompanyFilter> filters = new ArrayList();
-
+    
     public Filtering()
     {
         try
         {
             data = new DataAccess();
+            
         }
         catch (IOException e)
         {
@@ -32,6 +33,7 @@ public class Filtering
      */
     public List<Company> filteredList()
     {
+        
         List<Company> allCompanies = data.getAllCompanies();
 
         List<Company> filteredList;
@@ -42,22 +44,15 @@ public class Filtering
     
     public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
     {
-                  
                 
-        List<Company> allCompanies = data.getAllCompanies();
-
-        List<ICompanyFilter> filters = new ArrayList();
+        filters.clear();
         
         if(national == true){
              filters.add(new CountryFiltering("Brazil"));
         }
         
-
         // filters.add(new CompanySMEFilter(true));
-   
-        
-        List<Company> filteredList;
-        filteredList = companyFiltering(allCompanies, filters);
+        List<Company> filteredList = filteredList();
 
         return filteredList;
     }
@@ -91,6 +86,7 @@ public class Filtering
     // Adds country to filter.
     public void addCountryFilter(String country)
     {
+        filters.clear();
         filters.add(new CountryFiltering(country));
     }
 

@@ -19,7 +19,7 @@ public class BllManager
     private ObservableList<Company> companyNames = FXCollections.observableArrayList();
     private DataAccess data;
     private List<Company> companies;
-    Filtering filtering;
+
 
     public BllManager()
     {
@@ -33,34 +33,11 @@ public class BllManager
         }
         companies = data.getAllCompanies();
 
-        filtering = new Filtering();
     }
     
-    
-    public ObservableList<Company> filteredList()
-    {
-        companyNames.clear();
-        
-        for (Company company : filtering.filteredList())
-        {
-            companyNames.add(company);
-        }
-
-        return companyNames;
-    }
 
     
-    
-    public ObservableList<String> countryNameList() throws IOException
-    {
-        CountryNameList cnl = new CountryNameList();
-        return cnl.allCountriesCorrect();
-    }
 
-    public void addCountryFilter(String country)
-    {
-        filtering.addCountryFilter(country);
-    }
     
     
 
