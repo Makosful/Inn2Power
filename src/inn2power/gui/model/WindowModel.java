@@ -19,7 +19,6 @@ import javafx.collections.ObservableList;
  */
 public class WindowModel
 {
-
     private DataAccess data;
     private Search search;
     private Filtering filtering;
@@ -46,9 +45,7 @@ public class WindowModel
      */
     public ObservableList<Company> getAllCompanies() throws IOException
     {
-
         companies.addAll(data.getAllCompanies());
-        
         return companies;
     }
     
@@ -76,14 +73,11 @@ public class WindowModel
      */
     public void filterBox(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
     {
-
-        
         List<Company> filteredList;
         filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
         companies.clear();
         companies.addAll(filteredList);
     }
-    
     
     /**
      * 
@@ -102,13 +96,9 @@ public class WindowModel
      */
     public void addCountryFilter(String country)
     {
-        
         filtering.addCountryFilter(country);
         companies.clear();
-
         companies.addAll(filtering.filteredList());
-       
-        
     }
     
     
