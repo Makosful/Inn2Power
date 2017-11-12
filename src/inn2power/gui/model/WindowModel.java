@@ -3,6 +3,7 @@ package inn2power.gui.model;
 import inn2power.bll.Search;
 import be.Company;
 import inn2power.bll.BllManager;
+import inn2power.bll.Filtering;
 import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.util.List;
@@ -20,6 +21,7 @@ public class WindowModel
 
     private DataAccess data;
     private Search search;
+    private Filtering filtering;
     private ObservableList<Company> companies = FXCollections.observableArrayList();
    
     public WindowModel()
@@ -28,6 +30,7 @@ public class WindowModel
         {
             data = new DataAccess();
             search = new Search();
+            filtering = new Filtering();
         }
         catch (IOException ex)
         {
@@ -59,6 +62,26 @@ public class WindowModel
         companies.addAll(result);
     }
     
+    
+     /**
+     * Sends the checkbox values as parameters to the filter,
+     * gets the filtered list of companies back which are added to the observable list 
+     * @param national
+     * @param bordering
+     * @param continent
+     * @param semiInternational
+     * @param international
+     * @throws IOException 
+     */
+    public void filterBox(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
+    {
+
+        
+        List<Company> filteredList;
+        filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
+        companies.clear();
+        companies.addAll(filteredList);
+    }
     
     
 }

@@ -64,32 +64,6 @@ public class BllManager
     
     
 
-    /**
-     * ends the checkbox values as parameters to the filter,
-     * gets the filtered list of companies back which are added to the observable list 
-     * @param national
-     * @param bordering
-     * @param continent
-     * @param semiInternational
-     * @param international
-     * @return the ovservablelist with companies
-     * @throws IOException 
-     */
-    public ObservableList<Company> filterBox(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
-    {
 
-        companyNames.clear();
-        
-        List<Company> filteredList;
-        
-        filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
-
-        for (Company company : filteredList)
-        {
-            companyNames.add(company);
-        }
-
-        return companyNames;
-    }
 
 }

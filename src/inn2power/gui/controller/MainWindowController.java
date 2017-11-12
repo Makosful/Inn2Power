@@ -151,6 +151,7 @@ public class MainWindowController implements Initializable
         try
         {
             countries = bm.countryNameList();
+            
             tableView.setItems(wm.getAllCompanies());
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
@@ -201,16 +202,13 @@ public class MainWindowController implements Initializable
                         CheckBoxes[q] = boxes[q].selectedProperty().getValue();
                     }
 
-                    try
-                    {
-                        updateTable(bm.filterBox(CheckBoxes[0],
-                                                 CheckBoxes[1],
-                                                 CheckBoxes[2],
-                                                 CheckBoxes[3],
-                                                 CheckBoxes[4]));
-                    }
-                    catch (IOException ex)
-                    {
+                    try {
+                        wm.filterBox(CheckBoxes[0],
+                                     CheckBoxes[1],
+                                     CheckBoxes[2],
+                                     CheckBoxes[3],
+                                     CheckBoxes[4]);
+                    } catch (IOException ex) {
                         Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
