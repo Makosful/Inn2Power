@@ -148,7 +148,7 @@ public class MainWindowController implements Initializable
         try
         {
             countries = bm.countryNameList();
-            tableView.setItems(bm.getAllCompaniesExample());
+            tableView.setItems(bm.getAllCompanies());
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
@@ -171,10 +171,10 @@ public class MainWindowController implements Initializable
         comboBoxCountries.setItems(countries.sorted());
     }
     
-    /**
-    * Listener for the checkboxes, 
-    * sends the checkbox values as parameters to the filter.
-    */
+     /**
+     * Listener for the checkboxes, 
+     * sends the checkbox values as parameters to the filter.
+     */
     public void checkBoxes()
     {
         boolean[] CheckBoxes = new boolean[5];
@@ -216,9 +216,9 @@ public class MainWindowController implements Initializable
     }
     
     
-    /* 
-    * Opens the company, from the clicked row in tableview, in a new window.
-    */
+     /* 
+     * Opens the company, from the clicked row in tableview, in a new window.
+     */
     private void openRowInWindow(TableRow<Company> row)
     {
         try

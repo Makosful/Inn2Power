@@ -36,19 +36,34 @@ public class BllManager
         filtering = new Filtering();
     }
 
-    public ObservableList getAllCompaniesExample() throws IOException
+    
+    /*
+     * @return observablelist with companies
+     * @throws IOException 
+     */
+    public ObservableList<Company> getAllCompanies() throws IOException
     {
 
         companies.forEach((company) ->
         {
             companyNames.add(company);
         });
+        
         return companyNames;
     }
 
-    public ObservableList getSearchResult(String searchText)
+    
+    
+
+    /**
+     * Selecte the companies that contains the searched text
+     * @param searchText
+     * @return companies as an observablelist
+     */
+    public ObservableList<Company> getSearchResult(String searchText)
     {
         companyNames.clear();
+        
         companies.forEach((company) ->
         {
             if ((company.getName().toLowerCase()).contains(searchText.toLowerCase()) || (company.getAddress().toLowerCase().contains(searchText.toLowerCase())))
@@ -56,9 +71,12 @@ public class BllManager
                 companyNames.add(company);
             }
         });
+        
         return companyNames;
     }
 
+    
+    
     public ObservableList<Company> filteredList()
     {
         companyNames.clear();
@@ -71,6 +89,8 @@ public class BllManager
         return companyNames;
     }
 
+    
+    
     public ObservableList<String> countryNameList() throws IOException
     {
         CountryNameList cnl = new CountryNameList();
@@ -81,12 +101,27 @@ public class BllManager
     {
         filtering.addCountryFilter(country);
     }
+    
+    
 
-    public ObservableList filterBox(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
+    /**
+     * ends the checkbox values as parameters to the filter,
+     * gets the filtered list of companies back which are added to the observable list 
+     * @param national
+     * @param bordering
+     * @param continent
+     * @param semiInternational
+     * @param international
+     * @return the ovservablelist with companies
+     * @throws IOException 
+     */
+    public ObservableList<Company> filterBox(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
     {
 
         companyNames.clear();
+        
         List<Company> filteredList;
+        
         filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
 
         for (Company company : filteredList)
@@ -95,7 +130,6 @@ public class BllManager
         }
 
         return companyNames;
-
     }
 
 }
