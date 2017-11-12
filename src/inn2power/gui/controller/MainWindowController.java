@@ -171,7 +171,10 @@ public class MainWindowController implements Initializable
         comboBoxCountries.setItems(countries.sorted());
     }
     
-    // TODO - Ejeren af dette kode.
+    /**
+    * Listener for the checkboxes, 
+    * sends the checkbox values as parameters to the filter.
+    */
     public void checkBoxes()
     {
         boolean[] CheckBoxes = new boolean[5];
@@ -211,7 +214,11 @@ public class MainWindowController implements Initializable
             });
         }
     }
-
+    
+    
+    /* 
+    * Opens the company, from the clicked row in tableview, in a new window.
+    */
     private void openRowInWindow(TableRow<Company> row)
     {
         try
@@ -258,7 +265,7 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * Updates the table with the search results
+     * Updates and fills the table with company objects
      *
      * @param companies
      */
