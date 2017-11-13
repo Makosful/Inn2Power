@@ -113,6 +113,7 @@ public class MainWindowController implements Initializable
     private WindowModel wm;
     private String sourceWebsite;
     private String targetWebsite;
+    
     /**
      * Constructor
      *
@@ -196,7 +197,6 @@ public class MainWindowController implements Initializable
             {
                 public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val)
                 {
-
                     for (int q = 0; q < boxes.length; q++)
                     {
                         CheckBoxes[q] = boxes[q].selectedProperty().getValue();
@@ -375,9 +375,11 @@ public class MainWindowController implements Initializable
     }
 
     @FXML
-    private void handleCountrySearch(ActionEvent event)
+    private void handleCountrySearch(ActionEvent event) throws IOException
     {
         String selectedItem = comboBoxCountries.getSelectionModel().getSelectedItem();
         wm.addCountryFilter(selectedItem);
+
+        checkBoxes();
     }
 }

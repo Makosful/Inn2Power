@@ -45,6 +45,7 @@ public class Filtering
     
     public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
     {
+<<<<<<< HEAD
                   
   
 
@@ -57,6 +58,9 @@ public class Filtering
                 i.remove();
             }
         }
+=======
+                
+>>>>>>> d42605e2fe1436c4f01e0938c551e220e296b20a
         
         if(national == true)
         {
@@ -100,6 +104,7 @@ public class Filtering
 
     // Adds country to filter.
     public void addCountryFilter(String country)
+<<<<<<< HEAD
     {   
         
         CountryFiltering cm = new CountryFiltering(country);
@@ -115,6 +120,15 @@ public class Filtering
 
         filters.add(cm);
         
+=======
+    {
+        filters.add(new CountryFiltering(country));
+>>>>>>> d42605e2fe1436c4f01e0938c551e220e296b20a
+    }
+    
+    public void clearFilter()
+    {
+        filters.clear();
     }
 
 }

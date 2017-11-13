@@ -24,6 +24,11 @@ public class DataAccess
         rDAO = new RelationDAO();
     }
 
+    /**
+     * Gets a list of all companies
+     *
+     * @return
+     */
     public List<Company> getAllCompanies()
     {
         return cDAO.getAllCompanies();
@@ -35,7 +40,7 @@ public class DataAccess
      * @param id The ID of the Company
      *
      * @return The Company with a matching ID. Null if the Company does not
-     *         exist
+     * exist
      *
      * @throws Inn2PowerException
      */
@@ -73,5 +78,5 @@ public class DataAccess
     {
         return rDAO.getAllRelations();
     }
-    
+
 }
