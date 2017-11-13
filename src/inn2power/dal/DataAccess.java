@@ -12,20 +12,22 @@ import java.util.List;
  *
  * @author Axl
  */
-public class DataAccess
-{
+public class DataAccess {
 
     CompanyDAO cDAO;
     RelationDAO rDAO;
 
-    public DataAccess() throws IOException
-    {
+    public DataAccess() throws IOException {
         cDAO = new CompanyDAO();
         rDAO = new RelationDAO();
     }
 
-    public List<Company> getAllCompanies()
-    {
+    /**
+     * Gets a list of all companies
+     *
+     * @return
+     */
+    public List<Company> getAllCompanies() {
         return cDAO.getAllCompanies();
     }
 
@@ -35,12 +37,11 @@ public class DataAccess
      * @param id The ID of the Company
      *
      * @return The Company with a matching ID. Null if the Company does not
-     *         exist
+     * exist
      *
      * @throws Inn2PowerException
      */
-    public Company getCompanyById(int id) throws Inn2PowerException
-    {
+    public Company getCompanyById(int id) throws Inn2PowerException {
         return cDAO.getCompanyById(id);
     }
 
@@ -49,9 +50,8 @@ public class DataAccess
      *
      * @return All the business roles listed in an array
      */
-    public String[] getCompanyBusinessRoles()
-    {
-        return cDAO.getCompanyBusinessRoles();
+    public String[] getCompanyBuisnessRoles() {
+        return cDAO.getCompanyBuisnessRoles();
     }
 
     /**
@@ -59,8 +59,7 @@ public class DataAccess
      *
      * @return A String array with all the supply chain categories
      */
-    public String[] getSupplyChainCategories()
-    {
+    public String[] getSupplyChainCategories() {
         return cDAO.getSupplyChainCategories();
     }
 
@@ -69,9 +68,8 @@ public class DataAccess
      *
      * @return A list of all relations
      */
-    public List<Relation> getAllRelations()
-    {
+    public List<Relation> getAllRelations() {
         return rDAO.getAllRelations();
     }
-    
+
 }
