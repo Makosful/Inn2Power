@@ -113,7 +113,7 @@ public class MainWindowController implements Initializable
     private WindowModel wm;
     private String sourceWebsite;
     private String targetWebsite;
-    
+
     /**
      * Constructor
      *
@@ -125,7 +125,6 @@ public class MainWindowController implements Initializable
     {
         bm = new BllManager();
         wm = new WindowModel();
-                
         checkBoxes();
 
         tableView.setRowFactory(tv ->
@@ -141,33 +140,34 @@ public class MainWindowController implements Initializable
             return row;
         });
 
-
         try
         {
-            
+
             countries = wm.countryNameList();
-            
+
+            // This adds information to the table
+            tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
             tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
             tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
-            tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
             tcWebsite.setCellValueFactory(new PropertyValueFactory<>("Website"));
-            
-            
+
+            // This sorts the table based on the collums. Highest priority is at the top
             tableView.setItems(wm.getAllCompanies());
             tableView.getSortOrder().add(tcName);
-            tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
-            tableView.getSortOrder().add(tcWebsite);
 
+            // Sets the window splitter to be locked to the left pane
             splitPane.setResizableWithParent(apLeft, false);
+
+            // Adds the text to the table
             autoTextChange();
-        }
-        catch (IOException ex)
+        } catch (IOException ex)
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
         comboBoxCountries();
     }
+
     /**
      * Adds the countries to the combobox.
      */
@@ -175,20 +175,20 @@ public class MainWindowController implements Initializable
     {
         comboBoxCountries.setItems(countries.sorted());
     }
-    
-     /**
-     * Listener for the checkboxes, 
-     * sends the checkbox values as parameters to the filter.
+
+    /**
+     * Listener for the checkboxes, sends the checkbox values as parameters to
+     * the filter.
      */
     public void checkBoxes()
     {
         boolean[] CheckBoxes = new boolean[5];
         CheckBox[] boxes =
         {
-            regionNational, 
-            regionBordering, 
-            regionContinent, 
-            regionSemiInternational, 
+            regionNational,
+            regionBordering,
+            regionContinent,
+            regionSemiInternational,
             regionInternational
         };
         for (int i = 0; i < boxes.length; i++)
@@ -202,22 +202,23 @@ public class MainWindowController implements Initializable
                         CheckBoxes[q] = boxes[q].selectedProperty().getValue();
                     }
 
-                    try {
+                    try
+                    {
                         wm.filterBox(CheckBoxes[0],
-                                     CheckBoxes[1],
-                                     CheckBoxes[2],
-                                     CheckBoxes[3],
-                                     CheckBoxes[4]);
-                    } catch (IOException ex) {
+                                CheckBoxes[1],
+                                CheckBoxes[2],
+                                CheckBoxes[3],
+                                CheckBoxes[4]);
+                    } catch (IOException ex)
+                    {
                         Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
         }
     }
-    
-    
-     /* 
+
+    /*
      * Opens the company, from the clicked row in tableview, in a new window.
      */
     private void openRowInWindow(TableRow<Company> row)
@@ -241,8 +242,7 @@ public class MainWindowController implements Initializable
             stage.initOwner(primeStage);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
-        }
-        catch (IOException ex)
+        } catch (IOException ex)
         {
             System.out.println("Could not read StyleSheet");
         }
@@ -258,14 +258,12 @@ public class MainWindowController implements Initializable
         {
             @Override
             public void changed(ObservableValue<? extends String> observable,
-                                String oldText, String newText)
+                    String oldText, String newText)
             {
                 wm.Search(txtSearch.getText());
             }
         });
     }
-
-
 
     /**
      * Sets the currently selected company as the starting company
@@ -285,9 +283,8 @@ public class MainWindowController implements Initializable
             linkStartURL.setText("Visit Website");
             //lblStartCoords.setText(comp.getLat() + "" + comp.getLng());
             //lblStartSME.setText(comp.getIsSME() + "");
-            sourceWebsite = comp.getWebsite();            
-        }
-        catch (NullPointerException e)
+            sourceWebsite = comp.getWebsite();
+        } catch (NullPointerException e)
         {
             System.out.println("No company selected.");
         }
@@ -312,8 +309,7 @@ public class MainWindowController implements Initializable
             //lblTargetCoords.setText(comp.getLat() + "" + comp.getLng());
             //lblTargetSME.setText(comp.getIsSME() + "");
             targetWebsite = comp.getWebsite();
-        }
-        catch (NullPointerException e)
+        } catch (NullPointerException e)
         {
             System.out.println("No company selected.");
         }
@@ -354,22 +350,26 @@ public class MainWindowController implements Initializable
     }
 
     @FXML
-    private void visitWebsite(MouseEvent event) {
+    private void visitWebsite(MouseEvent event)
+    {
         System.out.println(sourceWebsite);
-        try {
-            try {
-                if(((Control)event.getSource()).getId().equals("linkStartURL"))
+        try
+        {
+            try
+            {
+                if (((Control) event.getSource()).getId().equals("linkStartURL"))
                 {
                     Desktop.getDesktop().browse(new URI(sourceWebsite));
-                }
-                else
+                } else
                 {
                     Desktop.getDesktop().browse(new URI(targetWebsite));
                 }
-            } catch (IOException ex) {
+            } catch (IOException ex)
+            {
                 Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (URISyntaxException ex) {
+        } catch (URISyntaxException ex)
+        {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
