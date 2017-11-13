@@ -31,11 +31,9 @@ public class CSVReaderCountries
                 String[] dataArray = dataRow.split(",");
                 data.add(dataArray[2]);
                 
-                
                 dataRow = CSVFile.readLine(); // Read next line of data.
             }
             return data;
         }
     }
- 
 }
