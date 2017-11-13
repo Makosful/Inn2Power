@@ -87,5 +87,10 @@ public class Filtering
     {
         filters.add(new CountryFiltering(country));
     }
+    
+    public void clearFilter()
+    {
+        filters.clear();
+    }
 
 }
