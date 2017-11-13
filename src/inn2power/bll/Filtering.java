@@ -45,7 +45,6 @@ public class Filtering
     public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
     {
                 
-        filters.clear();
         
         if(national == true){
              filters.add(new CountryFiltering("Brazil"));
@@ -86,7 +85,6 @@ public class Filtering
     // Adds country to filter.
     public void addCountryFilter(String country)
     {
-        filters.clear();
         filters.add(new CountryFiltering(country));
     }
 
