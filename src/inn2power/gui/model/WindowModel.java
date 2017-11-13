@@ -96,7 +96,7 @@ public class WindowModel
      */
     public void addCountryFilter(String country)
     {
-        filtering.clearFilter();
+
         filtering.addCountryFilter(country);
         companies.clear();
         companies.addAll(filtering.filteredList());
