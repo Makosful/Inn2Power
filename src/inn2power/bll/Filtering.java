@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class Filtering
 {
+
     DataAccess data;
     List<ICompanyFilter> filters = new ArrayList();
     
@@ -32,6 +33,7 @@ public class Filtering
      */
     public List<Company> filteredList()
     {
+        
         List<Company> allCompanies = data.getAllCompanies();
 
         List<Company> filteredList;
@@ -42,6 +44,8 @@ public class Filtering
     
     public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
     {
+                
+        
         if(national == true){
              filters.add(new CountryFiltering("Brazil"));
         }
