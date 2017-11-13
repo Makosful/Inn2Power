@@ -12,12 +12,14 @@ import java.util.List;
  *
  * @author Axl
  */
-public class DataAccess {
+public class DataAccess
+{
 
     CompanyDAO cDAO;
     RelationDAO rDAO;
 
-    public DataAccess() throws IOException {
+    public DataAccess() throws IOException
+    {
         cDAO = new CompanyDAO();
         rDAO = new RelationDAO();
     }
@@ -27,7 +29,8 @@ public class DataAccess {
      *
      * @return
      */
-    public List<Company> getAllCompanies() {
+    public List<Company> getAllCompanies()
+    {
         return cDAO.getAllCompanies();
     }
 
@@ -41,7 +44,8 @@ public class DataAccess {
      *
      * @throws Inn2PowerException
      */
-    public Company getCompanyById(int id) throws Inn2PowerException {
+    public Company getCompanyById(int id) throws Inn2PowerException
+    {
         return cDAO.getCompanyById(id);
     }
 
@@ -50,7 +54,8 @@ public class DataAccess {
      *
      * @return All the business roles listed in an array
      */
-    public String[] getCompanyBuisnessRoles() {
+    public String[] getCompanyBusinessRoles()
+    {
         return cDAO.getCompanyBuisnessRoles();
     }
 
@@ -59,7 +64,8 @@ public class DataAccess {
      *
      * @return A String array with all the supply chain categories
      */
-    public String[] getSupplyChainCategories() {
+    public String[] getSupplyChainCategories()
+    {
         return cDAO.getSupplyChainCategories();
     }
 
@@ -68,7 +74,8 @@ public class DataAccess {
      *
      * @return A list of all relations
      */
-    public List<Relation> getAllRelations() {
+    public List<Relation> getAllRelations()
+    {
         return rDAO.getAllRelations();
     }
 
