@@ -4,6 +4,8 @@ import be.Company;
 import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -15,13 +17,13 @@ public class Filtering
 
     DataAccess data;
     List<ICompanyFilter> filters = new ArrayList();
-    
+
+
     public Filtering()
     {
         try
         {
             data = new DataAccess();
-            
         }
         catch (IOException e)
         {
@@ -33,7 +35,6 @@ public class Filtering
      */
     public List<Company> filteredList()
     {
-        
         List<Company> allCompanies = data.getAllCompanies();
 
         List<Company> filteredList;
@@ -44,14 +45,28 @@ public class Filtering
     
     public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
     {
-                
-        filters.clear();
+                  
+  
+
+        CompanySMEFilter sme = new CompanySMEFilter(true);
         
-        if(national == true){
-             filters.add(new CountryFiltering("Brazil"));
+        Iterator<ICompanyFilter> i = filters.iterator();
+        while (i.hasNext()) {
+            ICompanyFilter filter = i.next();
+            if(filter.equals(sme)){
+                i.remove();
+            }
         }
         
-        // filters.add(new CompanySMEFilter(true));
+        if(national == true)
+        {
+            filters.add(sme);
+            
+        }
+        
+                
+            
+        
         List<Company> filteredList = filteredList();
 
         return filteredList;
@@ -85,9 +100,21 @@ public class Filtering
 
     // Adds country to filter.
     public void addCountryFilter(String country)
-    {
-        filters.clear();
-        filters.add(new CountryFiltering(country));
+    {   
+        
+        CountryFiltering cm = new CountryFiltering(country);
+        
+        Iterator<ICompanyFilter> i = filters.iterator();
+        while (i.hasNext()) {
+            
+            ICompanyFilter filter = i.next();
+            if(filter.equals(cm)){
+                i.remove();
+            }
+        }
+
+        filters.add(cm);
+        
     }
 
 }

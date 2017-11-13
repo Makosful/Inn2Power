@@ -40,4 +40,9 @@ public class CompanySMEFilter implements ICompanyFilter {
            
     }
     
+    @Override   
+    public boolean equals(Object object2) {
+        return object2 instanceof CompanySMEFilter;
+    }
+    
 }
