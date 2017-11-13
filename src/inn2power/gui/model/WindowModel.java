@@ -72,9 +72,13 @@ public class WindowModel
      * @param international
      * @throws IOException
      */
-    public void filterBox(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
+    public void filterBox(boolean[] regionCheckboxes) throws IOException
     {
         List<Company> filteredList;
+        for (int i = 0; i < regionCheckboxes.length; i++)
+        {
+         filteredList = filtering.addFilters(true, true, true, true, true, true)
+        }
         filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
         companies.clear();
         companies.addAll(filteredList);

@@ -40,12 +40,40 @@ public class Filtering
         return filteredList;
     }
     
-    public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
+    public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException
     {
-        if(national == true){
-             filters.add(new CountryFiltering("Brazil"));
+        for (int i = 0; i < checkBoxFilters.length; i++)
+        {
+//            if (checkBoxFilters[i] == true)
+//            {
+//                filters.add(new CountryFiltering("Brazil"));
+//            }
+            
+            if(checkBoxFilters[0] == true)
+            {
+                // AFRICA
+            }
+            else if(checkBoxFilters[1] == true)
+            {
+               // ASIA
+            }
+            else if(checkBoxFilters[2] == true)
+            {
+                // EUROPE
+            }
+            else if(checkBoxFilters[3] == true)
+            {
+                // NORTH AMERICA
+            }
+            else if(checkBoxFilters[4] == true)
+            {
+                // OCEANIA
+            }
+            else if(checkBoxFilters[5] == true)
+            {
+                // SOUTH AMERICA
+            }
         }
-        
         // filters.add(new CompanySMEFilter(true));
         List<Company> filteredList = filteredList();
 

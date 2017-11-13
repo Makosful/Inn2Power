@@ -45,7 +45,7 @@ import javafx.stage.Stage;
 public class MainWindowController implements Initializable
 {
 
-    //<editor-fold defaultstate="collapsed" desc="FXML Variables">
+    //<editor-fold defaultstate="collapsed" desc="FXML & Variables">
     @FXML
     private TableView<Company> tableView;
     @FXML
@@ -62,16 +62,6 @@ public class MainWindowController implements Initializable
     private TableColumn<Company, String> tcCoorcinate;
     @FXML
     private TableColumn<Company, String> tcIsSME;
-    @FXML
-    private CheckBox regionNational;
-    @FXML
-    private CheckBox regionBordering;
-    @FXML
-    private CheckBox regionContinent;
-    @FXML
-    private CheckBox regionSemiInternational;
-    @FXML
-    private CheckBox regionInternational;
     @FXML
     private Label lblStartId;
     @FXML
@@ -94,8 +84,6 @@ public class MainWindowController implements Initializable
     private Hyperlink linkStartURL;
     @FXML
     private Hyperlink linkTargetURL;
-    private Label lblStartCoords;
-    private Label lblTargetCoords;
     @FXML
     private Label lblStartSME;
     @FXML
@@ -106,13 +94,31 @@ public class MainWindowController implements Initializable
     private TextField txtSearch;
     @FXML
     private AnchorPane apLeft;
-    //</editor-fold>
-
+    @FXML
+    private Label lblStartId1;
+    @FXML
+    private Label lblTargetId1;
+    @FXML
+    private CheckBox regionAfrica;
+    @FXML
+    private CheckBox regionAsia;
+    @FXML
+    private CheckBox regionEurope;
+    @FXML
+    private CheckBox regionNAmerica;
+    @FXML
+    private CheckBox regionOceania;
+    @FXML
+    private CheckBox regionSAmerica;
+    
+    private Label lblStartCoords;
+    private Label lblTargetCoords;
     private ObservableList<String> countries;
     private BllManager bm;
     private WindowModel wm;
     private String sourceWebsite;
     private String targetWebsite;
+    //</editor-fold>
 
     /**
      * Constructor
@@ -183,14 +189,15 @@ public class MainWindowController implements Initializable
      */
     public void checkBoxes()
     {
-        boolean[] CheckBoxes = new boolean[5];
+        boolean[] CheckBoxes = new boolean[6];
         CheckBox[] boxes =
         {
-            regionNational,
-            regionBordering,
-            regionContinent,
-            regionSemiInternational,
-            regionInternational
+            regionAfrica,
+            regionAsia,
+            regionEurope,
+            regionNAmerica,
+            regionOceania,
+            regionSAmerica
         };
         for (int i = 0; i < boxes.length; i++)
         {
@@ -210,7 +217,8 @@ public class MainWindowController implements Initializable
                                 CheckBoxes[1],
                                 CheckBoxes[2],
                                 CheckBoxes[3],
-                                CheckBoxes[4]);
+                                CheckBoxes[4], 
+                                CheckBoxes[5]);
                     } catch (IOException ex)
                     {
                         Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
