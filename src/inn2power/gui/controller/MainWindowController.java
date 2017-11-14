@@ -149,7 +149,6 @@ public class MainWindowController implements Initializable
 
         try
         {
-
             countries = wm.countryNameList();
 
             // This adds information to the table
@@ -164,7 +163,7 @@ public class MainWindowController implements Initializable
             tableView.getSortOrder().add(tcId);
 
             // Sets the window splitter to be locked to the left pane
-            splitPane.setResizableWithParent(apLeft, false);
+            SplitPane.setResizableWithParent(apLeft, false);
 
             // Adds the text to the table
             autoTextChange();
@@ -172,7 +171,8 @@ public class MainWindowController implements Initializable
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        comboBoxCountries();
+//        NOTE TO SELF: ADD LATER. IMPORTANT        
+//        comboBoxCountries();
     }
 
     /**
@@ -199,18 +199,18 @@ public class MainWindowController implements Initializable
             regionOceania,
             regionSAmerica
         };
-        for (int i = 0; i < boxes.length; i++)
+        for (CheckBox boxe : boxes)
         {
-            boxes[i].selectedProperty().addListener(new ChangeListener<Boolean>()
+            boxe.selectedProperty().addListener(new ChangeListener<Boolean>()
             {
+                @Override
                 public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val)
                 {
-
                     for (int q = 0; q < boxes.length; q++)
                     {
                         CheckBoxes[q] = boxes[q].selectedProperty().getValue();
                     }
-
+                    
                     try
                     {
                         wm.filterBox(CheckBoxes);

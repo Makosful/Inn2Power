@@ -87,7 +87,7 @@ public class WindowModel
      */
     public ObservableList<String> countryNameList() throws IOException
     {
-        CountryNameList cnl = new CountryNameList("");
+        CountryNameList cnl = new CountryNameList("FIX PLS");
         cnl.removeDublicates();
         return cnl.removeDublicates();
     }

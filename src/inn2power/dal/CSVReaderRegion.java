@@ -27,7 +27,7 @@ public class CSVReaderRegion
     {
         countries = FXCollections.observableArrayList();
 
-        try (BufferedReader CSVFile = new BufferedReader(new FileReader("./region/" + region)))
+        try (BufferedReader CSVFile = new BufferedReader(new FileReader("./regions/" + region + ".csv")))
         {
             String country = CSVFile.readLine();
             while (country != null)
