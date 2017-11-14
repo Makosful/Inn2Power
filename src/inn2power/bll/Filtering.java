@@ -51,11 +51,11 @@ public class Filtering
             
             if(checkBoxFilters[0] == true)
             {
-                // AFRICA
+                filters.add(new CountryFiltering("Brazil"));
             }
             else if(checkBoxFilters[1] == true)
             {
-               // ASIA
+                filters.add(new CountryFiltering("Phillipines"));
             }
             else if(checkBoxFilters[2] == true)
             {

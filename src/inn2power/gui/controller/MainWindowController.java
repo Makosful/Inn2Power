@@ -213,12 +213,8 @@ public class MainWindowController implements Initializable
 
                     try
                     {
-                        wm.filterBox(CheckBoxes[0],
-                                CheckBoxes[1],
-                                CheckBoxes[2],
-                                CheckBoxes[3],
-                                CheckBoxes[4], 
-                                CheckBoxes[5]);
+                        wm.filterBox(CheckBoxes);
+                        System.out.println("Succesfully added checkbox array list");
                     } catch (IOException ex)
                     {
                         Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
