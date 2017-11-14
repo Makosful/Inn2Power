@@ -61,7 +61,7 @@ public class MainWindowController implements Initializable
     @FXML
     private TableColumn<Company, String> tcCoorcinate;
     @FXML
-    private TableColumn<Company, String> tcIsSME;
+    private TableColumn<Company, String> tcSME;
     @FXML
     private Label lblStartId;
     @FXML
@@ -156,6 +156,9 @@ public class MainWindowController implements Initializable
             tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
             tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
             tcWebsite.setCellValueFactory(new PropertyValueFactory<>("Website"));
+            tcCountry.setCellValueFactory(new PropertyValueFactory<>("Country"));
+            // Potential add (Swap integers to YES / NO / UNKNOWN
+            //tcSME.setCellValueFactory(new PropertyValueFactory<>("SME")); 
 
             // This sorts the table based on the collums. Highest priority is at the top
             tableView.setItems(wm.getAllCompanies());
