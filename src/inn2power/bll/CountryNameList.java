@@ -12,24 +12,28 @@ import javafx.collections.ObservableList;
 public class CountryNameList
 {
 
-    CSVReaderRegion csvrc;
+    ObservableList<String> countries;
 
     public CountryNameList(String region) throws IOException
     {
-        this.csvrc = new CSVReaderRegion(region);
+        CSVReaderRegion csv = new CSVReaderRegion(region);
+        countries = csv.getAllCountries();
     }
 
     // Ordered list of countries, returns only every country once.
     public ObservableList<String> removeDublicates()
     {
-        ObservableList<String> countriesData = FXCollections.observableArrayList();
-        for (String string : csvrc.getAllCountries())
+        ObservableList<String> noDublicatesList = FXCollections.observableArrayList();
+        countries.stream().filter((country) -> (!noDublicatesList.contains(country)
+                && !country.contains("\""))).forEachOrdered((country) ->
         {
-            if (!countriesData.contains(string) && !string.contains("\""))
-            {
-                countriesData.add(string);
-            }
-        }
-        return countriesData;
+            noDublicatesList.add(country);
+        });
+        return noDublicatesList;
+    }
+
+    public ObservableList<String> getCountries()
+    {
+        return countries;
     }
 }

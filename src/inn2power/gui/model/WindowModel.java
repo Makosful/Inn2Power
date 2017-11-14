@@ -75,7 +75,7 @@ public class WindowModel
     public void filterBox(boolean[] regionCheckboxes) throws IOException
     {
         List<Company> filteredList;
-        
+
         filteredList = filtering.addFilters(regionCheckboxes);
         CompanyObsArrayList.clear();
         CompanyObsArrayList.addAll(filteredList);
@@ -87,9 +87,9 @@ public class WindowModel
      */
     public ObservableList<String> countryNameList() throws IOException
     {
-        CountryNameList cnl = new CountryNameList("FIX PLS");
-        cnl.removeDublicates();
-        return cnl.removeDublicates();
+        CountryNameList cnl = new CountryNameList("EuropeCountryList");
+        ObservableList<String> list = cnl.getCountries();
+        return list;
     }
 
     /**

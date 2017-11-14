@@ -33,7 +33,7 @@ public class CSVReaderRegion
             while (country != null)
             {
                 countries.add(country); // Adds the county to the list
-                CSVFile.readLine();     // Moves to the next line
+                country = CSVFile.readLine();     // Moves to the next line
             }
         }
     }
