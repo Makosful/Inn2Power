@@ -43,12 +43,7 @@ public class Filtering
     public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException
     {
         for (int i = 0; i < checkBoxFilters.length; i++)
-        {
-//            if (checkBoxFilters[i] == true)
-//            {
-//                filters.add(new CountryFiltering("Brazil"));
-//            }
-            
+        {   
             if(checkBoxFilters[0] == true)
             {
                 filters.add(new CountryFiltering("Brazil"));
