@@ -199,9 +199,9 @@ public class MainWindowController implements Initializable
             regionOceania,
             regionSAmerica
         };
-        for (CheckBox boxe : boxes)
+        for (CheckBox box : boxes)
         {
-            boxe.selectedProperty().addListener(new ChangeListener<Boolean>()
+            box.selectedProperty().addListener(new ChangeListener<Boolean>()
             {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val)

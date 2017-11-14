@@ -56,7 +56,7 @@ public class DataAccess
      */
     public String[] getCompanyBusinessRoles()
     {
-        return cDAO.getCompanyBuisnessRoles();
+        return cDAO.getCompanyBusinessRoles();
     }
 
     /**
