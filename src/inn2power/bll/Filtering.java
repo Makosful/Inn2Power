@@ -4,7 +4,6 @@ import be.Company;
 import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,20 +17,19 @@ public class Filtering
     DataAccess data;
     List<ICompanyFilter> filters = new ArrayList();
 
-
     public Filtering()
     {
         try
         {
             data = new DataAccess();
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
         }
     }
+
     /**
-     * 
-     * @returns the list, which contains the selected country. 
+     *
+     * @return @returns the list, which contains the selected country.
      */
     public List<Company> filteredList()
     {
@@ -42,40 +40,33 @@ public class Filtering
 
         return filteredList;
     }
-    
+
     public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
     {
 
-                  
-  
-
         CompanySMEFilter sme = new CompanySMEFilter(true);
-        
+
         Iterator<ICompanyFilter> i = filters.iterator();
-        while (i.hasNext()) {
+        while (i.hasNext())
+        {
             ICompanyFilter filter = i.next();
-            if(filter.equals(sme)){
+            if (filter.equals(sme))
+            {
                 i.remove();
             }
         }
 
-                
-
-        
-        if(national == true)
+        if (national == true)
         {
             filters.add(sme);
-            
+
         }
-        
-                
-            
-        
+
         List<Company> filteredList = filteredList();
 
         return filteredList;
     }
-    
+
     public List<Company> companyFiltering(List<Company> allCompanies, List<ICompanyFilter> filters)
     {
         // ArrayList which countries are added to, according to if there is a
@@ -105,27 +96,28 @@ public class Filtering
     // Adds country to filter.
     public void addCountryFilter(String country)
 
-    {   
-        
+    {
+
         CountryFiltering cm = new CountryFiltering(country);
-        
+
         Iterator<ICompanyFilter> i = filters.iterator();
-        while (i.hasNext()) {
-            
+        while (i.hasNext())
+        {
+
             ICompanyFilter filter = i.next();
-            if(filter.equals(cm)){
+            if (filter.equals(cm))
+            {
                 i.remove();
             }
         }
 
         filters.add(cm);
-        
 
-    {
-        filters.add(new CountryFiltering(country));
+        {
+            filters.add(new CountryFiltering(country));
 
-    }
-    
+        }
+
     }
 
 }

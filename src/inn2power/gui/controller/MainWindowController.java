@@ -12,7 +12,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,7 +35,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-//</editor-fold>
 
 /**
  *
@@ -113,7 +111,7 @@ public class MainWindowController implements Initializable
     private WindowModel wm;
     private String sourceWebsite;
     private String targetWebsite;
-    
+
     /**
      * Constructor
      *
@@ -125,7 +123,7 @@ public class MainWindowController implements Initializable
     {
         bm = new BllManager();
         wm = new WindowModel();
-                
+
         checkBoxes();
 
         tableView.setRowFactory(tv ->
@@ -141,33 +139,31 @@ public class MainWindowController implements Initializable
             return row;
         });
 
-
         try
         {
-            
+
             countries = wm.countryNameList();
-            
+
             tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
             tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
             tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
             tcWebsite.setCellValueFactory(new PropertyValueFactory<>("Website"));
-            
-            
+
             tableView.setItems(wm.getAllCompanies());
             tableView.getSortOrder().add(tcName);
             tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
             tableView.getSortOrder().add(tcWebsite);
 
-            splitPane.setResizableWithParent(apLeft, false);
+            SplitPane.setResizableWithParent(apLeft, false);
             autoTextChange();
-        }
-        catch (IOException ex)
+        } catch (IOException ex)
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
         comboBoxCountries();
     }
+
     /**
      * Adds the countries to the combobox.
      */
@@ -175,49 +171,47 @@ public class MainWindowController implements Initializable
     {
         comboBoxCountries.setItems(countries.sorted());
     }
-    
-     /**
-     * Listener for the checkboxes, 
-     * sends the checkbox values as parameters to the filter.
+
+    /**
+     * Listener for the checkboxes, sends the checkbox values as parameters to
+     * the filter.
      */
     public void checkBoxes()
     {
         boolean[] CheckBoxes = new boolean[5];
         CheckBox[] boxes =
         {
-            regionNational, 
-            regionBordering, 
-            regionContinent, 
-            regionSemiInternational, 
+            regionNational,
+            regionBordering,
+            regionContinent,
+            regionSemiInternational,
             regionInternational
         };
-        for (int i = 0; i < boxes.length; i++)
+        for (CheckBox boxe : boxes)
         {
-            boxes[i].selectedProperty().addListener(new ChangeListener<Boolean>()
+            boxe.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) ->
             {
-                public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val)
+                for (int q = 0; q < boxes.length; q++)
                 {
-                    for (int q = 0; q < boxes.length; q++)
-                    {
-                        CheckBoxes[q] = boxes[q].selectedProperty().getValue();
-                    }
+                    CheckBoxes[q] = boxes[q].selectedProperty().getValue();
+                }
 
-                    try {
-                        wm.filterBox(CheckBoxes[0],
-                                     CheckBoxes[1],
-                                     CheckBoxes[2],
-                                     CheckBoxes[3],
-                                     CheckBoxes[4]);
-                    } catch (IOException ex) {
-                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                try
+                {
+                    wm.filterBox(CheckBoxes[0],
+                            CheckBoxes[1],
+                            CheckBoxes[2],
+                            CheckBoxes[3],
+                            CheckBoxes[4]);
+                } catch (IOException ex)
+                {
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
         }
     }
-    
-    
-     /* 
+
+    /*
      * Opens the company, from the clicked row in tableview, in a new window.
      */
     private void openRowInWindow(TableRow<Company> row)
@@ -241,8 +235,7 @@ public class MainWindowController implements Initializable
             stage.initOwner(primeStage);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
-        }
-        catch (IOException ex)
+        } catch (IOException ex)
         {
             System.out.println("Could not read StyleSheet");
         }
@@ -254,18 +247,11 @@ public class MainWindowController implements Initializable
      */
     private void autoTextChange()
     {
-        txtSearch.textProperty().addListener(new ChangeListener<String>()
+        txtSearch.textProperty().addListener((ObservableValue<? extends String> observable, String oldText, String newText) ->
         {
-            @Override
-            public void changed(ObservableValue<? extends String> observable,
-                                String oldText, String newText)
-            {
-                wm.Search(txtSearch.getText());
-            }
+            wm.Search(txtSearch.getText());
         });
     }
-
-
 
     /**
      * Sets the currently selected company as the starting company
@@ -285,9 +271,8 @@ public class MainWindowController implements Initializable
             linkStartURL.setText("Visit Website");
             //lblStartCoords.setText(comp.getLat() + "" + comp.getLng());
             //lblStartSME.setText(comp.getIsSME() + "");
-            sourceWebsite = comp.getWebsite();            
-        }
-        catch (NullPointerException e)
+            sourceWebsite = comp.getWebsite();
+        } catch (NullPointerException e)
         {
             System.out.println("No company selected.");
         }
@@ -312,8 +297,7 @@ public class MainWindowController implements Initializable
             //lblTargetCoords.setText(comp.getLat() + "" + comp.getLng());
             //lblTargetSME.setText(comp.getIsSME() + "");
             targetWebsite = comp.getWebsite();
-        }
-        catch (NullPointerException e)
+        } catch (NullPointerException e)
         {
             System.out.println("No company selected.");
         }
@@ -354,22 +338,26 @@ public class MainWindowController implements Initializable
     }
 
     @FXML
-    private void visitWebsite(MouseEvent event) {
+    private void visitWebsite(MouseEvent event)
+    {
         System.out.println(sourceWebsite);
-        try {
-            try {
-                if(((Control)event.getSource()).getId().equals("linkStartURL"))
+        try
+        {
+            try
+            {
+                if (((Control) event.getSource()).getId().equals("linkStartURL"))
                 {
                     Desktop.getDesktop().browse(new URI(sourceWebsite));
-                }
-                else
+                } else
                 {
                     Desktop.getDesktop().browse(new URI(targetWebsite));
                 }
-            } catch (IOException ex) {
+            } catch (IOException ex)
+            {
                 Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (URISyntaxException ex) {
+        } catch (URISyntaxException ex)
+        {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

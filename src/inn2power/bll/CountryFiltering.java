@@ -1,7 +1,6 @@
 package inn2power.bll;
 
 import be.Company;
-import java.util.Objects;
 
 /**
  *
@@ -17,17 +16,16 @@ public class CountryFiltering implements ICompanyFilter
         this.country = country;
     }
 
-
     @Override
     public boolean meetCriteria(Company company)
     {
         return company.getCountry().equalsIgnoreCase(country);
     }
-    
-    @Override   
-    public boolean equals(Object object2) {
+
+    @Override
+    public boolean equals(Object object2)
+    {
         return object2 instanceof CountryFiltering;
     }
-
 
 }

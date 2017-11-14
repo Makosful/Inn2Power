@@ -18,29 +18,19 @@ public class BllManager
 
     private ObservableList<Company> companyNames = FXCollections.observableArrayList();
     private DataAccess data;
-    private List<Company> companies;
-
+    private final List<Company> companies;
 
     public BllManager()
     {
         try
         {
             data = new DataAccess();
-        }
-        catch (IOException ex)
+        } catch (IOException ex)
         {
             Logger.getLogger(BllManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         companies = data.getAllCompanies();
 
     }
-    
-
-    
-
-    
-    
-
-
 
 }
