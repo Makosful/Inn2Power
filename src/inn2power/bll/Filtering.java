@@ -97,7 +97,6 @@ public class Filtering
     public void addCountryFilter(String country)
 
     {
-
         CountryFiltering cm = new CountryFiltering(country);
 
         Iterator<ICompanyFilter> i = filters.iterator();
@@ -112,12 +111,6 @@ public class Filtering
         }
 
         filters.add(cm);
-
-        {
-            filters.add(new CountryFiltering(country));
-
-        }
-
     }
 
 }
