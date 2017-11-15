@@ -94,10 +94,6 @@ public class MainWindowController implements Initializable
     @FXML
     private AnchorPane apLeft;
     @FXML
-    private Label lblStartId1;
-    @FXML
-    private Label lblTargetId1;
-    @FXML
     private CheckBox regionAfrica;
     @FXML
     private CheckBox regionAsia;

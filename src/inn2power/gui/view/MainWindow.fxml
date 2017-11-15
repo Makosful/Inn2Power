@@ -203,31 +203,40 @@
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
-                                                <CheckBox fx:id="region" mnemonicParsing="false" text="National">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox fx:id="regionBordering" layoutY="27.0" mnemonicParsing="false" text="Bordering">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox fx:id="regionContinent" layoutY="54.0" mnemonicParsing="false" text="Continent">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox fx:id="regionSemiInternational" layoutY="81.0" mnemonicParsing="false" text="Semi-international">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox fx:id="regionInternational" layoutY="108.0" mnemonicParsing="false" text="International">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
+                                    <VBox>
+                                       <children>
+                                                      <CheckBox fx:id="regionAfrica" mnemonicParsing="false" text="Africa">
+                                                          <padding>
+                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                          </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="regionAsia" mnemonicParsing="false" text="Asia">
+                                                          <padding>
+                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                          </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="regionEurope" mnemonicParsing="false" text="Europe">
+                                                          <padding>
+                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                          </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="regionNAmerica" mnemonicParsing="false" text="North America">
+                                                          <padding>
+                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                          </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="regionOceania" mnemonicParsing="false" text="Oceania">
+                                                          <padding>
+                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                          </padding>
+                                                      </CheckBox>
+                                          <CheckBox fx:id="regionSAmerica" mnemonicParsing="false" text="South America">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </CheckBox>
+                                       </children>
+                                    </VBox>
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -324,6 +333,9 @@
                                                 <TableColumn fx:id="tcCoorcinate" prefWidth="114.0" text="Coordinates" />
                                                 <TableColumn fx:id="tcSME" prefWidth="48.0" text="SME" />
                                             </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
                                         </TableView>
                                     </children>
                                 </AnchorPane>
