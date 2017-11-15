@@ -113,10 +113,6 @@ public class Filtering
 
         filters.add(cm);
 
-        {
-            filters.add(new CountryFiltering(country));
-
-        }
 
     }
 

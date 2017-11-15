@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,11 +26,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -71,6 +75,13 @@ public class MainWindowController implements Initializable
     @FXML
     private CheckBox regionInternational;
     @FXML
+    private RadioButton isSME;
+    @FXML
+    private RadioButton isNotSME;
+    @FXML
+    private RadioButton noSMEFilter;
+    
+    @FXML
     private Label lblStartId;
     @FXML
     private Label lblTargetId;
@@ -104,13 +115,17 @@ public class MainWindowController implements Initializable
     private TextField txtSearch;
     @FXML
     private AnchorPane apLeft;
+    
     //</editor-fold>
 
+    
     private ObservableList<String> countries;
     private BllManager bm;
     private WindowModel wm;
     private String sourceWebsite;
     private String targetWebsite;
+    @FXML
+    private ToggleGroup SME;
 
     /**
      * Constructor
@@ -162,6 +177,36 @@ public class MainWindowController implements Initializable
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
         comboBoxCountries();
+        
+      
+        SME.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+ 
+                //This is the way to add a listener on a togglegroup.
+                @Override
+                public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
+ 
+                    //Gets the RadioButton clicked by the user by typecasting the toggle.
+                    RadioButton newRb = (RadioButton) newToggle;
+                    if(newRb == isSME)
+                    {
+                        System.out.println("lille firma");
+                    }else if(newRb == isNotSME)
+                    {
+                        System.out.println("stort firma");
+                    }else if(newRb == noSMEFilter)
+                    {
+                        System.out.println("nvm");
+                    }
+                    
+ 
+                    //Gets the Radiobutton that was marked before clicking also by typecasting.
+                    RadioButton oldRb = (RadioButton) oldToggle;
+
+                }
+            });
+        
+        
+        
     }
 
     /**

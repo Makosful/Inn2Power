@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
@@ -17,13 +18,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@../../css/cssstylesheet.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.MainWindowController">
+<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@../../css/cssstylesheet.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.MainWindowController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -236,12 +238,12 @@
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
-                                                <CheckBox mnemonicParsing="false" text="Filter option 1">
+                                                <CheckBox layoutY="27.0" mnemonicParsing="false" text="Filter option 2">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
                                                 </CheckBox>
-                                                <CheckBox layoutY="27.0" mnemonicParsing="false" text="Filter option 2">
+                                                <CheckBox mnemonicParsing="false" text="Filter option 1">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -261,6 +263,13 @@
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
                                                 </CheckBox>
+                                    <RadioButton fx:id="isSME" layoutX="14.0" layoutY="135.0" mnemonicParsing="false" text="is SME">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="SME" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="isNotSME" layoutX="14.0" layoutY="152.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$SME" />
+                                    <RadioButton fx:id="noSMEFilter" layoutX="128.0" layoutY="152.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$SME" />
                                             </children>
                                         </AnchorPane>
                                     </content>
