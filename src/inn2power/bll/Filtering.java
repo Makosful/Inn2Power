@@ -42,29 +42,36 @@ public class Filtering
     
     public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException
     {
+        CountryFiltering countryFilter = new CountryFiltering("brazil");
+
+        while ()
+        {
+            
+        }
+        
         for (int i = 0; i < checkBoxFilters.length; i++)
         {   
             if(checkBoxFilters[0] == true)
             {
                 filters.add(new CountryFiltering("Brazil"));
             }
-            else if(checkBoxFilters[1] == true)
+            if(checkBoxFilters[1] == true)
             {
                 filters.add(new CountryFiltering("Phillipines"));
             }
-            else if(checkBoxFilters[2] == true)
+            if(checkBoxFilters[2] == true)
             {
                 // EUROPE
             }
-            else if(checkBoxFilters[3] == true)
+            if(checkBoxFilters[3] == true)
             {
                 // NORTH AMERICA
             }
-            else if(checkBoxFilters[4] == true)
+            if(checkBoxFilters[4] == true)
             {
                 // OCEANIA
             }
-            else if(checkBoxFilters[5] == true)
+            if(checkBoxFilters[5] == true)
             {
                 // SOUTH AMERICA
             }
@@ -106,5 +113,4 @@ public class Filtering
     {
         filters.add(new CountryFiltering(country));
     }
-
 }

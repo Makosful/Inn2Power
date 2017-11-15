@@ -337,8 +337,8 @@ public class MainWindowController implements Initializable
         lblStartCountry.setText("");
         lblStartAdress.setText("");
         // Spot reserved for setting the Start URL
-        lblStartCoords.setText("(0.0; 0.0)");
-        lblStartSME.setText("Yes");
+        lblStartCoords.setText("");
+        lblStartSME.setText("");
     }
 
     /**
@@ -354,8 +354,8 @@ public class MainWindowController implements Initializable
         lblTargetCountry.setText("");
         lblTargetAdress.setText("");
         // Spot reserved for setting the Target URL
-        lblTargetCoords.setText("(0.0; 0.0)");
-        lblTargetSME.setText("Yes");
+        lblTargetCoords.setText("");
+        lblTargetSME.setText("");
     }
 
     @FXML
