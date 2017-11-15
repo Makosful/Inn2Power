@@ -102,6 +102,12 @@ public class WindowModel
         companies.addAll(filtering.filteredList());
     }
     
-    
+    public void setSMEFilter(int SME)
+    {
+        List<Company> filteredList;
+        filteredList = filtering.addSMEFilter(SME);
+        companies.clear();
+        companies.addAll(filteredList);
+    }
     
 }

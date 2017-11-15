@@ -189,13 +189,13 @@ public class MainWindowController implements Initializable
                     RadioButton newRb = (RadioButton) newToggle;
                     if(newRb == isSME)
                     {
-                        System.out.println("lille firma");
+                        wm.setSMEFilter(1);
                     }else if(newRb == isNotSME)
                     {
-                        System.out.println("stort firma");
+                        wm.setSMEFilter(0);
                     }else if(newRb == noSMEFilter)
                     {
-                        System.out.println("nvm");
+                        wm.setSMEFilter(2);
                     }
                     
  

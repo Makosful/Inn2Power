@@ -40,6 +40,33 @@ public class Filtering
 
         return filteredList;
     }
+    
+    public List<Company> addSMEFilter(int SME){
+    
+        CompanySMEFilter sme = new CompanySMEFilter(true);
+        
+        Iterator<ICompanyFilter> i = filters.iterator();
+        while (i.hasNext())
+        {
+            ICompanyFilter filter = i.next();
+            if (filter.equals(sme))
+            {
+                i.remove();
+            }
+        }
+        System.out.println(filters.size());
+        if(SME == 1)
+        {
+            filters.add(sme);
+        }else if(SME == 0)
+        {
+            filters.add(new CompanySMEFilter(false));
+        }
+        
+        List<Company> filteredList = filteredList();
+
+        return filteredList;
+    }
 
     public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
     {
@@ -47,11 +74,9 @@ public class Filtering
         CompanySMEFilter sme = new CompanySMEFilter(true);
 
         Iterator<ICompanyFilter> i = filters.iterator();
-        while (i.hasNext())
-        {
+        while (i.hasNext()) {
             ICompanyFilter filter = i.next();
-            if (filter.equals(sme))
-            {
+            if(filter.equals(sme)){
                 i.remove();
             }
         }
