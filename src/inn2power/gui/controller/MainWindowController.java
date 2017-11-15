@@ -166,7 +166,6 @@ public class MainWindowController implements Initializable
 
             // Sets the window splitter to be locked to the left pane
             SplitPane.setResizableWithParent(apLeft, false);
-            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
             // Adds the text to the table
             autoTextChange();
