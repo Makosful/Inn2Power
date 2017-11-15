@@ -1,6 +1,7 @@
 package inn2power.bll;
 
 import inn2power.dal.CSVReaderCountries;
+import inn2power.dal.CSVReaderRegion;
 import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,19 +13,28 @@ import javafx.collections.ObservableList;
 public class CountryNameList
 {
 
-    CSVReaderCountries csvrc = new CSVReaderCountries();
+    ObservableList<String> countries;
 
-    // Ordered list of countries, returns only every country once.
-    public ObservableList<String> allCountriesCorrect() throws IOException
-    {
-        ObservableList<String> countriesData = FXCollections.observableArrayList();
-        for (String string : csvrc.getAllCountries())
+        public CountryNameList(String region) throws IOException
         {
-            if (!countriesData.contains(string) && !string.contains("\""))
-            {
-                countriesData.add(string);
-            }
+        CSVReaderRegion csv = new CSVReaderRegion(region);
+        countries = csv.getAllCountries();
         }
-        return countriesData;
+        
+    // Ordered list of countries, returns only every country once.
+    public ObservableList<String> removeDuplicates() throws IOException
+    {
+        ObservableList<String> noDublicatesList = FXCollections.observableArrayList();
+        countries.stream().filter((country) -> (!noDublicatesList.contains(country)
+                && !country.contains("\""))).forEachOrdered((country) ->
+        {
+            noDublicatesList.add(country);
+        });
+        return noDublicatesList;
+    }
+
+    public ObservableList<String> getCountries()
+    {
+        return countries;
     }
 }

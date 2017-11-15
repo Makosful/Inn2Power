@@ -22,8 +22,8 @@ public class WindowModel
     private DataAccess data;
     private Search search;
     private Filtering filtering;
-    private ObservableList<Company> companies = FXCollections.observableArrayList();
-   
+    private ObservableList<Company> CompanyObsArrayList = FXCollections.observableArrayList();
+
     public WindowModel()
     {
           try
@@ -45,8 +45,8 @@ public class WindowModel
      */
     public ObservableList<Company> getAllCompanies() throws IOException
     {
-        companies.addAll(data.getAllCompanies());
-        return companies;
+        CompanyObsArrayList.addAll(data.getAllCompanies());
+        return CompanyObsArrayList;
     }
     
     /**
@@ -55,9 +55,9 @@ public class WindowModel
      */
     public void Search(String searchText)
     {
-        companies.clear();
+        CompanyObsArrayList.clear();
         List<Company> result = search.getSearchResult(data.getAllCompanies(), searchText);
-        companies.addAll(result);
+        CompanyObsArrayList.addAll(result);
     }
     
     
@@ -70,13 +70,23 @@ public class WindowModel
      * @param semiInternational
      * @param international
      * @throws IOException 
+=======
+
+    /**
+     * Sends the checkbox values as parameters to the filter, gets the filtered
+     * list of companies back which are added to the observable list
+     *
+     * @param regionCheckboxes
+     * @throws IOException
+>>>>>>> dev-filtering
      */
-    public void filterBox(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
+    public void filterBox(boolean[] regionCheckboxes) throws IOException
     {
         List<Company> filteredList;
-        filteredList = filtering.addFilters(national, bordering, continent, semiInternational, international);
-        companies.clear();
-        companies.addAll(filteredList);
+
+        filteredList = filtering.addFilters(regionCheckboxes);
+        CompanyObsArrayList.clear();
+        CompanyObsArrayList.addAll(filteredList);
     }
     
     /**
@@ -86,8 +96,9 @@ public class WindowModel
      */    
     public ObservableList<String> countryNameList() throws IOException
     {
-        CountryNameList cnl = new CountryNameList();
-        return cnl.allCountriesCorrect();
+        CountryNameList cnl = new CountryNameList("EuropeCountryList");
+        ObservableList<String> list = cnl.getCountries();
+        return list;
     }
 
     /**
@@ -98,8 +109,8 @@ public class WindowModel
     {
 
         filtering.addCountryFilter(country);
-        companies.clear();
-        companies.addAll(filtering.filteredList());
+        CompanyObsArrayList.clear();
+        CompanyObsArrayList.addAll(filtering.filteredList());
     }
     
     

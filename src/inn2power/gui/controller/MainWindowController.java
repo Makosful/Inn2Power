@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,7 +44,7 @@ import javafx.stage.Stage;
 public class MainWindowController implements Initializable
 {
 
-    //<editor-fold defaultstate="collapsed" desc="FXML Variables">
+    //<editor-fold defaultstate="collapsed" desc="FXML & Variables">
     @FXML
     private TableView<Company> tableView;
     @FXML
@@ -59,17 +60,7 @@ public class MainWindowController implements Initializable
     @FXML
     private TableColumn<Company, String> tcCoorcinate;
     @FXML
-    private TableColumn<Company, String> tcIsSME;
-    @FXML
-    private CheckBox regionNational;
-    @FXML
-    private CheckBox regionBordering;
-    @FXML
-    private CheckBox regionContinent;
-    @FXML
-    private CheckBox regionSemiInternational;
-    @FXML
-    private CheckBox regionInternational;
+    private TableColumn<Company, String> tcSME;
     @FXML
     private Label lblStartId;
     @FXML
@@ -92,8 +83,6 @@ public class MainWindowController implements Initializable
     private Hyperlink linkStartURL;
     @FXML
     private Hyperlink linkTargetURL;
-    private Label lblStartCoords;
-    private Label lblTargetCoords;
     @FXML
     private Label lblStartSME;
     @FXML
@@ -104,13 +93,31 @@ public class MainWindowController implements Initializable
     private TextField txtSearch;
     @FXML
     private AnchorPane apLeft;
-    //</editor-fold>
+    @FXML
+    private Label lblStartId1;
+    @FXML
+    private Label lblTargetId1;
+    @FXML
+    private CheckBox regionAfrica;
+    @FXML
+    private CheckBox regionAsia;
+    @FXML
+    private CheckBox regionEurope;
+    @FXML
+    private CheckBox regionNAmerica;
+    @FXML
+    private CheckBox regionOceania;
+    @FXML
+    private CheckBox regionSAmerica;
 
+    private Label lblStartCoords;
+    private Label lblTargetCoords;
     private ObservableList<String> countries;
     private BllManager bm;
     private WindowModel wm;
     private String sourceWebsite;
     private String targetWebsite;
+    //</editor-fold>
 
     /**
      * Constructor
@@ -141,13 +148,15 @@ public class MainWindowController implements Initializable
 
         try
         {
-
             countries = wm.countryNameList();
 
             tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
             tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
             tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
             tcWebsite.setCellValueFactory(new PropertyValueFactory<>("Website"));
+            tcCountry.setCellValueFactory(new PropertyValueFactory<>("Country"));
+            // Potential add (Swap integers to YES / NO / UNKNOWN
+            //tcSME.setCellValueFactory(new PropertyValueFactory<>("SME"));
 
             tableView.setItems(wm.getAllCompanies());
             tableView.getSortOrder().add(tcName);
@@ -155,12 +164,16 @@ public class MainWindowController implements Initializable
             tableView.getSortOrder().add(tcId);
             tableView.getSortOrder().add(tcWebsite);
 
+            // Sets the window splitter to be locked to the left pane
             SplitPane.setResizableWithParent(apLeft, false);
+
+            // Adds the text to the table
             autoTextChange();
         } catch (IOException ex)
         {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
+//        NOTE TO SELF: ADD LATER. IMPORTANT
         comboBoxCountries();
     }
 
@@ -169,6 +182,7 @@ public class MainWindowController implements Initializable
      */
     public void comboBoxCountries()
     {
+        System.out.println(countries);
         comboBoxCountries.setItems(countries.sorted());
     }
 
@@ -178,34 +192,37 @@ public class MainWindowController implements Initializable
      */
     public void checkBoxes()
     {
-        boolean[] CheckBoxes = new boolean[5];
+        boolean[] CheckBoxes = new boolean[6];
         CheckBox[] boxes =
         {
-            regionNational,
-            regionBordering,
-            regionContinent,
-            regionSemiInternational,
-            regionInternational
+            regionAfrica,
+            regionAsia,
+            regionEurope,
+            regionNAmerica,
+            regionOceania,
+            regionSAmerica
         };
-        for (CheckBox boxe : boxes)
-        {
-            boxe.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) ->
-            {
-                for (int q = 0; q < boxes.length; q++)
-                {
-                    CheckBoxes[q] = boxes[q].selectedProperty().getValue();
-                }
 
-                try
+        for (CheckBox box : boxes)
+        {
+            box.selectedProperty().addListener(new ChangeListener<Boolean>()
+            {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val)
                 {
-                    wm.filterBox(CheckBoxes[0],
-                            CheckBoxes[1],
-                            CheckBoxes[2],
-                            CheckBoxes[3],
-                            CheckBoxes[4]);
-                } catch (IOException ex)
-                {
-                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                    for (int q = 0; q < boxes.length; q++)
+                    {
+                        CheckBoxes[q] = boxes[q].selectedProperty().getValue();
+                    }
+
+                    try
+                    {
+                        wm.filterBox(CheckBoxes);
+                        System.out.println("Succesfully added checkbox array list");
+                    } catch (IOException ex)
+                    {
+                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             });
         }
@@ -316,8 +333,8 @@ public class MainWindowController implements Initializable
         lblStartCountry.setText("");
         lblStartAdress.setText("");
         // Spot reserved for setting the Start URL
-        lblStartCoords.setText("(0.0; 0.0)");
-        lblStartSME.setText("Yes");
+        lblStartCoords.setText("");
+        lblStartSME.setText("");
     }
 
     /**
@@ -333,8 +350,8 @@ public class MainWindowController implements Initializable
         lblTargetCountry.setText("");
         lblTargetAdress.setText("");
         // Spot reserved for setting the Target URL
-        lblTargetCoords.setText("(0.0; 0.0)");
-        lblTargetSME.setText("Yes");
+        lblTargetCoords.setText("");
+        lblTargetSME.setText("");
     }
 
     @FXML
