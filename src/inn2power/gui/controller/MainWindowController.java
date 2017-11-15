@@ -158,7 +158,7 @@ public class MainWindowController implements Initializable
             tcWebsite.setCellValueFactory(new PropertyValueFactory<>("Website"));
             tcCountry.setCellValueFactory(new PropertyValueFactory<>("Country"));
             // Potential add (Swap integers to YES / NO / UNKNOWN
-            //tcSME.setCellValueFactory(new PropertyValueFactory<>("SME")); 
+            //tcSME.setCellValueFactory(new PropertyValueFactory<>("SME"));
 
             // This sorts the table based on the collums. Highest priority is at the top
             tableView.setItems(wm.getAllCompanies());
@@ -175,7 +175,7 @@ public class MainWindowController implements Initializable
             System.out.println(ex.getMessage());
         }
 //        NOTE TO SELF: ADD LATER. IMPORTANT
-//        comboBoxCountries();
+        comboBoxCountries();
     }
 
     /**
@@ -183,6 +183,7 @@ public class MainWindowController implements Initializable
      */
     public void comboBoxCountries()
     {
+        System.out.println(countries);
         comboBoxCountries.setItems(countries.sorted());
     }
 
