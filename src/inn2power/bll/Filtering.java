@@ -55,7 +55,7 @@ public class Filtering
             }
         }
         
-        for (int i = 0; i < checkBoxFilters.length; i++)
+        for (int z = 0; z < checkBoxFilters.length; z++)
         {   
             if(checkBoxFilters[0] == true)
             {
