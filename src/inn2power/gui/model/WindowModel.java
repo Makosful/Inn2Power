@@ -65,17 +65,13 @@ public class WindowModel
      * Sends the checkbox values as parameters to the filter, gets the filtered
      * list of companies back which are added to the observable list
      *
-     * @param national
-     * @param bordering
-     * @param continent
-     * @param semiInternational
-     * @param international
+     * @param regionCheckboxes
      * @throws IOException
      */
     public void filterBox(boolean[] regionCheckboxes) throws IOException
     {
         List<Company> filteredList;
-        
+
         filteredList = filtering.addFilters(regionCheckboxes);
         CompanyObsArrayList.clear();
         CompanyObsArrayList.addAll(filteredList);
@@ -88,8 +84,8 @@ public class WindowModel
     public ObservableList<String> countryNameList() throws IOException
     {
         CountryNameList cnl = new CountryNameList("EuropeCountryList");
-        cnl.removeDublicates();
-        return cnl.removeDublicates();
+        ObservableList<String> list = cnl.getCountries();
+        return list;
     }
 
     /**

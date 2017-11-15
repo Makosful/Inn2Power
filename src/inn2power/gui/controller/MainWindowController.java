@@ -110,7 +110,7 @@ public class MainWindowController implements Initializable
     private CheckBox regionOceania;
     @FXML
     private CheckBox regionSAmerica;
-    
+
     private Label lblStartCoords;
     private Label lblTargetCoords;
     private ObservableList<String> countries;
@@ -169,9 +169,9 @@ public class MainWindowController implements Initializable
             autoTextChange();
         } catch (IOException ex)
         {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
-//        NOTE TO SELF: ADD LATER. IMPORTANT        
+//        NOTE TO SELF: ADD LATER. IMPORTANT
 //        comboBoxCountries();
     }
 
@@ -210,7 +210,7 @@ public class MainWindowController implements Initializable
                     {
                         CheckBoxes[q] = boxes[q].selectedProperty().getValue();
                     }
-                    
+
                     try
                     {
                         wm.filterBox(CheckBoxes);
