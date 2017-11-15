@@ -54,7 +54,7 @@ public class DataAccess
      *
      * @return All the business roles listed in an array
      */
-    public String[] getCompanyBusinessRoles()
+    public String[] getCompanyBuisnessRoles()
     {
         return cDAO.getCompanyBuisnessRoles();
     }
