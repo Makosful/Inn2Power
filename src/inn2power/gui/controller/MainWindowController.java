@@ -156,9 +156,9 @@ public class MainWindowController implements Initializable
 
             tableView.setItems(wm.getAllCompanies());
             tableView.getSortOrder().add(tcName);
-            tableView.getSortOrder().add(tcAddress);
+            //tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
-            tableView.getSortOrder().add(tcWebsite);
+            //tableView.getSortOrder().add(tcWebsite);
 
             // Sets the window splitter to be locked to the left pane
             SplitPane.setResizableWithParent(apLeft, false);
