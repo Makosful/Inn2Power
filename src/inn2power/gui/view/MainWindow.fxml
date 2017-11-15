@@ -199,8 +199,6 @@
                   <Button layoutX="150.0" layoutY="50.0" mnemonicParsing="false" onAction="#setTargetCompany" prefHeight="20.0" prefWidth="130.0" styleClass="changefocuscolor" text="Set Target Company" />
                         <Accordion layoutX="10.0" layoutY="130.0" prefWidth="270.0">
                             <panes>
-<<<<<<< HEAD
-=======
                                 <TitledPane animated="false" prefHeight="207.0" prefWidth="216.0" styleClass="changefocuscolor" text="Regions">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -239,40 +237,6 @@
                                                       </CheckBox>
                                        </children>
                                     </VBox>
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </TitledPane>
->>>>>>> dev-filtering
-                                <TitledPane animated="false" styleClass="changefocuscolor" text="??? ???">
-                                    <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                            <children>
-                                                <CheckBox mnemonicParsing="false" text="Filter option 1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="27.0" mnemonicParsing="false" text="Filter option 2">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="50.0" mnemonicParsing="false" text="Filter option 3">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="77.0" mnemonicParsing="false" text="Filter option 4">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="104.0" mnemonicParsing="false" text="Filter option 5">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -369,9 +333,6 @@
                                                 <TableColumn fx:id="tcCoorcinate" prefWidth="114.0" text="Coordinates" />
                                                 <TableColumn fx:id="tcSME" prefWidth="48.0" text="SME" />
                                             </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
                                         </TableView>
                                     </children>
                                 </AnchorPane>

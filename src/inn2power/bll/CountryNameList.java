@@ -22,7 +22,7 @@ public class CountryNameList
         }
         
     // Ordered list of countries, returns only every country once.
-    public ObservableList<String> removeDuplicates() throws IOException
+    public ObservableList<String> allCountriesCorrect() throws IOException
     {
         ObservableList<String> noDublicatesList = FXCollections.observableArrayList();
         countries.stream().filter((country) -> (!noDublicatesList.contains(country)
