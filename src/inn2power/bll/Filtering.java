@@ -55,15 +55,13 @@ public class Filtering
             }
         }
         
-        for (int z = 0; z < checkBoxFilters.length; z++)
-        {   
             if(checkBoxFilters[0] == true)
             {
                 filters.add(new CountryFiltering("Brazil"));
             }
             if(checkBoxFilters[1] == true)
             {
-                filters.add(new CountryFiltering("Phillipines"));
+                // ASIA
             }
             if(checkBoxFilters[2] == true)
             {
@@ -81,7 +79,7 @@ public class Filtering
             {
                 // SOUTH AMERICA
             }
-        }
+            
         // filters.add(new CompanySMEFilter(true));
         List<Company> filteredList = filteredList();
 
