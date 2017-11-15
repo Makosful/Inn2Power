@@ -4,6 +4,7 @@ import be.Company;
 import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -44,9 +45,14 @@ public class Filtering
     {
         CountryFiltering countryFilter = new CountryFiltering("brazil");
 
-        while ()
+        Iterator<ICompanyFilter> i = filters.iterator();
+        while (i.hasNext())
         {
-            
+            ICompanyFilter filter = i.next();
+            if (filter.equals(countryFilter))
+            {
+                i.remove();
+            }
         }
         
         for (int i = 0; i < checkBoxFilters.length; i++)
