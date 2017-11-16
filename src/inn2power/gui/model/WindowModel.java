@@ -1,6 +1,7 @@
 package inn2power.gui.model;
 
 import be.Company;
+import be.Relation;
 import inn2power.bll.BllManager;
 import inn2power.bll.CountryNameList;
 import inn2power.bll.Filtering;
@@ -8,8 +9,6 @@ import inn2power.bll.Search;
 import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -21,6 +20,7 @@ public class WindowModel
 {
 
     private DataAccess data;
+    private BllManager bll;
     private Search search;
     private Filtering filtering;
     private ObservableList<Company> CompanyObsArrayList = FXCollections.observableArrayList();
@@ -30,11 +30,12 @@ public class WindowModel
         try
         {
             data = new DataAccess();
+            bll = new BllManager();
             search = new Search();
             filtering = new Filtering();
         } catch (IOException ex)
         {
-            Logger.getLogger(BllManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -172,4 +173,18 @@ public class WindowModel
         return newList;
     }
 
+    /**
+     * Gets the entire list of relations
+     *
+     * @return
+     */
+    public List<Relation> getAllRelations()
+    {
+        return bll.getAllRelations();
+    }
+
+    public List<Relation> getRelationNetwork(Company source, int depth)
+    {
+        return bll.getRelationNetwork(source, depth);
+    }
 }

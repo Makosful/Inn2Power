@@ -2,6 +2,7 @@ package inn2power.gui.controller;
 
 //<editor-fold defaultstate="collapsed" desc="Imports">
 import be.Company;
+import inn2power.bll.SteggerOverflowException;
 import inn2power.gui.model.WindowModel;
 import java.awt.Desktop;
 import java.io.IOException;
@@ -282,26 +283,23 @@ public class MainWindowController implements Initializable
 
         for (CheckBox box : boxes)
         {
-            box.selectedProperty().addListener(new ChangeListener<Boolean>()
+            box.selectedProperty().addListener((ObservableValue<? extends Boolean> ov,
+                    Boolean old_val,
+                    Boolean new_val) ->
             {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> ov,
-                        Boolean old_val, Boolean new_val)
+                for (int q = 0; q < boxes.length; q++)
                 {
-                    for (int q = 0; q < boxes.length; q++)
-                    {
-                        CheckBoxes[q] = boxes[q].selectedProperty().getValue();
-                    }
+                    CheckBoxes[q] = boxes[q].selectedProperty().getValue();
+                }
 
-                    try
-                    {
-                        wm.filterBox(CheckBoxes);
-                        System.out.println("Succesfully added checkbox array list");
-                        updateComboBox(CheckBoxes);
-                    } catch (IOException ex)
-                    {
-                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                try
+                {
+                    wm.filterBox(CheckBoxes);
+                    System.out.println("Succesfully added checkbox array list");
+                    updateComboBox(CheckBoxes);
+                } catch (IOException ex)
+                {
+                    System.out.println(ex.getMessage());
                 }
             });
         }
@@ -360,15 +358,20 @@ public class MainWindowController implements Initializable
         try
         {
             Company comp = tableView.getSelectionModel().getSelectedItem();
+
+            // Temp code to test relations
+            System.out.println(
+                    wm.getRelationNetwork(comp, 1)
+            );
+            // End of temp code
+
             lblStartId.setText(comp.getId() + "");
             lblStartName.setText(comp.getName());
             lblStartCountry.setText(comp.getCountry());
             lblStartAdress.setText(comp.getAddress());
             linkStartURL.setText("Visit Website");
-            //lblStartCoords.setText(comp.getLat() + "" + comp.getLng());
-            //lblStartSME.setText(comp.getIsSME() + "");
             sourceWebsite = comp.getWebsite();
-        } catch (NullPointerException e)
+        } catch (SteggerOverflowException e)
         {
             System.out.println("No company selected.");
         }

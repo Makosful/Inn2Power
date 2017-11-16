@@ -2,6 +2,7 @@ package inn2power.dal;
 
 import be.*;
 import bll.Inn2PowerException;
+import bll.RelaationalLogic;
 import dal.*;
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +18,7 @@ public class DataAccess
 
     CompanyDAO cDAO;
     RelationDAO rDAO;
+    RelaationalLogic logic;
 
     public DataAccess() throws IOException
     {
@@ -77,6 +79,11 @@ public class DataAccess
     public List<Relation> getAllRelations()
     {
         return rDAO.getAllRelations();
+    }
+
+    public List<Relation> getRelationNetwork(Company source, int depth)
+    {
+        return logic.getRelationalNetwork(source, depth);
     }
 
 }
