@@ -70,8 +70,6 @@ public class MainWindowController implements Initializable
     @FXML
     private Label lblTargetId;
     @FXML
-    private ComboBox<String> comboBoxCountries;
-    @FXML
     private Label lblStartName;
     @FXML
     private Label lblTargetName;
@@ -117,6 +115,8 @@ public class MainWindowController implements Initializable
     private RadioButton isNotSME;
     @FXML
     private RadioButton noSMEFilster;
+    @FXML
+    private ComboBox<String> comboBoxCountries;
 
     private Label lblStartCoords;
     private Label lblTargetCoords;
@@ -190,7 +190,6 @@ public class MainWindowController implements Initializable
      */
     public void comboBoxCountries()
     {
-        System.out.println(countries);
         comboBoxCountries.setItems(countries.sorted());
     }
 
