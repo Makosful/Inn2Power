@@ -113,6 +113,16 @@ public class WindowModel
         CompanyObsArrayList.addAll(filtering.filteredList());
     }
     
-    
+    /**
+     * calls the smefilter method in filters and adds the filter then sets the reurned list to the observablearraylist
+     * @param SME 
+     */
+    public void setSMEFilter(int SME)
+    {
+        List<Company> filteredList;
+        filteredList = filtering.addSMEFilter(SME);
+        CompanyObsArrayList.clear();
+        CompanyObsArrayList.addAll(filteredList);
+    }
     
 }
