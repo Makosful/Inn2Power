@@ -38,7 +38,9 @@ public class WindowModel
         }
     }
 
-    /*
+    /**
+     * Gets a list containing all the companies
+     *
      * @return observablelist with companies
      * @throws IOException
      */
@@ -79,11 +81,12 @@ public class WindowModel
 
     /**
      *
+     * @param region
      * @return @throws IOException
      */
-    public ObservableList<String> getListCountries() throws IOException
+    public ObservableList<String> getListCountries(String region) throws IOException
     {
-        CountryNameList cnl = new CountryNameList("EuropeCountryList");
+        CountryNameList cnl = new CountryNameList(region);
         ObservableList<String> list = cnl.allCountriesCorrect();
         return list;
     }
@@ -138,6 +141,35 @@ public class WindowModel
         list = cnl.allCountriesCorrect();
 
         return list;
+    }
+
+    /**
+     * Updates the comboboxCountries' list
+     *
+     * @param table A List of all the companies' cuntries
+     * @param regions A List with all the countries from the selected regions
+     * @return Returns a List containing only the countries where a registered
+     * company is from inside the selected regions
+     */
+    public ObservableList<String> updateList(ObservableList<String> table,
+            ObservableList<String> regions)
+    {
+        ObservableList<String> newList = FXCollections.observableArrayList();
+
+        for (int i = 0; i < table.size(); i++)
+        {
+            if (regions.isEmpty())
+            {
+                return table;
+            }
+
+            if (regions.contains(table.get(i)))
+            {
+                newList.add(table.get(i));
+            }
+        }
+
+        return newList;
     }
 
 }

@@ -2,7 +2,6 @@ package inn2power.gui.controller;
 
 //<editor-fold defaultstate="collapsed" desc="Imports">
 import be.Company;
-import inn2power.bll.BllManager;
 import inn2power.gui.model.WindowModel;
 import java.awt.Desktop;
 import java.io.IOException;
@@ -14,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,7 +39,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-//</editor-fold>
 
 /**
  *
@@ -90,8 +89,6 @@ public class MainWindowController implements Initializable
     @FXML
     private Label lblTargetSME;
     @FXML
-    private SplitPane splitPane;
-    @FXML
     private TextField txtSearch;
     @FXML
     private AnchorPane apLeft;
@@ -122,7 +119,6 @@ public class MainWindowController implements Initializable
     private Label lblTargetCoords;
     private ObservableList<String> fileCountries;
     private ObservableList<String> combCountries;
-    private BllManager bm;
     private WindowModel wm;
     private String sourceWebsite;
     private String targetWebsite;
@@ -137,7 +133,6 @@ public class MainWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        bm = new BllManager();
         wm = new WindowModel();
 
         checkBoxes();
@@ -159,7 +154,6 @@ public class MainWindowController implements Initializable
         {
             // A lot of things in this try-catch statement don't actually belong here. Consider moving them outside.
 
-            fileCountries = wm.getListCountries();
             combCountries = wm.getTableCountries();
 
             tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -198,6 +192,77 @@ public class MainWindowController implements Initializable
         comboBoxCountries.setItems(combCountries.sorted());
     }
 
+    private void updateComboBox(boolean[] boxes)
+    {
+
+        ObservableList checkList = FXCollections.observableArrayList();
+
+        try
+        {
+            if (boxes[0])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("AfricaCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+            if (boxes[1])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("AsiaCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+            if (boxes[2])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("EuropeCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+            if (boxes[3])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("NAmericaCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+            if (boxes[4])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("OceaniaCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+            if (boxes[5])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("SAmericaCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+        } catch (IOException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+
+        ObservableList<String> updatedList = wm.updateList(combCountries,
+                checkList);
+        comboBoxCountries.setItems(updatedList.sorted());
+    }
+
     /**
      * Listener for the checkboxes, sends the checkbox values as parameters to
      * the filter.
@@ -220,7 +285,8 @@ public class MainWindowController implements Initializable
             box.selectedProperty().addListener(new ChangeListener<Boolean>()
             {
                 @Override
-                public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val)
+                public void changed(ObservableValue<? extends Boolean> ov,
+                        Boolean old_val, Boolean new_val)
                 {
                     for (int q = 0; q < boxes.length; q++)
                     {
@@ -231,6 +297,7 @@ public class MainWindowController implements Initializable
                     {
                         wm.filterBox(CheckBoxes);
                         System.out.println("Succesfully added checkbox array list");
+                        updateComboBox(CheckBoxes);
                     } catch (IOException ex)
                     {
                         Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
