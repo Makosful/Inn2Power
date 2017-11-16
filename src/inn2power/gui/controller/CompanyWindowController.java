@@ -48,6 +48,7 @@ public class CompanyWindowController implements Initializable
         lblLink.setText(company.getWebsite());
     }
 
+    @FXML
     public void goToWebsite() throws URISyntaxException, IOException
     {
         Desktop.getDesktop().browse(new URI(this.lblLink.getText()));

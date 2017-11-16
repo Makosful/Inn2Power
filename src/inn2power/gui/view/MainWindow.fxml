@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
@@ -17,6 +18,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -244,33 +246,15 @@
                                 <TitledPane animated="false" styleClass="changefocuscolor" text="??? ???">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                            <children>
-                                                <CheckBox mnemonicParsing="false" text="Filter option 1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="27.0" mnemonicParsing="false" text="Filter option 2">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="50.0" mnemonicParsing="false" text="Filter option 3">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="77.0" mnemonicParsing="false" text="Filter option 4">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="104.0" mnemonicParsing="false" text="Filter option 5">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                            </children>
+                                 <children>
+                                    <RadioButton fx:id="isSME" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" text="Small company">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="SME" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="isNotSME" layoutX="14.0" layoutY="74.0" mnemonicParsing="false" text="Big company" toggleGroup="$SME" />
+                                    <RadioButton fx:id="noSMEFilster" layoutX="16.0" layoutY="124.0" mnemonicParsing="false" text="Both" toggleGroup="$SME" />
+                                 </children>
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>

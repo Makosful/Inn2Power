@@ -26,11 +26,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -114,6 +117,14 @@ public class MainWindowController implements Initializable
     private String sourceWebsite;
     private String targetWebsite;
     //</editor-fold>
+    @FXML
+    private RadioButton isSME;
+    @FXML
+    private ToggleGroup SME;
+    @FXML
+    private RadioButton isNotSME;
+    @FXML
+    private RadioButton noSMEFilster;
 
     /**
      * Constructor
@@ -128,7 +139,7 @@ public class MainWindowController implements Initializable
         wm = new WindowModel();
 
         checkBoxes();
-
+        smeFilterListener();
         tableView.setRowFactory(tv ->
         {
             TableRow<Company> row = new TableRow<>();
@@ -382,5 +393,36 @@ public class MainWindowController implements Initializable
         wm.addCountryFilter(selectedItem);
 
         checkBoxes();
+    }
+    
+     /**
+     * handles the click on sme radiobutton
+     */
+    private void smeFilterListener(){
+        SME.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+ 
+            //This is the way to add a listener on a togglegroup.
+            @Override
+            public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
+
+                //Gets the RadioButton clicked by the user by typecasting the toggle.
+                RadioButton newRb = (RadioButton) newToggle;
+                if(newRb == isSME)
+                {
+                    wm.setSMEFilter(1);
+                }else if(newRb == isNotSME)
+                {
+                    wm.setSMEFilter(0);
+                }else if(newRb == noSMEFilster)
+                {
+                    wm.setSMEFilter(2);
+                }
+
+
+                //Gets the Radiobutton that was marked before clicking also by typecasting.
+                RadioButton oldRb = (RadioButton) oldToggle;
+
+            }
+        });
     }
 }
