@@ -1,10 +1,10 @@
 package inn2power.gui.model;
 
-import inn2power.bll.Search;
 import be.Company;
 import inn2power.bll.BllManager;
 import inn2power.bll.CountryNameList;
 import inn2power.bll.Filtering;
+import inn2power.bll.Search;
 import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
  */
 public class WindowModel
 {
+
     private DataAccess data;
     private Search search;
     private Filtering filtering;
@@ -26,32 +27,32 @@ public class WindowModel
 
     public WindowModel()
     {
-          try
+        try
         {
             data = new DataAccess();
             search = new Search();
             filtering = new Filtering();
-        }
-        catch (IOException ex)
+        } catch (IOException ex)
         {
             Logger.getLogger(BllManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-     /*
+
+    /*
      * @return observablelist with companies
-     * @throws IOException 
+     * @throws IOException
      */
     public ObservableList<Company> getAllCompanies() throws IOException
     {
         CompanyObsArrayList.addAll(data.getAllCompanies());
         return CompanyObsArrayList;
     }
-    
+
     /**
-     * Gets the companies that contains the searchresult and updates the tableview with the observablelist
-     * @param searchText 
+     * Gets the companies that contains the searchresult and updates the
+     * tableview with the observablelist
+     *
+     * @param searchText
      */
     public void Search(String searchText)
     {
@@ -59,18 +60,6 @@ public class WindowModel
         List<Company> result = search.getSearchResult(data.getAllCompanies(), searchText);
         CompanyObsArrayList.addAll(result);
     }
-    
-    
-     /**
-     * Sends the checkbox values as parameters to the filter,
-     * gets the filtered list of companies back which are added to the observable list 
-     * @param national
-     * @param bordering
-     * @param continent
-     * @param semiInternational
-     * @param international
-     * @throws IOException 
-=======
 
     /**
      * Sends the checkbox values as parameters to the filter, gets the filtered
@@ -78,7 +67,6 @@ public class WindowModel
      *
      * @param regionCheckboxes
      * @throws IOException
->>>>>>> dev-filtering
      */
     public void filterBox(boolean[] regionCheckboxes) throws IOException
     {
@@ -88,12 +76,11 @@ public class WindowModel
         CompanyObsArrayList.clear();
         CompanyObsArrayList.addAll(filteredList);
     }
-    
+
     /**
-     * 
-     * @return
-     * @throws IOException 
-     */    
+     *
+     * @return @throws IOException
+     */
     public ObservableList<String> countryNameList() throws IOException
     {
         CountryNameList cnl = new CountryNameList("EuropeCountryList");
@@ -102,8 +89,8 @@ public class WindowModel
     }
 
     /**
-     * 
-     * @param country 
+     *
+     * @param country
      */
     public void addCountryFilter(String country)
     {
@@ -112,10 +99,12 @@ public class WindowModel
         CompanyObsArrayList.clear();
         CompanyObsArrayList.addAll(filtering.filteredList());
     }
-    
+
     /**
-     * calls the smefilter method in filters and adds the filter then sets the reurned list to the observablearraylist
-     * @param SME 
+     * calls the smefilter method in filters and adds the filter then sets the
+     * reurned list to the observablearraylist
+     *
+     * @param SME
      */
     public void setSMEFilter(int SME)
     {
@@ -124,5 +113,5 @@ public class WindowModel
         CompanyObsArrayList.clear();
         CompanyObsArrayList.addAll(filteredList);
     }
-    
+
 }
