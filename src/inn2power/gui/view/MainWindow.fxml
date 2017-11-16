@@ -248,7 +248,7 @@
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
-                                <TitledPane animated="false" styleClass="changefocuscolor" text="??? ???">
+                                <TitledPane animated="false" styleClass="changefocuscolor" text="Small, Medium, Large Enterprise">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
