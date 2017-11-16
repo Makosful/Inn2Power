@@ -21,4 +21,10 @@ public class CountryFiltering implements ICompanyFilter
     {
         return company.getCountry().equalsIgnoreCase(country);
     }
+    
+    @Override
+    public boolean equals(Object object2)
+    {
+        return object2 instanceof CountryFiltering;
+    }
 }
