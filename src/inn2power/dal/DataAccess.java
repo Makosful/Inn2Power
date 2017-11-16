@@ -2,14 +2,14 @@ package inn2power.dal;
 
 import be.*;
 import bll.Inn2PowerException;
-import bll.RelaationalLogic;
+import bll.RelationalLogic;
 import dal.*;
 import java.io.IOException;
 import java.util.List;
 
 /**
  * This class will be used to access all data from the CSV files through the
- * Inn2Power_Backend libirary
+ * Inn2Power_Backend library
  *
  * @author Axl
  */
@@ -18,7 +18,7 @@ public class DataAccess
 
     CompanyDAO cDAO;
     RelationDAO rDAO;
-    RelaationalLogic logic;
+    RelationalLogic logic;
 
     public DataAccess() throws IOException
     {
@@ -37,7 +37,7 @@ public class DataAccess
     }
 
     /**
-     * Get's a specific company by their assigned ID
+     * Gets a specific company by their assigned ID
      *
      * @param id The ID of the Company
      *
@@ -58,7 +58,7 @@ public class DataAccess
      */
     public String[] getCompanyBuisnessRoles()
     {
-        return cDAO.getCompanyBuisnessRoles();
+        return cDAO.getCompanyBusinessRoles();
     }
 
     /**
