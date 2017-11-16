@@ -140,30 +140,35 @@ public class Filtering
      * @param SME
      * @return list of companies
      */
-    public List<Company> addSMEFilter(int SME){
-
-    CompanySMEFilter sme = new CompanySMEFilter(true);
-
-    Iterator<ICompanyFilter> i = filters.iterator();
-    while (i.hasNext())
+    public List<Company> addSMEFilter(int SME)
     {
-        ICompanyFilter filter = i.next();
-        if (filter.equals(sme))
+        CompanySMEFilter sme = new CompanySMEFilter(true);
+
+        Iterator<ICompanyFilter> i = filters.iterator();
+        while (i.hasNext())
         {
-            i.remove();
+            ICompanyFilter filter = i.next();
+            if (filter.equals(sme))
+            {
+               i.remove();
+            }
         }
+
+        if(SME == 1)
+        {
+           filters.add(sme);
+        }
+        else if(SME == 0)
+        {
+            filters.add(new CompanySMEFilter(false));
+        }
+        else if(SME == -1)
+        {
+            filters.add(sme);
+        }
+
+        List<Company> filteredList = filteredList();
+
+        return filteredList;
     }
-
-    if(SME == 1)
-    {
-        filters.add(sme);
-    }else if(SME == 0)
-    {
-        filters.add(new CompanySMEFilter(false));
-    }
-
-    List<Company> filteredList = filteredList();
-
-    return filteredList;
-}
 }

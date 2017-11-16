@@ -106,11 +106,15 @@ public class MainWindowController implements Initializable
     @FXML
     private CheckBox regionSAmerica;
     @FXML
-    private RadioButton isSME;
-    @FXML
     private ToggleGroup SME;
     @FXML
+    private RadioButton isSME;
+    @FXML
     private RadioButton isNotSME;
+    @FXML
+    private RadioButton isBoth;
+    @FXML
+    private RadioButton isUnknown;
     @FXML
     private RadioButton noSMEFilster;
     @FXML
@@ -485,16 +489,26 @@ public class MainWindowController implements Initializable
 
                 //Gets the RadioButton clicked by the user by typecasting the toggle.
                 RadioButton newRb = (RadioButton) newToggle;
-                if (newRb == isSME)
+               if (newRb == isSME)
                 {
                     wm.setSMEFilter(1);
-                } else if (newRb == isNotSME)
+                } 
+               else if (newRb == isNotSME)
                 {
                     wm.setSMEFilter(0);
-                } else if (newRb == noSMEFilster)
+                } 
+                /*else if (newRb == isBoth)
                 {
-                    wm.setSMEFilter(2);
+                    wm.setSMEFilter();
                 }
+                else if (newRb == isUnknown)
+                {
+                    wm.setSMEFilter();
+                }
+                else if (newRb == noSMEFilster)
+                {
+                    wm.setSMEFilter();
+                }*/
 
                 //Gets the Radiobutton that was marked before clicking also by typecasting.
                 RadioButton oldRb = (RadioButton) oldToggle;
