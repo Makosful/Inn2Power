@@ -201,36 +201,61 @@
                   <Button layoutX="150.0" layoutY="50.0" mnemonicParsing="false" onAction="#setTargetCompany" prefHeight="20.0" prefWidth="130.0" styleClass="changefocuscolor" text="Set Target Company" />
                         <Accordion layoutX="10.0" layoutY="130.0" prefWidth="270.0">
                             <panes>
-                                <TitledPane animated="false" styleClass="changefocuscolor" text="??? ???">
+                                <TitledPane animated="false" prefHeight="207.0" prefWidth="216.0" styleClass="changefocuscolor" text="Region">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
-                                                <CheckBox mnemonicParsing="false" text="Filter option 1">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="27.0" mnemonicParsing="false" text="Filter option 2">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="50.0" mnemonicParsing="false" text="Filter option 3">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="77.0" mnemonicParsing="false" text="Filter option 4">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox layoutY="104.0" mnemonicParsing="false" text="Filter option 5">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
+                                    <VBox>
+                                       <children>
+                                                      <CheckBox fx:id="regionAfrica" mnemonicParsing="false" text="Africa">
+                                                          <padding>
+                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                          </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="regionAsia" mnemonicParsing="false" text="Asia">
+                                                          <padding>
+                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                          </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="regionEurope" mnemonicParsing="false" text="Europe">
+                                                          <padding>
+                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                          </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="regionNAmerica" mnemonicParsing="false" text="North America">
+                                                          <padding>
+                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                          </padding>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="regionOceania" mnemonicParsing="false" text="Oceania">
+                                                          <padding>
+                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                          </padding>
+                                                      </CheckBox>
+                                          <CheckBox fx:id="regionSAmerica" mnemonicParsing="false" text="South America">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </CheckBox>
+                                       </children>
+                                    </VBox>
                                             </children>
+                                        </AnchorPane>
+                                    </content>
+                                </TitledPane>
+                                <TitledPane animated="false" styleClass="changefocuscolor" text="Company size">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton fx:id="isSME" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" text="Small company">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="SME" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="isNotSME" layoutX="14.0" layoutY="56.0" mnemonicParsing="false" text="Big company" toggleGroup="$SME" />
+                                    <RadioButton fx:id="noSMEFilter" layoutX="16.0" layoutY="124.0" mnemonicParsing="false" text="All" toggleGroup="$SME" />
+                                    <RadioButton fx:id="SMENotDeclared" layoutX="16.0" layoutY="91.0" mnemonicParsing="false" text="Company size not declared" toggleGroup="$SME" />
+                                 </children>
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
@@ -238,12 +263,12 @@
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
-                                                <CheckBox layoutY="27.0" mnemonicParsing="false" text="Filter option 2">
+                                                <CheckBox mnemonicParsing="false" text="Filter option 1">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
                                                 </CheckBox>
-                                                <CheckBox mnemonicParsing="false" text="Filter option 1">
+                                                <CheckBox layoutY="27.0" mnemonicParsing="false" text="Filter option 2">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -259,46 +284,6 @@
                                                     </padding>
                                                 </CheckBox>
                                                 <CheckBox layoutY="108.0" mnemonicParsing="false" text="Filter option 5">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                    <RadioButton fx:id="isSME" layoutX="14.0" layoutY="135.0" mnemonicParsing="false" text="is SME">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="SME" />
-                                       </toggleGroup>
-                                    </RadioButton>
-                                    <RadioButton fx:id="isNotSME" layoutX="14.0" layoutY="152.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$SME" />
-                                    <RadioButton fx:id="noSMEFilter" layoutX="128.0" layoutY="152.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$SME" />
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </TitledPane>
-                                <TitledPane animated="false" prefHeight="207.0" prefWidth="216.0" styleClass="changefocuscolor" text="Region">
-                                    <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                            <children>
-                                                <CheckBox fx:id="regionNational" mnemonicParsing="false" text="National">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox fx:id="regionBordering" layoutY="27.0" mnemonicParsing="false" text="Bordering">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox fx:id="regionContinent" layoutY="54.0" mnemonicParsing="false" text="Continent">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox fx:id="regionSemiInternational" layoutY="81.0" mnemonicParsing="false" text="Semi-international">
-                                                    <padding>
-                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                    </padding>
-                                                </CheckBox>
-                                                <CheckBox fx:id="regionInternational" layoutY="108.0" mnemonicParsing="false" text="International">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -331,7 +316,7 @@
                                                 <TableColumn fx:id="tcAddress" prefWidth="118.0" text="Address" />
                                                 <TableColumn fx:id="tcWebsite" prefWidth="119.0" text="Website (URL)" />
                                                 <TableColumn fx:id="tcCoorcinate" prefWidth="114.0" text="Coordinates" />
-                                                <TableColumn fx:id="tcIsSME" prefWidth="48.0" text="isSME?" />
+                                                <TableColumn fx:id="tcSME" prefWidth="48.0" text="SME" />
                                             </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

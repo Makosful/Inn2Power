@@ -41,57 +41,60 @@ public class Filtering
         return filteredList;
     }
     
-    public List<Company> addSMEFilter(int SME){
-    
-        CompanySMEFilter sme = new CompanySMEFilter(true);
-        
+    /**
+     * removes old filters and then adds the filters depending on the given checkbox values in checkboxfilters array
+     * @param checkBoxFilters
+     * @return
+     * @throws IOException 
+     */
+    public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException
+    {
+        CountryFiltering countryFilter = new CountryFiltering("brazil");
+
         Iterator<ICompanyFilter> i = filters.iterator();
         while (i.hasNext())
         {
             ICompanyFilter filter = i.next();
-            if (filter.equals(sme))
+            
+            if (filter.equals(countryFilter))
             {
                 i.remove();
             }
         }
-        System.out.println(filters.size());
-        if(SME == 1)
-        {
-            filters.add(sme);
-        }else if(SME == 0)
-        {
-            filters.add(new CompanySMEFilter(false));
-        }
+        
+            if(checkBoxFilters[0] == true)
+            {
+                filters.add(new CountryFiltering("Brazil"));
+            }
+            if(checkBoxFilters[1] == true)
+            {
+                // ASIA
+            }
+            if(checkBoxFilters[2] == true)
+            {
+                // EUROPE
+            }
+            if(checkBoxFilters[3] == true)
+            {
+                // NORTH AMERICA
+            }
+            if(checkBoxFilters[4] == true)
+            {
+                // OCEANIA
+            }
+            if(checkBoxFilters[5] == true)
+            {
+                // SOUTH AMERICA
+            }
+            
         
         List<Company> filteredList = filteredList();
 
         return filteredList;
     }
 
-    public List<Company> addFilters(boolean national, boolean bordering, boolean continent, boolean semiInternational, boolean international) throws IOException
-    {
-
-        CompanySMEFilter sme = new CompanySMEFilter(true);
-
-        Iterator<ICompanyFilter> i = filters.iterator();
-        while (i.hasNext()) {
-            ICompanyFilter filter = i.next();
-            if(filter.equals(sme)){
-                i.remove();
-            }
-        }
-
-        if (national == true)
-        {
-            filters.add(sme);
-
-        }
-
-        List<Company> filteredList = filteredList();
-
-        return filteredList;
-    }
-
+    
+    
     public List<Company> companyFiltering(List<Company> allCompanies, List<ICompanyFilter> filters)
     {
         // ArrayList which countries are added to, according to if there is a
@@ -122,7 +125,6 @@ public class Filtering
     public void addCountryFilter(String country)
 
     {
-
         CountryFiltering cm = new CountryFiltering(country);
 
         Iterator<ICompanyFilter> i = filters.iterator();
@@ -137,8 +139,40 @@ public class Filtering
         }
 
         filters.add(cm);
+    }
+    
+    /**
+     * sets the required small buissness filter
+     * @param SME
+     * @return list of companies
+     */
+    public List<Company> addSMEFilter(int SME){
 
+    CompanySMEFilter sme = new CompanySMEFilter(1);
 
+    Iterator<ICompanyFilter> i = filters.iterator();
+    while (i.hasNext())
+    {
+        ICompanyFilter filter = i.next();
+        if (filter.equals(sme))
+        {
+            i.remove();
+        }
     }
 
+    if(SME == 1)
+    {
+        filters.add(new CompanySMEFilter(1));
+    }else if(SME == 0)
+    {
+        filters.add(new CompanySMEFilter(0));
+    }else if(SME == -1)
+    {
+        filters.add(new CompanySMEFilter(-1));
+    }
+
+    List<Company> filteredList = filteredList();
+
+    return filteredList;
+}
 }

@@ -2,7 +2,7 @@ package inn2power.gui.controller;
 
 //<editor-fold defaultstate="collapsed" desc="Imports">
 import be.Company;
-import inn2power.bll.BllManager;
+import inn2power.bll.SteggerOverflowException;
 import inn2power.gui.model.WindowModel;
 import java.awt.Desktop;
 import java.io.IOException;
@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,7 +48,7 @@ import javafx.stage.Stage;
 public class MainWindowController implements Initializable
 {
 
-    //<editor-fold defaultstate="collapsed" desc="FXML Variables">
+    //<editor-fold defaultstate="collapsed" desc="FXML & Variables">
     @FXML
     private TableView<Company> tableView;
     @FXML
@@ -63,30 +64,11 @@ public class MainWindowController implements Initializable
     @FXML
     private TableColumn<Company, String> tcCoorcinate;
     @FXML
-    private TableColumn<Company, String> tcIsSME;
-    @FXML
-    private CheckBox regionNational;
-    @FXML
-    private CheckBox regionBordering;
-    @FXML
-    private CheckBox regionContinent;
-    @FXML
-    private CheckBox regionSemiInternational;
-    @FXML
-    private CheckBox regionInternational;
-    @FXML
-    private RadioButton isSME;
-    @FXML
-    private RadioButton isNotSME;
-    @FXML
-    private RadioButton noSMEFilter;
-    
+    private TableColumn<Company, String> tcSME;
     @FXML
     private Label lblStartId;
     @FXML
     private Label lblTargetId;
-    @FXML
-    private ComboBox<String> comboBoxCountries;
     @FXML
     private Label lblStartName;
     @FXML
@@ -103,29 +85,49 @@ public class MainWindowController implements Initializable
     private Hyperlink linkStartURL;
     @FXML
     private Hyperlink linkTargetURL;
-    private Label lblStartCoords;
-    private Label lblTargetCoords;
     @FXML
     private Label lblStartSME;
     @FXML
     private Label lblTargetSME;
     @FXML
-    private SplitPane splitPane;
-    @FXML
     private TextField txtSearch;
     @FXML
     private AnchorPane apLeft;
-    
-    //</editor-fold>
+    @FXML
+    private CheckBox regionAfrica;
+    @FXML
+    private CheckBox regionAsia;
+    @FXML
+    private CheckBox regionEurope;
+    @FXML
+    private CheckBox regionNAmerica;
+    @FXML
+    private CheckBox regionOceania;
+    @FXML
+    private CheckBox regionSAmerica;
+    @FXML
+    private RadioButton isSME;
+    @FXML
+    private ToggleGroup SME;
+    @FXML
+    private RadioButton isNotSME;
+    @FXML
+    private ComboBox<String> comboBoxCountries;
 
-    
-    private ObservableList<String> countries;
-    private BllManager bm;
+    private Label lblStartCoords;
+    private Label lblTargetCoords;
+    private ObservableList<String> fileCountries;
+    private ObservableList<String> combCountries;
     private WindowModel wm;
     private String sourceWebsite;
     private String targetWebsite;
+    //</editor-fold>
     @FXML
-    private ToggleGroup SME;
+    private SplitPane splitPane;
+    @FXML
+    private RadioButton SMENotDeclared;
+    @FXML
+    private RadioButton noSMEFilter;
 
     /**
      * Constructor
@@ -136,11 +138,10 @@ public class MainWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        bm = new BllManager();
         wm = new WindowModel();
 
         checkBoxes();
-
+        smeFilterListener();
         tableView.setRowFactory(tv ->
         {
             TableRow<Company> row = new TableRow<>();
@@ -156,32 +157,35 @@ public class MainWindowController implements Initializable
 
         try
         {
+            // A lot of things in this try-catch statement don't actually belong here. Consider moving them outside.
 
-            countries = wm.countryNameList();
+            combCountries = wm.getTableCountries();
 
             tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
             tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
             tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
             tcWebsite.setCellValueFactory(new PropertyValueFactory<>("Website"));
+            tcCountry.setCellValueFactory(new PropertyValueFactory<>("Country"));
+            // Potential add (Swap integers to YES / NO / UNKNOWN
+            //tcSME.setCellValueFactory(new PropertyValueFactory<>("SME"));
 
             tableView.setItems(wm.getAllCompanies());
             tableView.getSortOrder().add(tcName);
-            tableView.getSortOrder().add(tcAddress);
+            //tableView.getSortOrder().add(tcAddress);
             tableView.getSortOrder().add(tcId);
-            tableView.getSortOrder().add(tcWebsite);
+            //tableView.getSortOrder().add(tcWebsite);
 
+            // Sets the window splitter to be locked to the left pane
             SplitPane.setResizableWithParent(apLeft, false);
+
+            // Adds the text to the table
             autoTextChange();
         } catch (IOException ex)
         {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
+//        NOTE TO SELF: ADD LATER. IMPORTANT
         comboBoxCountries();
-        
-        
-        
-        
-        
     }
 
     /**
@@ -189,7 +193,79 @@ public class MainWindowController implements Initializable
      */
     public void comboBoxCountries()
     {
-        comboBoxCountries.setItems(countries.sorted());
+        //comboBoxCountries.setItems(fileCountries.sorted());
+        comboBoxCountries.setItems(combCountries.sorted());
+    }
+
+    private void updateComboBox(boolean[] boxes)
+    {
+
+        ObservableList checkList = FXCollections.observableArrayList();
+
+        try
+        {
+            if (boxes[0])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("AfricaCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+            if (boxes[1])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("AsiaCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+            if (boxes[2])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("EuropeCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+            if (boxes[3])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("NAmericaCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+            if (boxes[4])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("OceaniaCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+            if (boxes[5])
+            {
+                ObservableList<String> listCountries
+                        = wm.getListCountries("SAmericaCountryList");
+                for (int i = 0; i < listCountries.size(); i++)
+                {
+                    checkList.add(listCountries.get(i));
+                }
+            }
+        } catch (IOException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+
+        ObservableList<String> updatedList = wm.updateList(combCountries,
+                checkList);
+        comboBoxCountries.setItems(updatedList.sorted());
     }
 
     /**
@@ -198,18 +274,22 @@ public class MainWindowController implements Initializable
      */
     public void checkBoxes()
     {
-        boolean[] CheckBoxes = new boolean[5];
+        boolean[] CheckBoxes = new boolean[6];
         CheckBox[] boxes =
         {
-            regionNational,
-            regionBordering,
-            regionContinent,
-            regionSemiInternational,
-            regionInternational
+            regionAfrica,
+            regionAsia,
+            regionEurope,
+            regionNAmerica,
+            regionOceania,
+            regionSAmerica
         };
-        for (CheckBox boxe : boxes)
+
+        for (CheckBox box : boxes)
         {
-            boxe.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) ->
+            box.selectedProperty().addListener((ObservableValue<? extends Boolean> ov,
+                    Boolean old_val,
+                    Boolean new_val) ->
             {
                 for (int q = 0; q < boxes.length; q++)
                 {
@@ -218,20 +298,18 @@ public class MainWindowController implements Initializable
 
                 try
                 {
-                    wm.filterBox(CheckBoxes[0],
-                            CheckBoxes[1],
-                            CheckBoxes[2],
-                            CheckBoxes[3],
-                            CheckBoxes[4]);
+                    wm.filterBox(CheckBoxes);
+                    System.out.println("Succesfully added checkbox array list");
+                    updateComboBox(CheckBoxes);
                 } catch (IOException ex)
                 {
-                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex.getMessage());
                 }
             });
         }
     }
 
-    /*
+    /**
      * Opens the company, from the clicked row in tableview, in a new window.
      */
     private void openRowInWindow(TableRow<Company> row)
@@ -284,15 +362,20 @@ public class MainWindowController implements Initializable
         try
         {
             Company comp = tableView.getSelectionModel().getSelectedItem();
+
+            // Temp code to test relations
+            System.out.println(
+                    wm.getRelationNetwork(comp, 1)
+            );
+            // End of temp code
+
             lblStartId.setText(comp.getId() + "");
             lblStartName.setText(comp.getName());
             lblStartCountry.setText(comp.getCountry());
             lblStartAdress.setText(comp.getAddress());
             linkStartURL.setText("Visit Website");
-            //lblStartCoords.setText(comp.getLat() + "" + comp.getLng());
-            //lblStartSME.setText(comp.getIsSME() + "");
             sourceWebsite = comp.getWebsite();
-        } catch (NullPointerException e)
+        } catch (SteggerOverflowException e)
         {
             System.out.println("No company selected.");
         }
@@ -336,8 +419,8 @@ public class MainWindowController implements Initializable
         lblStartCountry.setText("");
         lblStartAdress.setText("");
         // Spot reserved for setting the Start URL
-        lblStartCoords.setText("(0.0; 0.0)");
-        lblStartSME.setText("Yes");
+        lblStartCoords.setText("");
+        lblStartSME.setText("");
     }
 
     /**
@@ -353,8 +436,8 @@ public class MainWindowController implements Initializable
         lblTargetCountry.setText("");
         lblTargetAdress.setText("");
         // Spot reserved for setting the Target URL
-        lblTargetCoords.setText("(0.0; 0.0)");
-        lblTargetSME.setText("Yes");
+        lblTargetCoords.setText("");
+        lblTargetSME.setText("");
     }
 
     @FXML
@@ -390,37 +473,38 @@ public class MainWindowController implements Initializable
 
         checkBoxes();
     }
-    
-    
+
     /**
      * handles the click on sme radiobutton
      */
-    private void smeFilterListener(){
-        SME.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
- 
+    private void smeFilterListener()
+    {
+        SME.selectedToggleProperty().addListener(new ChangeListener<Toggle>()
+        {
+
             //This is the way to add a listener on a togglegroup.
             @Override
-            public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
+            public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle)
+            {
 
                 //Gets the RadioButton clicked by the user by typecasting the toggle.
                 RadioButton newRb = (RadioButton) newToggle;
-                if(newRb == isSME)
-                {
-                    wm.setSMEFilter(1);
-                }else if(newRb == isNotSME)
-                {
-                    wm.setSMEFilter(0);
-                }else if(newRb == noSMEFilter)
-                {
-                    wm.setSMEFilter(2);
+                
+                
+               
+                switch (newRb.getId()) {
+                    case "isSME":  wm.setSMEFilter(1);
+                             break;
+                    case "isNotSME":  wm.setSMEFilter(0);
+                             break;
+                    case "noSMEFilter":  wm.setSMEFilter(2);
+                             break;
+                    case "SMENotDeclared":  wm.setSMEFilter(-1);
+                             break;
                 }
 
-
-                //Gets the Radiobutton that was marked before clicking also by typecasting.
-                RadioButton oldRb = (RadioButton) oldToggle;
 
             }
         });
     }
-    
 }

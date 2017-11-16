@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package inn2power.bll;
 
 import be.Company;
@@ -13,32 +8,53 @@ import be.Company;
  */
 public class CompanySMEFilter implements ICompanyFilter
 {
-    boolean showSME;
-    public CompanySMEFilter(boolean showSME){
+
+    private final int showSME;
+
+    public CompanySMEFilter(int showSME)
+    {
         this.showSME = showSME;
     }
+
     @Override
-    public boolean meetCriteria(Company company) {
-        if(showSME == true){
+    public boolean meetCriteria(Company company)
+    {
+
+        // checks if its a big or small company depends on parameter isSME
+        if (showSME == 1)
+        {
             boolean isItSme = false;
-            if(company.getIsSME() == 1){
+            if (company.getIsSME() == 1)
+            {
                 isItSme = true;
             }
             return isItSme;
-        }else{
+        } else if(showSME == 0)
+        {
             boolean isItSme = false;
-            if(company.getIsSME() == 0){
+            if (company.getIsSME() == 0)
+            {
+                isItSme = true;
+            }
+            return isItSme;
+        }else
+        {
+            boolean isItSme = false;
+            if (company.getIsSME() == -1)
+            {
                 isItSme = true;
             }
             return isItSme;
         }
-           
+
     }
-    
-    @Override   
-    public boolean equals(Object object2) {
+
+    @Override
+    public boolean equals(Object object2)
+    {
         return object2 instanceof CompanySMEFilter;
     }
-    
-    
+
+
+
 }
