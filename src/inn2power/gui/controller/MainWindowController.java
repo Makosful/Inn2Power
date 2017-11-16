@@ -120,7 +120,8 @@ public class MainWindowController implements Initializable
 
     private Label lblStartCoords;
     private Label lblTargetCoords;
-    private ObservableList<String> countries;
+    private ObservableList<String> fileCountries;
+    private ObservableList<String> combCountries;
     private BllManager bm;
     private WindowModel wm;
     private String sourceWebsite;
@@ -156,7 +157,10 @@ public class MainWindowController implements Initializable
 
         try
         {
-            countries = wm.countryNameList();
+            // A lot of things in this try-catch statement don't actually belong here. Consider moving them outside.
+
+            fileCountries = wm.getListCountries();
+            combCountries = wm.getTableCountries();
 
             tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
             tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
@@ -190,7 +194,8 @@ public class MainWindowController implements Initializable
      */
     public void comboBoxCountries()
     {
-        comboBoxCountries.setItems(countries.sorted());
+        //comboBoxCountries.setItems(fileCountries.sorted());
+        comboBoxCountries.setItems(combCountries.sorted());
     }
 
     /**
@@ -235,7 +240,7 @@ public class MainWindowController implements Initializable
         }
     }
 
-    /*
+    /**
      * Opens the company, from the clicked row in tableview, in a new window.
      */
     private void openRowInWindow(TableRow<Company> row)

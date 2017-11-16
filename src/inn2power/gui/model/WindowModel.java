@@ -81,10 +81,10 @@ public class WindowModel
      *
      * @return @throws IOException
      */
-    public ObservableList<String> countryNameList() throws IOException
+    public ObservableList<String> getListCountries() throws IOException
     {
         CountryNameList cnl = new CountryNameList("EuropeCountryList");
-        ObservableList<String> list = cnl.getCountries();
+        ObservableList<String> list = cnl.allCountriesCorrect();
         return list;
     }
 
@@ -112,6 +112,32 @@ public class WindowModel
         filteredList = filtering.addSMEFilter(SME);
         CompanyObsArrayList.clear();
         CompanyObsArrayList.addAll(filteredList);
+    }
+
+    /**
+     * Gets the countries from all the companies registered
+     *
+     * @return Returns and observable list containing all the countries in which
+     * a registered company is located
+     * @throws IOException
+     */
+    public ObservableList<String> getTableCountries() throws IOException
+    {
+        // Creates the return list
+        ObservableList<String> list = FXCollections.observableArrayList();
+
+        // Gets the countries from all the companies
+        ObservableList<Company> allCompanies = getAllCompanies();
+        for (int i = 0; i < allCompanies.size(); i++)
+        {
+            list.add(allCompanies.get(i).getCountry());
+        }
+
+        CountryNameList cnl = new CountryNameList(list);
+
+        list = cnl.allCountriesCorrect();
+
+        return list;
     }
 
 }
