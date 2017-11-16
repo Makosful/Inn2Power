@@ -153,7 +153,7 @@ public class Filtering
             i.remove();
         }
     }
-    System.out.println(filters.size());
+
     if(SME == 1)
     {
         filters.add(sme);
