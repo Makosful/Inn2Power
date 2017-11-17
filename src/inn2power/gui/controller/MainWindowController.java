@@ -141,13 +141,6 @@ public class MainWindowController implements Initializable
     {
         wm = new WindowModel();
 
-        setCheckBoxes();
-        setSMEFilterListener();
-        setOpenCompanyWindow();
-        setAutoTextChange();
-        setColumns();
-        setLockedSplitPane(true);
-
         try
         {
             combCountries = wm.getTableCountries();
@@ -158,8 +151,17 @@ public class MainWindowController implements Initializable
         {
             System.out.println(ex.getMessage());
         }
-//        NOTE TO SELF: ADD LATER. IMPORTANT
+
+        setCheckBoxes();
+        setSMEFilterListener();
+        setOpenCompanyWindow();
+        setAutoTextChange();
+        setColumns();
+        setLockedSplitPane(true);
+
+        // NOTE TO SELF: ADD LATER. IMPORTANT
         comboBoxCountries();
+
     }
 
     /**
