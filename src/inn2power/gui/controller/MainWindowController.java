@@ -141,11 +141,84 @@ public class MainWindowController implements Initializable
     {
         wm = new WindowModel();
 
-        checkBoxes();
-        smeFilterListener();
+        setCheckBoxes();
+        setSMEFilterListener();
+        setOpenCompanyWindow();
+        setAutoTextChange();
+        setColumns();
+        setLockedSplitPane(true);
 
-        // When double clicking, open a window with detailed information about
-        // the company clicked on
+        try
+        {
+            combCountries = wm.getTableCountries();
+            setTableContent();
+            setSortOrder();
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+//        NOTE TO SELF: ADD LATER. IMPORTANT
+        comboBoxCountries();
+    }
+
+    /**
+     * Sets the locking on the split pane to the left pane
+     *
+     * @param lock Should it be locked
+     */
+    private void setLockedSplitPane(boolean lock)
+    {
+        if (lock)
+        {
+            SplitPane.setResizableWithParent(apLeft, false);
+        }
+        else
+        {
+            SplitPane.setResizableWithParent(apLeft, true);
+        }
+    }
+
+    /**
+     * Filles the table with all companies
+     *
+     * @throws IOException
+     */
+    private void setTableContent() throws IOException
+    {
+        // Fills the table with the cmpanies
+        tableView.setItems(wm.getAllCompanies());
+    }
+
+    /**
+     * Sets the order of which the rows should be sorted by, by default
+     */
+    private void setSortOrder()
+    {
+        tableView.getSortOrder().add(tcName);
+        tableView.getSortOrder().add(tcId);
+    }
+
+    /**
+     * Defines the collumns used
+     */
+    private void setColumns()
+    {
+        tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        tcWebsite.setCellValueFactory(new PropertyValueFactory<>("Website"));
+        tcCountry.setCellValueFactory(new PropertyValueFactory<>("Country"));
+        // Potential add (Swap integers to YES / NO / UNKNOWN
+        tcSME.setCellValueFactory(new PropertyValueFactory<>("SME"));
+    }
+
+    /**
+     * Creates the functionality for double clicking on a company in the list to
+     * get a window with detailed information about the company
+     */
+    private void setOpenCompanyWindow()
+    {
         tableView.setRowFactory(tv ->
         {
             TableRow<Company> row = new TableRow<>();
@@ -158,39 +231,6 @@ public class MainWindowController implements Initializable
             });
             return row;
         });
-
-        try
-        {
-            // A lot of things in this try-catch statement don't actually belong here. Consider moving them outside.
-
-            combCountries = wm.getTableCountries();
-
-            tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
-            tcAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
-            tcId.setCellValueFactory(new PropertyValueFactory<>("Id"));
-            tcWebsite.setCellValueFactory(new PropertyValueFactory<>("Website"));
-            tcCountry.setCellValueFactory(new PropertyValueFactory<>("Country"));
-            // Potential add (Swap integers to YES / NO / UNKNOWN
-            //tcSME.setCellValueFactory(new PropertyValueFactory<>("SME"));
-
-            tableView.setItems(wm.getAllCompanies());
-            tableView.getSortOrder().add(tcName);
-            //tableView.getSortOrder().add(tcAddress);
-            tableView.getSortOrder().add(tcId);
-            //tableView.getSortOrder().add(tcWebsite);
-
-            // Sets the window splitter to be locked to the left pane
-            SplitPane.setResizableWithParent(apLeft, false);
-
-            // Adds the text to the table
-            autoTextChange();
-        }
-        catch (IOException ex)
-        {
-            System.out.println(ex.getMessage());
-        }
-//        NOTE TO SELF: ADD LATER. IMPORTANT
-        comboBoxCountries();
     }
 
     /**
@@ -198,10 +238,14 @@ public class MainWindowController implements Initializable
      */
     public void comboBoxCountries()
     {
-        //comboBoxCountries.setItems(fileCountries.sorted());
         comboBoxCountries.setItems(combCountries.sorted());
     }
 
+    /**
+     * Updates the comboBox based on the regional filters that's been sat
+     *
+     * @param boxes The checkboxes handling the regional filters
+     */
     private void updateComboBox(boolean[] boxes)
     {
 
@@ -278,7 +322,7 @@ public class MainWindowController implements Initializable
      * Listener for the checkboxes, sends the checkbox values as parameters to
      * the filter.
      */
-    public void checkBoxes()
+    public void setCheckBoxes()
     {
         boolean[] CheckBoxes = new boolean[6];
         CheckBox[] boxes =
@@ -351,7 +395,7 @@ public class MainWindowController implements Initializable
      * Adds an observer to the search bar, allowing the app to search the
      * database on the fly
      */
-    private void autoTextChange()
+    private void setAutoTextChange()
     {
         txtSearch.textProperty().addListener((ObservableValue<? extends String> observable, String oldText, String newText) ->
         {
@@ -450,6 +494,11 @@ public class MainWindowController implements Initializable
         lblTargetSME.setText("");
     }
 
+    /**
+     * Opens the link in the browser
+     *
+     * @param event
+     */
     @FXML
     private void visitWebsite(MouseEvent event)
     {
@@ -478,19 +527,26 @@ public class MainWindowController implements Initializable
         }
     }
 
+    /**
+     * The search functionality
+     *
+     * @param event
+     *
+     * @throws IOException
+     */
     @FXML
     private void handleCountrySearch(ActionEvent event) throws IOException
     {
         String selectedItem = comboBoxCountries.getSelectionModel().getSelectedItem();
         wm.addCountryFilter(selectedItem);
 
-        checkBoxes();
+        setCheckBoxes();
     }
 
     /**
      * handles the click on sme radiobutton
      */
-    private void smeFilterListener()
+    private void setSMEFilterListener()
     {
         SME.selectedToggleProperty().addListener(new ChangeListener<Toggle>()
         {
