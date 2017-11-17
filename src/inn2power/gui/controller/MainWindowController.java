@@ -40,6 +40,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+//</editor-fold>
 
 /**
  *
@@ -142,6 +143,9 @@ public class MainWindowController implements Initializable
 
         checkBoxes();
         smeFilterListener();
+
+        // When double clicking, open a window with detailed information about
+        // the company clicked on
         tableView.setRowFactory(tv ->
         {
             TableRow<Company> row = new TableRow<>();
@@ -180,7 +184,8 @@ public class MainWindowController implements Initializable
 
             // Adds the text to the table
             autoTextChange();
-        } catch (IOException ex)
+        }
+        catch (IOException ex)
         {
             System.out.println(ex.getMessage());
         }
@@ -207,7 +212,7 @@ public class MainWindowController implements Initializable
             if (boxes[0])
             {
                 ObservableList<String> listCountries
-                        = wm.getListCountries("AfricaCountryList");
+                                       = wm.getListCountries("AfricaCountryList");
                 for (int i = 0; i < listCountries.size(); i++)
                 {
                     checkList.add(listCountries.get(i));
@@ -216,7 +221,7 @@ public class MainWindowController implements Initializable
             if (boxes[1])
             {
                 ObservableList<String> listCountries
-                        = wm.getListCountries("AsiaCountryList");
+                                       = wm.getListCountries("AsiaCountryList");
                 for (int i = 0; i < listCountries.size(); i++)
                 {
                     checkList.add(listCountries.get(i));
@@ -225,7 +230,7 @@ public class MainWindowController implements Initializable
             if (boxes[2])
             {
                 ObservableList<String> listCountries
-                        = wm.getListCountries("EuropeCountryList");
+                                       = wm.getListCountries("EuropeCountryList");
                 for (int i = 0; i < listCountries.size(); i++)
                 {
                     checkList.add(listCountries.get(i));
@@ -234,7 +239,7 @@ public class MainWindowController implements Initializable
             if (boxes[3])
             {
                 ObservableList<String> listCountries
-                        = wm.getListCountries("NAmericaCountryList");
+                                       = wm.getListCountries("NAmericaCountryList");
                 for (int i = 0; i < listCountries.size(); i++)
                 {
                     checkList.add(listCountries.get(i));
@@ -243,7 +248,7 @@ public class MainWindowController implements Initializable
             if (boxes[4])
             {
                 ObservableList<String> listCountries
-                        = wm.getListCountries("OceaniaCountryList");
+                                       = wm.getListCountries("OceaniaCountryList");
                 for (int i = 0; i < listCountries.size(); i++)
                 {
                     checkList.add(listCountries.get(i));
@@ -252,19 +257,20 @@ public class MainWindowController implements Initializable
             if (boxes[5])
             {
                 ObservableList<String> listCountries
-                        = wm.getListCountries("SAmericaCountryList");
+                                       = wm.getListCountries("SAmericaCountryList");
                 for (int i = 0; i < listCountries.size(); i++)
                 {
                     checkList.add(listCountries.get(i));
                 }
             }
-        } catch (IOException ex)
+        }
+        catch (IOException ex)
         {
             System.out.println(ex.getMessage());
         }
 
         ObservableList<String> updatedList = wm.updateList(combCountries,
-                checkList);
+                                                           checkList);
         comboBoxCountries.setItems(updatedList.sorted());
     }
 
@@ -288,8 +294,8 @@ public class MainWindowController implements Initializable
         for (CheckBox box : boxes)
         {
             box.selectedProperty().addListener((ObservableValue<? extends Boolean> ov,
-                    Boolean old_val,
-                    Boolean new_val) ->
+                                                Boolean old_val,
+                                                Boolean new_val) ->
             {
                 for (int q = 0; q < boxes.length; q++)
                 {
@@ -301,7 +307,8 @@ public class MainWindowController implements Initializable
                     wm.filterBox(CheckBoxes);
                     System.out.println("Succesfully added checkbox array list");
                     updateComboBox(CheckBoxes);
-                } catch (IOException ex)
+                }
+                catch (IOException ex)
                 {
                     System.out.println(ex.getMessage());
                 }
@@ -333,7 +340,8 @@ public class MainWindowController implements Initializable
             stage.initOwner(primeStage);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
-        } catch (IOException ex)
+        }
+        catch (IOException ex)
         {
             System.out.println("Could not read StyleSheet");
         }
@@ -375,7 +383,8 @@ public class MainWindowController implements Initializable
             lblStartAdress.setText(comp.getAddress());
             linkStartURL.setText("Visit Website");
             sourceWebsite = comp.getWebsite();
-        } catch (SteggerOverflowException e)
+        }
+        catch (SteggerOverflowException e)
         {
             System.out.println("No company selected.");
         }
@@ -400,7 +409,8 @@ public class MainWindowController implements Initializable
             //lblTargetCoords.setText(comp.getLat() + "" + comp.getLng());
             //lblTargetSME.setText(comp.getIsSME() + "");
             targetWebsite = comp.getWebsite();
-        } catch (NullPointerException e)
+        }
+        catch (NullPointerException e)
         {
             System.out.println("No company selected.");
         }
@@ -451,15 +461,18 @@ public class MainWindowController implements Initializable
                 if (((Control) event.getSource()).getId().equals("linkStartURL"))
                 {
                     Desktop.getDesktop().browse(new URI(sourceWebsite));
-                } else
+                }
+                else
                 {
                     Desktop.getDesktop().browse(new URI(targetWebsite));
                 }
-            } catch (IOException ex)
+            }
+            catch (IOException ex)
             {
                 Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (URISyntaxException ex)
+        }
+        catch (URISyntaxException ex)
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -489,26 +502,28 @@ public class MainWindowController implements Initializable
 
                 //Gets the RadioButton clicked by the user by typecasting the toggle.
                 RadioButton newRb = (RadioButton) newToggle;
-               if (newRb == isSME)
+                if (newRb == isSME)
                 {
                     wm.setSMEFilter(1);
-                } 
-               else if (newRb == isNotSME)
+                }
+                else if (newRb == isNotSME)
                 {
                     wm.setSMEFilter(0);
-                } 
-                /*else if (newRb == isBoth)
-                {
-                    wm.setSMEFilter();
                 }
-                else if (newRb == isUnknown)
-                {
-                    wm.setSMEFilter();
-                }
-                else if (newRb == noSMEFilster)
-                {
-                    wm.setSMEFilter();
-                }*/
+                /*
+                 * else if (newRb == isBoth)
+                 * {
+                 * wm.setSMEFilter();
+                 * }
+                 * else if (newRb == isUnknown)
+                 * {
+                 * wm.setSMEFilter();
+                 * }
+                 * else if (newRb == noSMEFilster)
+                 * {
+                 * wm.setSMEFilter();
+                 * }
+                 */
 
                 //Gets the Radiobutton that was marked before clicking also by typecasting.
                 RadioButton oldRb = (RadioButton) oldToggle;

@@ -1,11 +1,14 @@
 package inn2power.bll;
 
 import be.Company;
+import inn2power.dal.CSVReaderRegion;
 import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -22,7 +25,8 @@ public class Filtering
         try
         {
             data = new DataAccess();
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
         }
     }
@@ -40,7 +44,7 @@ public class Filtering
 
         return filteredList;
     }
-    
+
     public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException
     {
         CountryFiltering countryFilter = new CountryFiltering("brazil");
@@ -49,46 +53,57 @@ public class Filtering
         while (i.hasNext())
         {
             ICompanyFilter filter = i.next();
-            
+
             if (filter.equals(countryFilter))
             {
                 i.remove();
             }
         }
-        
-            if(checkBoxFilters[0] == true)
-            {
-                filters.add(new CountryFiltering("Brazil"));
-            }
-            if(checkBoxFilters[1] == true)
-            {
-                // ASIA
-            }
-            if(checkBoxFilters[2] == true)
-            {
-                // EUROPE
-            }
-            if(checkBoxFilters[3] == true)
-            {
-                // NORTH AMERICA
-            }
-            if(checkBoxFilters[4] == true)
-            {
-                // OCEANIA
-            }
-            if(checkBoxFilters[5] == true)
-            {
-                // SOUTH AMERICA
-            }
-            
-        
+
+        CSVReaderRegion csv;
+        ObservableList<String> regions = FXCollections.observableArrayList();
+
+        if (checkBoxFilters[0] == true)
+        {
+            csv = new CSVReaderRegion("AfricaCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+        }
+        if (checkBoxFilters[1] == true)
+        {
+            // ASIA
+            csv = new CSVReaderRegion("AsiaCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+        }
+        if (checkBoxFilters[2] == true)
+        {
+            // EUROPE
+            csv = new CSVReaderRegion("EuropeCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+        }
+        if (checkBoxFilters[3] == true)
+        {
+            // NORTH AMERICA
+            csv = new CSVReaderRegion("NAmericaCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+        }
+        if (checkBoxFilters[4] == true)
+        {
+            // OCEANIA
+            csv = new CSVReaderRegion("OceaniaCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+        }
+        if (checkBoxFilters[5] == true)
+        {
+            // SOUTH AMERICA
+            csv = new CSVReaderRegion("SAmericaCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+        }
+
         List<Company> filteredList = filteredList();
 
         return filteredList;
     }
 
-    
-    
     public List<Company> companyFiltering(List<Company> allCompanies, List<ICompanyFilter> filters)
     {
         // ArrayList which countries are added to, according to if there is a
@@ -134,10 +149,12 @@ public class Filtering
 
         filters.add(cm);
     }
-    
+
     /**
      * sets the required small buissness filter
+     *
      * @param SME
+     *
      * @return list of companies
      */
     public List<Company> addSMEFilter(int SME)
@@ -150,19 +167,19 @@ public class Filtering
             ICompanyFilter filter = i.next();
             if (filter.equals(sme))
             {
-               i.remove();
+                i.remove();
             }
         }
 
-        if(SME == 1)
+        if (SME == 1)
         {
-           filters.add(sme);
+            filters.add(sme);
         }
-        else if(SME == 0)
+        else if (SME == 0)
         {
             filters.add(new CompanySMEFilter(false));
         }
-        else if(SME == -1)
+        else if (SME == -1)
         {
             filters.add(sme);
         }
