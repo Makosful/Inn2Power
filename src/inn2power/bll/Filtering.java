@@ -47,14 +47,14 @@ public class Filtering
 
     public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException
     {
-        CountryFiltering countryFilter = new CountryFiltering("brazil");
+        RegionFiltering regionFilter = new RegionFiltering(filters);
 
         Iterator<ICompanyFilter> i = filters.iterator();
         while (i.hasNext())
         {
             ICompanyFilter filter = i.next();
 
-            if (filter.equals(countryFilter))
+            if (filter.equals(regionFilter))
             {
                 i.remove();
             }
@@ -67,41 +67,58 @@ public class Filtering
         {
             csv = new CSVReaderRegion("AfricaCountryList");
             ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
         }
         if (checkBoxFilters[1] == true)
         {
             // ASIA
             csv = new CSVReaderRegion("AsiaCountryList");
             ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
         }
         if (checkBoxFilters[2] == true)
         {
             // EUROPE
             csv = new CSVReaderRegion("EuropeCountryList");
             ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
         }
         if (checkBoxFilters[3] == true)
         {
             // NORTH AMERICA
             csv = new CSVReaderRegion("NAmericaCountryList");
             ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
         }
         if (checkBoxFilters[4] == true)
         {
             // OCEANIA
             csv = new CSVReaderRegion("OceaniaCountryList");
             ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
         }
         if (checkBoxFilters[5] == true)
         {
             // SOUTH AMERICA
             csv = new CSVReaderRegion("SAmericaCountryList");
             ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
         }
+
+        filters.add(new RegionFiltering(regions));
 
         List<Company> filteredList = filteredList();
 
         return filteredList;
+    }
+
+    private void addCountry(ObservableList<String> countries,
+                            ObservableList<String> regions)
+    {
+        countries.forEach((country) ->
+        {
+            regions.add(country);
+        });
     }
 
     public List<Company> companyFiltering(List<Company> allCompanies, List<ICompanyFilter> filters)
