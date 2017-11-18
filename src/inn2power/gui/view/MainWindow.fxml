@@ -272,7 +272,7 @@
                                                 <Insets bottom="15.0" />
                                              </padding>
                                           </RadioButton>
-                                          <RadioButton fx:id="isBoth" mnemonicParsing="false" text="Both (needs implementation)" toggleGroup="$SME">
+                                          <RadioButton fx:id="isBothSME" mnemonicParsing="false" text="Both small and large companies" toggleGroup="$SME">
                                              <padding>
                                                 <Insets bottom="15.0" />
                                              </padding>

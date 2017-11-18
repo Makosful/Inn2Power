@@ -38,7 +38,7 @@ public class Filtering
     public List<Company> filteredList()
     {
         List<Company> allCompanies = data.getAllCompanies();
-
+        System.out.println(allCompanies.size());
         List<Company> filteredList;
         filteredList = companyFiltering(allCompanies, filters);
 
@@ -194,6 +194,8 @@ public class Filtering
             filters.add(new CompanySMEFilter(SME));
         }else if(SME == -1)
         {
+            filters.add(new CompanySMEFilter(SME));
+        }else if(SME == 3){
             filters.add(new CompanySMEFilter(SME));
         }
 

@@ -49,14 +49,11 @@ import javafx.stage.Stage;
 public class MainWindowController implements Initializable
 {
 
-    @FXML
-    private RadioButton SMENotDeclared;
-    @FXML
-    private RadioButton noSMEFilter;
-    @FXML
-    private SplitPane splitPane;
+  
 
-    //<editor-fold defaultstate="collapsed" desc="FXML & Variables">
+   
+
+//<editor-fold defaultstate="collapsed" desc="FXML elements & Variables">
     @FXML
     private TableView<Company> tableView;
     @FXML
@@ -120,10 +117,16 @@ public class MainWindowController implements Initializable
     @FXML
     private RadioButton isNotSME;
     @FXML
-    private RadioButton isBoth;
+    private RadioButton isBothSME;
+    @FXML
+    private RadioButton SMENotDeclared;
+    @FXML
+    private RadioButton noSMEFilter;
+    @FXML
+    private SplitPane splitPane;
     @FXML
     private ComboBox<String> comboBoxCountries;
-
+    
     private Label lblStartCoords;
     private Label lblTargetCoords;
     private ObservableList<String> fileCountries;
@@ -131,7 +134,8 @@ public class MainWindowController implements Initializable
     private WindowModel wm;
     private String sourceWebsite;
     private String targetWebsite;
-    //</editor-fold>
+//</editor-fold>
+
 
     /**
      * Constructor
@@ -572,6 +576,8 @@ public class MainWindowController implements Initializable
                     case "isNotSME":  wm.setSMEFilter(0);
                              break;
                     case "SMENotDeclared":  wm.setSMEFilter(-1);
+                             break;
+                    case "isBothSME":  wm.setSMEFilter(3);
                              break;
                     case "noSMEFilter":  wm.setSMEFilter(2);
                              break;

@@ -37,6 +37,14 @@ public class CompanySMEFilter implements ICompanyFilter
                 isItSme = true;
             }
             return isItSme;
+        } else if(showSME == 3)
+        {
+            boolean isItSme = false;
+            if (company.getIsSME() == 0 || company.getIsSME() == 1)
+            {
+                isItSme = true;
+            }
+            return isItSme;
         }else
         {
             boolean isItSme = false;
