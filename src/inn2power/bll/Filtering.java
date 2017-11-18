@@ -167,16 +167,14 @@ public class Filtering
         filters.add(cm);
     }
 
-    /**
+     /**
      * sets the required small buissness filter
-     *
      * @param SME
-     *
      * @return list of companies
      */
-    public List<Company> addSMEFilter(int SME)
-    {
-        CompanySMEFilter sme = new CompanySMEFilter(true);
+    public List<Company> addSMEFilter(int SME){
+
+        CompanySMEFilter sme = new CompanySMEFilter(1);
 
         Iterator<ICompanyFilter> i = filters.iterator();
         while (i.hasNext())
@@ -188,17 +186,15 @@ public class Filtering
             }
         }
 
-        if (SME == 1)
+        if(SME == 1)
         {
-            filters.add(sme);
-        }
-        else if (SME == 0)
+            filters.add(new CompanySMEFilter(1));
+        }else if(SME == 0)
         {
-            filters.add(new CompanySMEFilter(false));
-        }
-        else if (SME == -1)
+            filters.add(new CompanySMEFilter(0));
+        }else if(SME == -1)
         {
-            filters.add(sme);
+            filters.add(new CompanySMEFilter(-1));
         }
 
         List<Company> filteredList = filteredList();
