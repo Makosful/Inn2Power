@@ -188,13 +188,13 @@ public class Filtering
 
         if(SME == 1)
         {
-            filters.add(new CompanySMEFilter(1));
+            filters.add(new CompanySMEFilter(SME));
         }else if(SME == 0)
         {
-            filters.add(new CompanySMEFilter(0));
+            filters.add(new CompanySMEFilter(SME));
         }else if(SME == -1)
         {
-            filters.add(new CompanySMEFilter(-1));
+            filters.add(new CompanySMEFilter(SME));
         }
 
         List<Company> filteredList = filteredList();

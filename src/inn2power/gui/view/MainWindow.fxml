@@ -26,7 +26,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@../../css/cssstylesheet.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.MainWindowController">
+<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@../../css/cssstylesheet.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.MainWindowController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -248,7 +248,7 @@
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
-                                <TitledPane animated="false" styleClass="changefocuscolor" text="Small, Medium, Large Enterprise">
+                                <TitledPane animated="false" styleClass="changefocuscolor" text="Company size">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -267,10 +267,7 @@
                                                 <Insets bottom="15.0" />
                                              </padding>
                                           </RadioButton>
-                                          <RadioButton fx:id="isUnknown" mnemonicParsing="false" text="Unknown (needs implementation)">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="SME1" />
-                                             </toggleGroup>
+                                          <RadioButton fx:id="SMENotDeclared" mnemonicParsing="false" text="Not declared" toggleGroup="$SME">
                                              <padding>
                                                 <Insets bottom="15.0" />
                                              </padding>
@@ -280,11 +277,7 @@
                                                 <Insets bottom="15.0" />
                                              </padding>
                                           </RadioButton>
-                                          <RadioButton fx:id="noSMEFilster" mnemonicParsing="false" text="All (needs implementation)">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="SME11" />
-                                             </toggleGroup>
-                                          </RadioButton>
+                                          <RadioButton fx:id="noSMEFilter" mnemonicParsing="false" text="All" toggleGroup="$SME" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -331,7 +324,7 @@
                   <Button layoutX="10.0" layoutY="105.0" mnemonicParsing="false" onAction="#clearStartCompany" prefHeight="25.0" prefWidth="130.0" styleClass="changefocuscolor" text="Clear Source" />
                   <Button layoutX="150.0" layoutY="105.0" mnemonicParsing="false" onAction="#clearTargetCompany" prefHeight="25.0" prefWidth="130.0" styleClass="changefocuscolor" text="Clear Target" />
                   <Button layoutX="10.0" layoutY="75.0" mnemonicParsing="false" onAction="#clearStartCompany" prefHeight="25.0" prefWidth="270.0" styleClass="changefocuscolor" text="Compare Source to Target" />
-                  <Button layoutX="44.0" layoutY="306.0" mnemonicParsing="false" onAction="#openCompanyRegister" text="Create Company" />
+                  <Button layoutX="175.0" layoutY="397.0" mnemonicParsing="false" onAction="#openCompanyRegister" text="Create Company" />
                     </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

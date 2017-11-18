@@ -49,6 +49,13 @@ import javafx.stage.Stage;
 public class MainWindowController implements Initializable
 {
 
+    @FXML
+    private RadioButton SMENotDeclared;
+    @FXML
+    private RadioButton noSMEFilter;
+    @FXML
+    private SplitPane splitPane;
+
     //<editor-fold defaultstate="collapsed" desc="FXML & Variables">
     @FXML
     private TableView<Company> tableView;
@@ -115,10 +122,6 @@ public class MainWindowController implements Initializable
     @FXML
     private RadioButton isBoth;
     @FXML
-    private RadioButton isUnknown;
-    @FXML
-    private RadioButton noSMEFilster;
-    @FXML
     private ComboBox<String> comboBoxCountries;
 
     private Label lblStartCoords;
@@ -153,7 +156,7 @@ public class MainWindowController implements Initializable
         }
 
         setCheckBoxes();
-        setSMEFilterListener();
+        smeFilterListener();
         setOpenCompanyWindow();
         setAutoTextChange();
         setColumns();
@@ -548,47 +551,39 @@ public class MainWindowController implements Initializable
     /**
      * handles the click on sme radiobutton
      */
-    private void setSMEFilterListener()
+    private void smeFilterListener()
     {
         SME.selectedToggleProperty().addListener(new ChangeListener<Toggle>()
         {
 
-            //This is the way to add a listener on a togglegroup.
+            //add a listener on SME togglegroup.
             @Override
             public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle)
             {
 
                 //Gets the RadioButton clicked by the user by typecasting the toggle.
                 RadioButton newRb = (RadioButton) newToggle;
-                if (newRb == isSME)
-                {
-                    wm.setSMEFilter(1);
+                
+                
+               
+                switch (newRb.getId()) {
+                    case "isSME":  wm.setSMEFilter(1);
+                             break;
+                    case "isNotSME":  wm.setSMEFilter(0);
+                             break;
+                    case "SMENotDeclared":  wm.setSMEFilter(-1);
+                             break;
+                    case "noSMEFilter":  wm.setSMEFilter(2);
+                             break;
                 }
-                else if (newRb == isNotSME)
-                {
-                    wm.setSMEFilter(0);
-                }
-                /*
-                 * else if (newRb == isBoth)
-                 * {
-                 * wm.setSMEFilter();
-                 * }
-                 * else if (newRb == isUnknown)
-                 * {
-                 * wm.setSMEFilter();
-                 * }
-                 * else if (newRb == noSMEFilster)
-                 * {
-                 * wm.setSMEFilter();
-                 * }
-                 */
 
-                //Gets the Radiobutton that was marked before clicking also by typecasting.
-                RadioButton oldRb = (RadioButton) oldToggle;
 
             }
         });
     }
+    
+    
+    
     /**
      * Window, to register company.
      * @param event
