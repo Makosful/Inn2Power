@@ -38,7 +38,7 @@ public class Filtering
     public List<Company> filteredList()
     {
         List<Company> allCompanies = data.getAllCompanies();
-        System.out.println(allCompanies.size());
+ 
         List<Company> filteredList;
         filteredList = companyFiltering(allCompanies, filters);
 
