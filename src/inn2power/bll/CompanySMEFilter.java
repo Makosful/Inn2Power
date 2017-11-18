@@ -9,9 +9,9 @@ import be.Company;
 public class CompanySMEFilter implements ICompanyFilter
 {
 
-    private final boolean showSME;
+    private final int showSME;
 
-    public CompanySMEFilter(boolean showSME)
+    public CompanySMEFilter(int showSME)
     {
         this.showSME = showSME;
     }
@@ -21,7 +21,7 @@ public class CompanySMEFilter implements ICompanyFilter
     {
 
         // checks if its a big or small company depends on parameter isSME
-        if (showSME == true)
+        if (showSME == 1)
         {
             boolean isItSme = false;
             if (company.getIsSME() == 1)
@@ -29,10 +29,18 @@ public class CompanySMEFilter implements ICompanyFilter
                 isItSme = true;
             }
             return isItSme;
-        } else
+        } else if(showSME == 0)
         {
             boolean isItSme = false;
             if (company.getIsSME() == 0)
+            {
+                isItSme = true;
+            }
+            return isItSme;
+        }else
+        {
+            boolean isItSme = false;
+            if (company.getIsSME() == -1)
             {
                 isItSme = true;
             }
@@ -45,14 +53,6 @@ public class CompanySMEFilter implements ICompanyFilter
     public boolean equals(Object object2)
     {
         return object2 instanceof CompanySMEFilter;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int hash = 7;
-        hash = 53 * hash + (this.showSME ? 1 : 0);
-        return hash;
     }
 
 }
