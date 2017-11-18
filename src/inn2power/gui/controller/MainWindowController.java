@@ -589,4 +589,31 @@ public class MainWindowController implements Initializable
             }
         });
     }
+    /**
+     * Window, to register company.
+     * @param event
+     * @throws IOException 
+     */
+    @FXML
+    private void openCompanyRegister(ActionEvent event) throws IOException
+    {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inn2power/gui/view/CreateCompany.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            CreateCompanyController controller;
+            controller = fxmlLoader.getController();
+            
+            stage.setScene(new Scene(root));  
+            stage.showAndWait();
+        }
+        catch(Exception e)
+        {
+            System.out.println("todo");
+        }
+    }
 }
+

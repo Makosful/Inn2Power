@@ -331,6 +331,7 @@
                   <Button layoutX="10.0" layoutY="105.0" mnemonicParsing="false" onAction="#clearStartCompany" prefHeight="25.0" prefWidth="130.0" styleClass="changefocuscolor" text="Clear Source" />
                   <Button layoutX="150.0" layoutY="105.0" mnemonicParsing="false" onAction="#clearTargetCompany" prefHeight="25.0" prefWidth="130.0" styleClass="changefocuscolor" text="Clear Target" />
                   <Button layoutX="10.0" layoutY="75.0" mnemonicParsing="false" onAction="#clearStartCompany" prefHeight="25.0" prefWidth="270.0" styleClass="changefocuscolor" text="Compare Source to Target" />
+                  <Button layoutX="44.0" layoutY="306.0" mnemonicParsing="false" onAction="#openCompanyRegister" text="Create Company" />
                     </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
