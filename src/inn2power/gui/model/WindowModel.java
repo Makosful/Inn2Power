@@ -46,7 +46,7 @@ public class WindowModel
      * @return observablelist with companies
      * @throws IOException
      */
-    public ObservableList<Company> getAllCompanies() throws IOException, SQLException
+    public ObservableList<Company> getAllCompanies() throws IOException
     {
         CompanyObsArrayList.addAll(bll.getAllCompanies());
         return CompanyObsArrayList;
@@ -58,7 +58,7 @@ public class WindowModel
      *
      * @param searchText
      */
-    public void Search(String searchText) throws SQLException
+    public void Search(String searchText)
     {
         CompanyObsArrayList.clear();
         List<Company> result = search.getSearchResult(bll.getAllCompanies(), searchText);
