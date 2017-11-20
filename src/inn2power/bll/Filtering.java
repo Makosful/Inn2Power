@@ -74,7 +74,10 @@ public class Filtering
         return filteredList;
     }
 
-    // Adds country to filter.
+    /**
+     * Adds country to filter.
+     * @param country 
+     */
     public void addCountryFilter(String country)
 
     {
@@ -122,7 +125,8 @@ public class Filtering
         }else if(SME == -1)
         {
             filters.add(new CompanySMEFilter(SME));
-        }else if(SME == 3){
+        }else if(SME == 3)
+        {
             filters.add(new CompanySMEFilter(SME));
         }
 

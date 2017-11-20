@@ -5,6 +5,7 @@ import bll.Inn2PowerException;
 import bll.RelationalLogic;
 import dal.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -17,11 +18,13 @@ public class DataAccess
 {
 
     CompanyDAO cDAO;
+    OurCompanyDAO ocDAO;
     RelationDAO rDAO;
     RelationalLogic logic;
 
     public DataAccess() throws IOException
     {
+        ocDAO = new OurCompanyDAO();
         cDAO = new CompanyDAO();
         rDAO = new RelationDAO();
     }
@@ -31,7 +34,7 @@ public class DataAccess
      *
      * @return
      */
-    public List<Company> getAllCompanies()
+    public List<Company> getAllCompanies() 
     {
         return cDAO.getAllCompanies();
     }
