@@ -26,8 +26,8 @@ public class DataBaseConnector
         dataSource.setServerName("EASV-DB2");
         dataSource.setPortNumber(1433);
         dataSource.setDatabaseName("Inn2Power");
-        dataSource.setUser("CS2017A_40");
-        dataSource.setPassword("CS2017A_40");
+        dataSource.setUser("CS2017A_8");
+        dataSource.setPassword("CS2017A_8");
     }
 
     public Connection getConnection() throws SQLServerException

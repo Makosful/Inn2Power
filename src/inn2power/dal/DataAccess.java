@@ -5,6 +5,7 @@ import bll.Inn2PowerException;
 import bll.RelaationalLogic;
 import dal.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -86,4 +87,8 @@ public class DataAccess
         return logic.getRelationalNetwork(source, depth);
     }
 
+    public void createNewCompany(String name, String address, String country, String website, String supplyChainCat, String businessRole, double lat, double lng, int isSME) throws SQLException
+    {
+        cDAO.createCompany(name, address, country, website, supplyChainCat, businessRole, lat, lng, isSME);
+    }
 }
