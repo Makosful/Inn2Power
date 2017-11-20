@@ -26,6 +26,15 @@ public class BllManager
         companies = data.getAllCompanies();
     }
 
+    /**
+     * Gets all companies
+     * @return list of all companies
+     */
+    public List<Company> getAllCompanies()
+    {
+        return data.getAllCompanies();
+    }
+
     public List<Relation> getAllRelations()
     {
         return data.getAllRelations();

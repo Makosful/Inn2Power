@@ -6,7 +6,7 @@ import inn2power.bll.BllManager;
 import inn2power.bll.CountryNameList;
 import inn2power.bll.Filtering;
 import inn2power.bll.Search;
-import inn2power.dal.DataAccess;
+
 import java.io.IOException;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -19,7 +19,7 @@ import javafx.collections.ObservableList;
 public class WindowModel
 {
 
-    private DataAccess data;
+
     private BllManager bll;
     private Search search;
     private Filtering filtering;
@@ -29,7 +29,7 @@ public class WindowModel
     {
         try
         {
-            data = new DataAccess();
+
             bll = new BllManager();
             search = new Search();
             filtering = new Filtering();
@@ -47,7 +47,7 @@ public class WindowModel
      */
     public ObservableList<Company> getAllCompanies() throws IOException
     {
-        CompanyObsArrayList.addAll(data.getAllCompanies());
+        CompanyObsArrayList.addAll(bll.getAllCompanies());
         return CompanyObsArrayList;
     }
 
@@ -60,7 +60,7 @@ public class WindowModel
     public void Search(String searchText)
     {
         CompanyObsArrayList.clear();
-        List<Company> result = search.getSearchResult(data.getAllCompanies(), searchText);
+        List<Company> result = search.getSearchResult(bll.getAllCompanies(), searchText);
         CompanyObsArrayList.addAll(result);
     }
 
