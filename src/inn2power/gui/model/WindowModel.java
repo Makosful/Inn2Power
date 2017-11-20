@@ -6,6 +6,7 @@ import inn2power.bll.BllManager;
 import inn2power.bll.CountryNameList;
 import inn2power.bll.Filtering;
 import inn2power.bll.Search;
+import inn2power.bll.exception.inn2powerexception;
 import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ public class WindowModel
     private Filtering filtering;
     private ObservableList<Company> CompanyObsArrayList = FXCollections.observableArrayList();
 
-    public WindowModel()
+    public WindowModel() throws inn2powerexception
     {
         try
         {
@@ -46,7 +47,7 @@ public class WindowModel
      * @return observablelist with companies
      * @throws IOException
      */
-    public ObservableList<Company> getAllCompanies() throws IOException
+    public ObservableList<Company> getAllCompanies() throws IOException, inn2powerexception
     {
         CompanyObsArrayList.addAll(bll.getAllCompanies());
         return CompanyObsArrayList;
@@ -58,7 +59,7 @@ public class WindowModel
      *
      * @param searchText
      */
-    public void Search(String searchText)
+    public void Search(String searchText) throws inn2powerexception
     {
         CompanyObsArrayList.clear();
         List<Company> result = search.getSearchResult(bll.getAllCompanies(), searchText);
@@ -126,7 +127,7 @@ public class WindowModel
      * a registered company is located
      * @throws IOException
      */
-    public ObservableList<String> getTableCountries() throws IOException
+    public ObservableList<String> getTableCountries() throws IOException, inn2powerexception
     {
         // Creates the return list
         ObservableList<String> list = FXCollections.observableArrayList();

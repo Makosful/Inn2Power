@@ -1,6 +1,7 @@
 package inn2power.bll;
 
 import be.Company;
+import inn2power.bll.exception.inn2powerexception;
 import inn2power.dal.CSVReaderRegion;
 import inn2power.dal.DataAccess;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class Filtering
      *
      * @return @returns the list, which contains the selected country.
      */
-    public List<Company> filteredList()
+    public List<Company> filteredList() throws inn2powerexception
     {
         List<Company> allCompanies = data.getAllCompanies();
  
@@ -45,7 +46,7 @@ public class Filtering
         return filteredList;
     }
 
-    public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException
+    public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException, inn2powerexception
     {
         RegionFiltering regionFilter = new RegionFiltering(filters);
 
@@ -172,7 +173,7 @@ public class Filtering
      * @param SME
      * @return list of companies
      */
-    public List<Company> addSMEFilter(int SME){
+    public List<Company> addSMEFilter(int SME) throws inn2powerexception{
 
         CompanySMEFilter sme = new CompanySMEFilter(1);
 

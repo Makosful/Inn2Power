@@ -3,6 +3,7 @@ package inn2power.gui.controller;
 //<editor-fold defaultstate="collapsed" desc="Imports">
 import be.Company;
 import inn2power.bll.SteggerOverflowException;
+import inn2power.bll.exception.inn2powerexception;
 import inn2power.gui.model.WindowModel;
 import java.awt.Desktop;
 import java.io.IOException;
@@ -146,7 +147,14 @@ public class MainWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        wm = new WindowModel();
+        try
+        {
+            wm = new WindowModel();
+        }
+        catch (inn2powerexception ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         try
         {
@@ -157,6 +165,10 @@ public class MainWindowController implements Initializable
         catch (IOException ex)
         {
             System.out.println(ex.getMessage());
+        }
+        catch (inn2powerexception ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         setCheckBoxes();
@@ -193,7 +205,7 @@ public class MainWindowController implements Initializable
      *
      * @throws IOException
      */
-    private void setTableContent() throws IOException
+    private void setTableContent() throws IOException, inn2powerexception
     {
         // Fills the table with the cmpanies
         tableView.setItems(wm.getAllCompanies());
@@ -408,7 +420,14 @@ public class MainWindowController implements Initializable
     {
         txtSearch.textProperty().addListener((ObservableValue<? extends String> observable, String oldText, String newText) ->
         {
-            wm.Search(txtSearch.getText());
+            try
+            {
+                wm.Search(txtSearch.getText());
+            }
+            catch (inn2powerexception ex)
+            {
+                Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
 

@@ -2,6 +2,7 @@ package inn2power.bll;
 
 import be.Company;
 import be.Relation;
+import inn2power.bll.exception.inn2powerexception;
 import inn2power.dal.DataAccess;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ public class BllManager
     private final List<Company> companies;
     
 
-    public BllManager() throws IOException
+    public BllManager() throws IOException, inn2powerexception
     {
         this.companyNames = FXCollections.observableArrayList();
         data = new DataAccess();
@@ -38,7 +39,7 @@ public class BllManager
         return data.getRelationNetwork(source, depth);
     }
     
-    public List<Company> getAllCompanies()
+    public List<Company> getAllCompanies() throws inn2powerexception
     {
         return data.getAllCompanies();
     }

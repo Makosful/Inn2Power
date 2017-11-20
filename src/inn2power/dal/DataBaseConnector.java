@@ -25,7 +25,7 @@ public class DataBaseConnector
 
         dataSource.setServerName("EASV-DB2");
         dataSource.setPortNumber(1433);
-        dataSource.setDatabaseName("Inn2Power");
+        dataSource.setDatabaseName("Inn2Power_davi0086");
         dataSource.setUser("CS2017A_8");
         dataSource.setPassword("CS2017A_8");
     }

@@ -4,9 +4,12 @@ import be.*;
 import bll.Inn2PowerException;
 import bll.RelaationalLogic;
 import dal.*;
+import inn2power.bll.exception.inn2powerexception;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class will be used to access all data from the CSV files through the
@@ -31,10 +34,19 @@ public class DataAccess
      * Gets a list of all companies
      *
      * @return
+     * @throws inn2power.bll.exception.inn2powerexception
      */
-    public List<Company> getAllCompanies()
+    public List<Company> getAllCompanies() throws inn2powerexception
     {
-        return cDAO.getAllCompanies();
+        try
+        {
+            return cDAO.getAllCompanies();
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     /**
