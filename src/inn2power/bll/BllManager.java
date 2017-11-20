@@ -21,7 +21,7 @@ public class BllManager
     private final List<Company> companies;
     
 
-    public BllManager() throws IOException
+    public BllManager() throws IOException, SQLException
     {
         this.companyNames = FXCollections.observableArrayList();
         data = new DataAccess();
@@ -38,7 +38,7 @@ public class BllManager
         return data.getRelationNetwork(source, depth);
     }
     
-    public List<Company> getAllCompanies()
+    public List<Company> getAllCompanies() throws SQLException
     {
         return data.getAllCompanies();
     }
