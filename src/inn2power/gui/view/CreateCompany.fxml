@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="546.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.CreateCompanyController">
           <TextField fx:id="txtAddress" layoutX="314.0" layoutY="387.0" />
@@ -24,5 +25,10 @@
    <Label layoutX="97.0" layoutY="83.0" text="Company Name" />
    <ComboBox fx:id="comboBoxCountry" layoutX="79.0" layoutY="387.0" prefWidth="150.0" promptText="          Country" />
    <ComboBox fx:id="comboBoxSME" layoutX="235.0" layoutY="264.0" prefHeight="31.0" prefWidth="86.0" promptText="SME" />
-   <Button layoutX="213.0" layoutY="453.0" mnemonicParsing="false" text="Create Company" />
+   <Button layoutX="213.0" layoutY="453.0" mnemonicParsing="false" onAction="#createCompany" text="Create Company" />
+   <Label fx:id="lblError" layoutX="132.0" layoutY="497.0" prefHeight="35.0" prefWidth="395.0" textFill="RED">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
 </AnchorPane>
