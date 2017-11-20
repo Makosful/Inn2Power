@@ -45,81 +45,8 @@ public class Filtering
         return filteredList;
     }
 
-    public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException
-    {
-        RegionFiltering regionFilter = new RegionFiltering(filters);
-
-        Iterator<ICompanyFilter> i = filters.iterator();
-        while (i.hasNext())
-        {
-            ICompanyFilter filter = i.next();
-
-            if (filter.equals(regionFilter))
-            {
-                i.remove();
-            }
-        }
-
-        CSVReaderRegion csv;
-        ObservableList<String> regions = FXCollections.observableArrayList();
-
-        if (checkBoxFilters[0] == true)
-        {
-            csv = new CSVReaderRegion("AfricaCountryList");
-            ObservableList<String> countries = csv.getAllCountries();
-            addCountry(countries, regions);
-        }
-        if (checkBoxFilters[1] == true)
-        {
-            // ASIA
-            csv = new CSVReaderRegion("AsiaCountryList");
-            ObservableList<String> countries = csv.getAllCountries();
-            addCountry(countries, regions);
-        }
-        if (checkBoxFilters[2] == true)
-        {
-            // EUROPE
-            csv = new CSVReaderRegion("EuropeCountryList");
-            ObservableList<String> countries = csv.getAllCountries();
-            addCountry(countries, regions);
-        }
-        if (checkBoxFilters[3] == true)
-        {
-            // NORTH AMERICA
-            csv = new CSVReaderRegion("NAmericaCountryList");
-            ObservableList<String> countries = csv.getAllCountries();
-            addCountry(countries, regions);
-        }
-        if (checkBoxFilters[4] == true)
-        {
-            // OCEANIA
-            csv = new CSVReaderRegion("OceaniaCountryList");
-            ObservableList<String> countries = csv.getAllCountries();
-            addCountry(countries, regions);
-        }
-        if (checkBoxFilters[5] == true)
-        {
-            // SOUTH AMERICA
-            csv = new CSVReaderRegion("SAmericaCountryList");
-            ObservableList<String> countries = csv.getAllCountries();
-            addCountry(countries, regions);
-        }
-
-        filters.add(new RegionFiltering(regions));
-
-        List<Company> filteredList = filteredList();
-
-        return filteredList;
-    }
-
-    private void addCountry(ObservableList<String> countries,
-                            ObservableList<String> regions)
-    {
-        countries.forEach((country) ->
-        {
-            regions.add(country);
-        });
-    }
+    
+    
 
     public List<Company> companyFiltering(List<Company> allCompanies, List<ICompanyFilter> filters)
     {
@@ -202,5 +129,99 @@ public class Filtering
         List<Company> filteredList = filteredList();
 
         return filteredList;
+    }
+    
+    
+    
+    
+    /**
+     * removes the objects which are instances of regionFilter, then if the given checkbox value is true, it adds the filter corresponding to the checkbox 
+     * @param checkBoxFilters - with booleans, if checked then true  
+     * @return the filtered list
+     * @throws IOException 
+     */
+    public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException
+    {
+        RegionFiltering regionFilter = new RegionFiltering(filters);
+
+        Iterator<ICompanyFilter> i = filters.iterator();
+        while (i.hasNext())
+        {
+            ICompanyFilter filter = i.next();
+
+            if (filter.equals(regionFilter))
+            {
+                i.remove();
+            }
+        }
+
+        CSVReaderRegion csv;
+        ObservableList<String> regions = FXCollections.observableArrayList();
+
+        if (checkBoxFilters[0] == true)
+        {
+            csv = new CSVReaderRegion("AfricaCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
+        }
+        if (checkBoxFilters[1] == true)
+        {
+            // ASIA
+            csv = new CSVReaderRegion("AsiaCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
+        }
+        if (checkBoxFilters[2] == true)
+        {
+            // EUROPE
+            csv = new CSVReaderRegion("EuropeCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
+        }
+        if (checkBoxFilters[3] == true)
+        {
+            // NORTH AMERICA
+            csv = new CSVReaderRegion("NAmericaCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
+        }
+        if (checkBoxFilters[4] == true)
+        {
+            // OCEANIA
+            csv = new CSVReaderRegion("OceaniaCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
+        }
+        if (checkBoxFilters[5] == true)
+        {
+            // SOUTH AMERICA
+            csv = new CSVReaderRegion("SAmericaCountryList");
+            ObservableList<String> countries = csv.getAllCountries();
+            addCountry(countries, regions);
+        }
+
+        filters.add(new RegionFiltering(regions));
+
+        List<Company> filteredList = filteredList();
+
+        return filteredList;
+    }
+    
+    
+    
+    
+    
+    /**
+     * Adds countries to the list regions 
+     * @param countries
+     * @param regions 
+     */
+    private void addCountry(ObservableList<String> countries,
+                            ObservableList<String> regions)
+    {
+        countries.forEach((country) ->
+        {
+            regions.add(country);
+        });
     }
 }
