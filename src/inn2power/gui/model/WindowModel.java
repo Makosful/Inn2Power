@@ -26,7 +26,7 @@ public class WindowModel
     private Filtering filtering;
     private ObservableList<Company> CompanyObsArrayList = FXCollections.observableArrayList();
 
-    public WindowModel()
+    public WindowModel() throws SQLException
     {
         try
         {
@@ -46,7 +46,7 @@ public class WindowModel
      * @return observablelist with companies
      * @throws IOException
      */
-    public ObservableList<Company> getAllCompanies() throws IOException
+    public ObservableList<Company> getAllCompanies() throws IOException, SQLException
     {
         CompanyObsArrayList.addAll(bll.getAllCompanies());
         return CompanyObsArrayList;
@@ -58,7 +58,7 @@ public class WindowModel
      *
      * @param searchText
      */
-    public void Search(String searchText)
+    public void Search(String searchText) throws SQLException
     {
         CompanyObsArrayList.clear();
         List<Company> result = search.getSearchResult(bll.getAllCompanies(), searchText);
