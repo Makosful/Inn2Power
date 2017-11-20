@@ -153,14 +153,14 @@ public class WindowModel
      * company is from inside the selected regions
      */
     public ObservableList<String> updateList(ObservableList<String> table,
-            ObservableList<String> regions)
+            ObservableList<String> regions) throws IOException
     {
         ObservableList<String> newList = FXCollections.observableArrayList();
 
         for (int i = 0; i < table.size(); i++)
         {
             if (regions.isEmpty())
-            {
+            {                 
                 return table;
             }
 
@@ -169,7 +169,7 @@ public class WindowModel
                 newList.add(table.get(i));
             }
         }
-
+        
         return newList;
     }
 

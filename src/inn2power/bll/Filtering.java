@@ -73,6 +73,8 @@ public class Filtering
         }
         return filteredList;
     }
+    
+    
 
     /**
      * Adds country to filter.
@@ -82,20 +84,11 @@ public class Filtering
 
     {
         CountryFiltering cm = new CountryFiltering(country);
-
-        Iterator<ICompanyFilter> i = filters.iterator();
-        while (i.hasNext())
-        {
-
-            ICompanyFilter filter = i.next();
-            if (filter.equals(cm))
-            {
-                i.remove();
-            }
-        }
-
+        removeFilter(cm);
         filters.add(cm);
     }
+    
+    
 
      /**
      * sets the required small buissness filter
@@ -105,16 +98,8 @@ public class Filtering
     public List<Company> addSMEFilter(int SME){
 
         CompanySMEFilter sme = new CompanySMEFilter(1);
+        removeFilter(sme);
 
-        Iterator<ICompanyFilter> i = filters.iterator();
-        while (i.hasNext())
-        {
-            ICompanyFilter filter = i.next();
-            if (filter.equals(sme))
-            {
-                i.remove();
-            }
-        }
 
         if(SME == 1)
         {
@@ -146,18 +131,10 @@ public class Filtering
      */
     public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException
     {
+        
         RegionFiltering regionFilter = new RegionFiltering(filters);
+        removeFilter(regionFilter);
 
-        Iterator<ICompanyFilter> i = filters.iterator();
-        while (i.hasNext())
-        {
-            ICompanyFilter filter = i.next();
-
-            if (filter.equals(regionFilter))
-            {
-                i.remove();
-            }
-        }
 
         CSVReaderRegion csv;
         ObservableList<String> regions = FXCollections.observableArrayList();
@@ -203,17 +180,28 @@ public class Filtering
             ObservableList<String> countries = csv.getAllCountries();
             addCountry(countries, regions);
         }
-
+        
+    
         filters.add(new RegionFiltering(regions));
-
+        
+        
+        if(regions.isEmpty())
+        {   
+           
+            CountryFiltering cm = new CountryFiltering("country");
+            removeFilter(cm);
+        }
+        
         List<Company> filteredList = filteredList();
 
+        
+      
+        
         return filteredList;
     }
     
     
-    
-    
+   
     
     /**
      * Adds countries to the list regions 
@@ -227,5 +215,26 @@ public class Filtering
         {
             regions.add(country);
         });
+    }
+    
+    
+    
+    /**
+     * Remove specific filter, uses the equals method to remove all instances of a filter object
+     * @param specificFilter 
+     */
+    public void removeFilter(ICompanyFilter specificFilter)
+    {
+        Iterator<ICompanyFilter> i = filters.iterator();
+        while (i.hasNext())
+        {
+            ICompanyFilter filter = i.next();
+
+            if (filter.equals(specificFilter))
+            {
+                i.remove();
+            }
+        }
+    
     }
 }

@@ -255,7 +255,7 @@ public class MainWindowController implements Initializable
      *
      * @param boxes The checkboxes handling the regional filters
      */
-    private void updateComboBox(boolean[] boxes)
+    private void updateComboBox(boolean[] boxes) throws IOException
     {
 
         ObservableList checkList = FXCollections.observableArrayList();
@@ -549,7 +549,7 @@ public class MainWindowController implements Initializable
         String selectedItem = comboBoxCountries.getSelectionModel().getSelectedItem();
         wm.addCountryFilter(selectedItem);
 
-        setCheckBoxes();
+        //setCheckBoxes();
     }
 
     /**
