@@ -26,7 +26,7 @@ public class WindowModel
     private Filtering filtering;
     private ObservableList<Company> CompanyObsArrayList = FXCollections.observableArrayList();
 
-    public WindowModel() throws SQLException
+    public WindowModel()
     {
         try
         {

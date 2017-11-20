@@ -46,7 +46,12 @@ public class CreateCompanyController implements Initializable
     private TextField txtWebsite;
 
 
-    WindowModel wm = new WindowModel();
+    WindowModel wm;
+
+    public CreateCompanyController()
+    {
+        this.wm = new WindowModel();
+    }
     /**
      * Initializes the controller class.
      */

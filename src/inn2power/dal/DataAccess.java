@@ -49,7 +49,8 @@ public class DataAccess
      */
     public Company getCompanyById(int id) throws Inn2PowerException
     {
-        return cDAO.getCompanyById(id);
+        //return cDAO.getCompanyById(id);
+        return null;
     }
 
     /**
@@ -59,7 +60,8 @@ public class DataAccess
      */
     public String[] getCompanyBuisnessRoles()
     {
-        return cDAO.getCompanyBuisnessRoles();
+        //return cDAO.getCompanyBuisnessRoles();
+        return null;
     }
 
     /**
@@ -69,7 +71,8 @@ public class DataAccess
      */
     public String[] getSupplyChainCategories()
     {
-        return cDAO.getSupplyChainCategories();
+       // return cDAO.getSupplyChainCategories();
+        return null;
     }
 
     /**
