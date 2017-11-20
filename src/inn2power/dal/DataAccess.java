@@ -32,7 +32,7 @@ public class DataAccess
      *
      * @return
      */
-    public List<Company> getAllCompanies()
+    public List<Company> getAllCompanies() throws SQLException
     {
         return cDAO.getAllCompanies();
     }
