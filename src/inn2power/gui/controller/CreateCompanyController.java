@@ -5,7 +5,7 @@
  */
 package inn2power.gui.controller;
 
-import inn2power.dal.CompanyDAO;
+import inn2power.dal.OurCompanyDAO;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -51,7 +51,7 @@ public class CreateCompanyController implements Initializable
     @FXML
     private TextField txtWebsite;
     
-    private CompanyDAO cDAO;
+    private OurCompanyDAO cDAO;
 
 
     /**
@@ -64,7 +64,7 @@ public class CreateCompanyController implements Initializable
         initializeComboBoxCountry();
         try
         {
-            cDAO = new CompanyDAO();
+            cDAO = new OurCompanyDAO();
         }
         catch (IOException ex)
         {
