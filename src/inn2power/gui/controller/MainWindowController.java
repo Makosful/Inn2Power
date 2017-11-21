@@ -164,9 +164,6 @@ public class MainWindowController implements Initializable
             
             setTableContent();
             setSortOrder();
-            
-            
-            
             setCheckBoxes();
             smeFilterListener();
             setOpenCompanyWindow();
