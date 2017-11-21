@@ -119,12 +119,12 @@ public class OurCompanyDAO
     {
         //I extract the data from the current row in the resultset:
         int id = rs.getInt("Id");
-        String name = rs.getString("Name");
-        String country = rs.getString("Country");
-        String address = rs.getString("Address");
-        String website = rs.getString("Website");
-        String supply = rs.getString("SupplyChainCat");
-        String business = rs.getString("BusinessRole");
+        String name = rs.getString("Name").trim();
+        String country = rs.getString("Country").trim();
+        String address = rs.getString("Address").trim();
+        String website = rs.getString("Website").trim();
+        String supply = rs.getString("SupplyChainCat").trim();
+        String business = rs.getString("BusinessRole").trim();
         double lat = rs.getDouble("Lat");
         double lng = rs.getDouble("Lng");
         int isSME = rs.getInt("IsSME");
