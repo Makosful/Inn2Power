@@ -25,7 +25,8 @@ public class RegionFiltering implements ICompanyFilter
         {
             return true;
         }
-        return regions.contains(company.getCountry());
+
+        return regions.contains(company.getCountry().trim());
     }
 
     @Override
