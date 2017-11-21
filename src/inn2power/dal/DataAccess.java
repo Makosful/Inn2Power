@@ -1,12 +1,16 @@
 package inn2power.dal;
 
+
 import be.*;
-import bll.Inn2PowerException;
+
 import bll.RelationalLogic;
 import dal.*;
+import inn2power.bll.Exception.Inn2PowerException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class will be used to access all data from the CSV files through the
@@ -34,9 +38,17 @@ public class DataAccess
      *
      * @return
      */
-    public List<Company> getAllCompanies() 
+    public List<Company> getAllCompanies() throws bll.Inn2PowerException
     {
-        return cDAO.getAllCompanies();
+        try
+        {
+            return ocDAO.getAllCompanies();
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     /**
@@ -49,7 +61,7 @@ public class DataAccess
      *
      * @throws Inn2PowerException
      */
-    public Company getCompanyById(int id) throws Inn2PowerException
+    public Company getCompanyById(int id) throws bll.Inn2PowerException
     {
         return cDAO.getCompanyById(id);
     }
