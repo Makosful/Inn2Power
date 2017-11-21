@@ -122,13 +122,14 @@ public class OurCompanyDAO
         String name = rs.getString("Name");
         String country = rs.getString("Country");
         String address = rs.getString("Address");
+        String website = rs.getString("Website");
         String supply = rs.getString("SupplyChainCat");
         String business = rs.getString("BusinessRole");
         double lat = rs.getDouble("Lat");
         double lng = rs.getDouble("Lng");
         int isSME = rs.getInt("IsSME");
         //I create the company object and add it to my list of results:
-        Company company = new Company(id, name, country, address, business, supply, business, lat, lng, isSME);
+        Company company = new Company(id, name, country, address, website, supply, business, lat, lng, isSME);
         return company;
     }
 

@@ -2,6 +2,7 @@ package inn2power.gui.model;
 
 import be.Company;
 import be.Relation;
+import bll.Inn2PowerException;
 import inn2power.bll.BllManager;
 import inn2power.bll.CountryNameList;
 import inn2power.bll.Filtering;
@@ -25,7 +26,7 @@ public class WindowModel
     private Filtering filtering;
     private ObservableList<Company> CompanyObsArrayList = FXCollections.observableArrayList();
 
-    public WindowModel()
+    public WindowModel() throws Inn2PowerException
     {
         try
         {
@@ -45,7 +46,7 @@ public class WindowModel
      * @return observablelist with companies
      * @throws IOException
      */
-    public ObservableList<Company> getAllCompanies() throws IOException
+    public ObservableList<Company> getAllCompanies() throws IOException, Inn2PowerException
     {
         CompanyObsArrayList.addAll(bll.getAllCompanies());
         return CompanyObsArrayList;
@@ -57,7 +58,7 @@ public class WindowModel
      *
      * @param searchText
      */
-    public void Search(String searchText)
+    public void Search(String searchText) throws Inn2PowerException
     {
         CompanyObsArrayList.clear();
         List<Company> result = search.getSearchResult(bll.getAllCompanies(), searchText);
@@ -71,7 +72,7 @@ public class WindowModel
      * @param regionCheckboxes
      * @throws IOException
      */
-    public void filterBox(boolean[] regionCheckboxes) throws IOException
+    public void filterBox(boolean[] regionCheckboxes) throws IOException, Inn2PowerException
     {
         List<Company> filteredList;
 
@@ -96,7 +97,7 @@ public class WindowModel
      *
      * @param country
      */
-    public void addCountryFilter(String country)
+    public void addCountryFilter(String country) throws Inn2PowerException
     {
 
         filtering.addCountryFilter(country);
@@ -110,7 +111,7 @@ public class WindowModel
      *
      * @param SME
      */
-    public void setSMEFilter(int SME)
+    public void setSMEFilter(int SME) throws Inn2PowerException
     {
         List<Company> filteredList;
         filteredList = filtering.addSMEFilter(SME);
@@ -125,7 +126,7 @@ public class WindowModel
      * a registered company is located
      * @throws IOException
      */
-    public ObservableList<String> getTableCountries() throws IOException
+    public ObservableList<String> getTableCountries() throws IOException, Inn2PowerException
     {
         // Creates the return list
         ObservableList<String> list = FXCollections.observableArrayList();
