@@ -5,7 +5,8 @@
  */
 package inn2power.gui.controller;
 
-import inn2power.dal.OurCompanyDAO;
+import bll.Inn2PowerException;
+import inn2power.gui.model.CreateCompanyModel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -51,7 +52,7 @@ public class CreateCompanyController implements Initializable
     @FXML
     private TextField txtWebsite;
     
-    private OurCompanyDAO cDAO;
+    private CreateCompanyModel ccModel;
 
 
     /**
@@ -62,14 +63,20 @@ public class CreateCompanyController implements Initializable
     {
         initializeComboBoxSME();
         initializeComboBoxCountry();
+        
         try
         {
-            cDAO = new OurCompanyDAO();
+            ccModel = new CreateCompanyModel();
         }
         catch (IOException ex)
         {
-            System.out.println("Error. Cannot load CDAO");
+            Logger.getLogger(CreateCompanyController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        catch (Inn2PowerException ex)
+        {
+            Logger.getLogger(CreateCompanyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     /**
      * Initializing the SME ComboBox, setting the two options.
@@ -101,7 +108,7 @@ public class CreateCompanyController implements Initializable
             double lat = Double.parseDouble(txtLat.getText());
             double lng = Double.parseDouble(txtLng.getText());
 
-        cDAO.createCompany(txtCompanyName.getText(), txtAddress.getText(), country , txtWebsite.getText(), txtSupplyChainCategory.getText(), txtBusinessRole.getText(),
+        ccModel.createCompany(txtCompanyName.getText(), txtAddress.getText(), country , txtWebsite.getText(), txtSupplyChainCategory.getText(), txtBusinessRole.getText(),
                                                                                                                                     lat, lng, getSME());
         }
     }
@@ -138,7 +145,7 @@ public class CreateCompanyController implements Initializable
     }
     
     private int getSME()
-    {
+        {
         int sme = 0;
             String smeNumber = comboBoxSME.getSelectionModel().getSelectedItem();
     
