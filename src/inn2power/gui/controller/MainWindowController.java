@@ -149,44 +149,43 @@ public class MainWindowController implements Initializable
     {
         try
         {
-            wm = new WindowModel();
-        }
-        catch (Inn2PowerException ex)
-        {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try
-        {
             try
             {
-                combCountries = wm.getTableCountries();
+                wm = new WindowModel();
             }
             catch (Inn2PowerException ex)
             {
                 Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            
+            
+            combCountries = wm.getTableCountries();
+            
             setTableContent();
             setSortOrder();
+            
+            
+            
+            setCheckBoxes();
+            smeFilterListener();
+            setOpenCompanyWindow();
+            setAutoTextChange();
+            setColumns();
+            setLockedSplitPane(true);
+            
+            // NOTE TO SELF: ADD LATER. IMPORTANT
+            comboBoxCountries();
+            
         }
         catch (IOException ex)
         {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (Inn2PowerException ex)
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        setCheckBoxes();
-        smeFilterListener();
-        setOpenCompanyWindow();
-        setAutoTextChange();
-        setColumns();
-        setLockedSplitPane(true);
-
-        // NOTE TO SELF: ADD LATER. IMPORTANT
-        comboBoxCountries();
 
     }
 
