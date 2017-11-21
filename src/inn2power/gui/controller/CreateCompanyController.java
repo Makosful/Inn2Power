@@ -71,18 +71,26 @@ public class CreateCompanyController implements Initializable
             System.out.println("Error. Cannot load CDAO");
         }
     }
-    
+    /**
+     * Initializing the SME ComboBox, setting the two options.
+     */
     private void  initializeComboBoxSME()
     {
         comboBoxSME.setVisibleRowCount(2);
         comboBoxSME.setItems(FXCollections.observableArrayList("Yes", "No"));
     }
-    
+    /**
+     * Initializing the ComboBox, Country.
+     */
     private void initializeComboBoxCountry()
     {
         comboBoxCountry.setItems(FXCollections.observableArrayList("Denmark"));
     }
-    
+    /**
+     * Creating the company.
+     * @param event
+     * @throws SQLException 
+     */
     @FXML
     private void createCompany(ActionEvent event) throws SQLException
     {
