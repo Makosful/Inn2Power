@@ -39,10 +39,10 @@ public class Filtering
     public List<Company> filteredList() throws Inn2PowerException
     {
         List<Company> allCompanies = data.getAllCompanies();
- 
+      
         List<Company> filteredList;
         filteredList = companyFiltering(allCompanies, filters);
-
+         
         return filteredList;
     }
 
@@ -55,6 +55,7 @@ public class Filtering
         // match. (Country match)
         List<Company> filteredList = new ArrayList();
         // Going through all companies
+        
         for (Company company : allCompanies)
         {
             boolean isThereAMatch = true;
@@ -145,6 +146,7 @@ public class Filtering
             csv = new CSVReaderRegion("AfricaCountryList");
             ObservableList<String> countries = csv.getAllCountries();
             addCountry(countries, regions);
+            
         }
         if (checkBoxFilters[1] == true)
         {
@@ -182,7 +184,7 @@ public class Filtering
             addCountry(countries, regions);
         }
         
-    
+        
         filters.add(new RegionFiltering(regions));
         
         
@@ -195,7 +197,6 @@ public class Filtering
         
         List<Company> filteredList = filteredList();
 
-        
       
         
         return filteredList;

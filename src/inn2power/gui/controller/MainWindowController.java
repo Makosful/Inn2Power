@@ -2,6 +2,7 @@ package inn2power.gui.controller;
 
 //<editor-fold defaultstate="collapsed" desc="Imports">
 import be.Company;
+import bll.Inn2PowerException;
 import inn2power.bll.SteggerOverflowException;
 import inn2power.gui.model.WindowModel;
 import java.awt.Desktop;
@@ -146,17 +147,35 @@ public class MainWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        wm = new WindowModel();
+        try
+        {
+            wm = new WindowModel();
+        }
+        catch (Inn2PowerException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         try
         {
-            combCountries = wm.getTableCountries();
+            try
+            {
+                combCountries = wm.getTableCountries();
+            }
+            catch (Inn2PowerException ex)
+            {
+                Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             setTableContent();
             setSortOrder();
         }
         catch (IOException ex)
         {
             System.out.println(ex.getMessage());
+        }
+        catch (Inn2PowerException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         setCheckBoxes();
@@ -193,7 +212,7 @@ public class MainWindowController implements Initializable
      *
      * @throws IOException
      */
-    private void setTableContent() throws IOException
+    private void setTableContent() throws IOException, Inn2PowerException
     {
         // Fills the table with the cmpanies
         tableView.setItems(wm.getAllCompanies());
@@ -365,6 +384,10 @@ public class MainWindowController implements Initializable
                 {
                     System.out.println(ex.getMessage());
                 }
+                catch (Inn2PowerException ex)
+                {
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             });
         }
     }
@@ -408,7 +431,14 @@ public class MainWindowController implements Initializable
     {
         txtSearch.textProperty().addListener((ObservableValue<? extends String> observable, String oldText, String newText) ->
         {
-            wm.Search(txtSearch.getText());
+            try
+            {
+                wm.Search(txtSearch.getText());
+            }
+            catch (Inn2PowerException ex)
+            {
+                Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
 
@@ -544,7 +574,7 @@ public class MainWindowController implements Initializable
      * @throws IOException
      */
     @FXML
-    private void handleCountrySearch(ActionEvent event) throws IOException
+    private void handleCountrySearch(ActionEvent event) throws IOException, Inn2PowerException
     {
         String selectedItem = comboBoxCountries.getSelectionModel().getSelectedItem();
         wm.addCountryFilter(selectedItem);
@@ -565,22 +595,29 @@ public class MainWindowController implements Initializable
             public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle)
             {
 
-                //Gets the RadioButton clicked by the user by typecasting the toggle.
-                RadioButton newRb = (RadioButton) newToggle;
-                
-                
-               
-                switch (newRb.getId()) {
-                    case "isSME":  wm.setSMEFilter(1);
-                             break;
-                    case "isNotSME":  wm.setSMEFilter(0);
-                             break;
-                    case "SMENotDeclared":  wm.setSMEFilter(-1);
-                             break;
-                    case "isBothSME":  wm.setSMEFilter(3);
-                             break;
-                    case "noSMEFilter":  wm.setSMEFilter(2);
-                             break;
+                try
+                {
+                    //Gets the RadioButton clicked by the user by typecasting the toggle.
+                    RadioButton newRb = (RadioButton) newToggle;
+                    
+                    
+                    
+                    switch (newRb.getId()) {
+                        case "isSME":  wm.setSMEFilter(1);
+                        break;
+                        case "isNotSME":  wm.setSMEFilter(0);
+                        break;
+                        case "SMENotDeclared":  wm.setSMEFilter(-1);
+                        break;
+                        case "isBothSME":  wm.setSMEFilter(3);
+                        break;
+                        case "noSMEFilter":  wm.setSMEFilter(2);
+                        break;
+                    }
+                }
+                catch (Inn2PowerException ex)
+                {
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
 

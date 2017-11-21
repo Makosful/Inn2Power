@@ -29,6 +29,7 @@ public class CSVReaderRegion
 
         try (BufferedReader CSVFile = new BufferedReader(new FileReader("./regions/" + region + ".csv")))
         {
+            
             String country = CSVFile.readLine();
             while (country != null)
             {
