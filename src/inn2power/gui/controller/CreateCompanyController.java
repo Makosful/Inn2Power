@@ -110,6 +110,8 @@ public class CreateCompanyController implements Initializable
 
         ccModel.createCompany(txtCompanyName.getText(), txtAddress.getText(), country , txtWebsite.getText(), txtSupplyChainCategory.getText(), txtBusinessRole.getText(),
                                                                                                                                     lat, lng, getSME());
+        lblError.setStyle("-fx-text-fill: black");
+        lblError.setText("Your company was created");
         }
     }
     
@@ -137,6 +139,7 @@ public class CreateCompanyController implements Initializable
             if(txtInput.get(i).isEmpty())
             {
                 valueEmpty = true;
+                lblError.setStyle("-fx-text-fill: red");
                 lblError.setText("Error: You need to fill the form out");
                 break;
             }
