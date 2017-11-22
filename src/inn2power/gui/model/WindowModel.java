@@ -9,6 +9,7 @@ import inn2power.bll.Filtering;
 import inn2power.bll.Search;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -187,5 +188,10 @@ public class WindowModel
     public List<Relation> getRelationNetwork(Company source, int depth)
     {
         return bll.getRelationNetwork(source, depth);
+    }
+    
+        public void removeCompany(Company company) throws SQLException
+    {
+        bll.removeCompany(company);
     }
 }

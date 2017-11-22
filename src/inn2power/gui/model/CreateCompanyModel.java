@@ -5,6 +5,7 @@
  */
 package inn2power.gui.model;
 
+import be.Company;
 import bll.Inn2PowerException;
 import inn2power.bll.BllManager;
 import java.io.FileReader;

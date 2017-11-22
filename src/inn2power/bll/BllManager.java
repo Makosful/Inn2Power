@@ -70,4 +70,10 @@ public class BllManager
         
         return countries.getAllCountries(fileReader);
     }
+    
+    public void removeCompany(Company company) throws SQLException
+    {
+        ourCompanyDAO.removeCompany(company);
+    }
+    
 }

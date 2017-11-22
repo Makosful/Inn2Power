@@ -132,5 +132,14 @@ public class OurCompanyDAO
         Company company = new Company(id, name, country, address, website, supply, business, lat, lng, isSME);
         return company;
     }
+    
+    public void removeCompany(Company company) throws SQLServerException, SQLException
+    {
+        try (Connection con = dbConnector.getConnection())
+        {
+            Statement statement = con.createStatement();
+            statement.execute("DELETE FROM WHERE id =" + company.getId());
+        }
+    }
 
 }

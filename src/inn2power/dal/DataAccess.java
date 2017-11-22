@@ -1,7 +1,7 @@
 package inn2power.dal;
 
 import be.*;
-import bll.RelaationalLogic;
+import bll.RelationalLogic;
 import dal.*;
 import inn2power.bll.Exception.Inn2PowerException;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class DataAccess
     CompanyDAO cDAO;
     OurCompanyDAO ocDAO;
     RelationDAO rDAO;
-    RelaationalLogic logic;
+    RelationalLogic logic;
 
     public DataAccess() throws IOException
     {
@@ -71,7 +71,7 @@ public class DataAccess
      */
     public String[] getCompanyBuisnessRoles()
     {
-        return cDAO.getCompanyBuisnessRoles();
+        return cDAO.getCompanyBusinessRoles();
     }
 
     /**

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -688,6 +689,12 @@ public class MainWindowController implements Initializable
         {
             System.out.println("todo");
         }
+    }
+    @FXML
+    private void removeCompany(ActionEvent event) throws SQLException
+    {
+        Company selectedCompany = tableView.getSelectionModel().getSelectedItem();
+        wm.removeCompany(selectedCompany);
     }
 }
 
