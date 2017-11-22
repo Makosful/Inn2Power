@@ -223,7 +223,8 @@ public class Filtering
     
     
     /**
-     * Remove specific filter, uses the equals method to remove all instances of a filter object
+     * Remove specific filter, uses the equals method to remove all 
+     * instances of a filter object
      * @param specificFilter 
      */
     public void removeFilter(ICompanyFilter specificFilter)
