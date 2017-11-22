@@ -131,6 +131,7 @@ public class Filtering
      * @return the filtered list
      *
      * @throws IOException
+     * @throws bll.Inn2PowerException
      */
     public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException, Inn2PowerException
     {

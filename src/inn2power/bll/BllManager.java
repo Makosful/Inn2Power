@@ -53,8 +53,12 @@ public class BllManager
         return data.getRelationNetwork(source, depth);
     }
 
-    public void createCompany(String name, String address, String country, String website, String supplyChainCat, String businessRole, double lat, double lng, int sme) throws SQLException
+    public void createCompany(String name, String address, String country, 
+                              String website, String supplyChainCat, 
+                              String businessRole, double lat, double lng,
+                              int sme) throws SQLException
     {
-        ourCompanyDAO.createCompany(name, address, country, website, supplyChainCat, businessRole, lat, lng, sme);
+        ourCompanyDAO.createCompany(name, address, country, website, 
+                                    supplyChainCat, businessRole, lat, lng, sme);
     }
 }

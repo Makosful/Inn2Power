@@ -410,7 +410,8 @@ public class MainWindowController implements Initializable
      */
     private void setAutoTextChange()
     {
-        txtSearch.textProperty().addListener((ObservableValue<? extends String> observable, String oldText, String newText) ->
+        txtSearch.textProperty().addListener((ObservableValue<? 
+                extends String> observable, String oldText, String newText) ->
         {
             try
             {
@@ -567,7 +568,8 @@ public class MainWindowController implements Initializable
 
             //add a listener on SME togglegroup.
             @Override
-            public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle)
+            public void changed(ObservableValue<? extends Toggle> 
+                                ov, Toggle oldToggle, Toggle newToggle)
             {
 
                 //Gets the RadioButton clicked by the user by typecasting the toggle.
