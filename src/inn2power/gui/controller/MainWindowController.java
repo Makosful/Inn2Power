@@ -548,7 +548,8 @@ public class MainWindowController implements Initializable
      * @throws IOException
      */
     @FXML
-    private void handleCountrySearch(ActionEvent event) throws IOException, Inn2PowerException
+    private void handleCountrySearch(ActionEvent event)
+            throws IOException, Inn2PowerException
     {
         String selectedItem = comboBoxCountries.getSelectionModel().getSelectedItem();
         wm.addCountryFilter(selectedItem);

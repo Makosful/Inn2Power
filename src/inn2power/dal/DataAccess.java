@@ -1,16 +1,11 @@
 package inn2power.dal;
 
-
 import be.*;
-
-import bll.RelationalLogic;
+import bll.RelaationalLogic;
 import dal.*;
-import inn2power.bll.Exception.Inn2PowerException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This class will be used to access all data from the CSV files through the
@@ -24,7 +19,7 @@ public class DataAccess
     CompanyDAO cDAO;
     OurCompanyDAO ocDAO;
     RelationDAO rDAO;
-    RelationalLogic logic;
+    RelaationalLogic logic;
 
     public DataAccess() throws IOException
     {
@@ -37,6 +32,8 @@ public class DataAccess
      * Gets a list of all companies
      *
      * @return
+     *
+     * @throws bll.Inn2PowerException
      */
     public List<Company> getAllCompanies() throws bll.Inn2PowerException
     {
@@ -46,7 +43,7 @@ public class DataAccess
         }
         catch (SQLException ex)
         {
-            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
         return null;
     }
@@ -57,9 +54,9 @@ public class DataAccess
      * @param id The ID of the Company
      *
      * @return The Company with a matching ID. Null if the Company does not
-     * exist
+     *         exist
      *
-     * @throws Inn2PowerException
+     * @throws bll.Inn2PowerException
      */
     public Company getCompanyById(int id) throws bll.Inn2PowerException
     {
@@ -73,7 +70,7 @@ public class DataAccess
      */
     public String[] getCompanyBuisnessRoles()
     {
-        return cDAO.getCompanyBusinessRoles();
+        return cDAO.getCompanyBuisnessRoles();
     }
 
     /**

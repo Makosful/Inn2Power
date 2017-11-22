@@ -7,7 +7,6 @@ import inn2power.bll.BllManager;
 import inn2power.bll.CountryNameList;
 import inn2power.bll.Filtering;
 import inn2power.bll.Search;
-
 import java.io.IOException;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -19,7 +18,6 @@ import javafx.collections.ObservableList;
  */
 public class WindowModel
 {
-
 
     private BllManager bll;
     private Search search;
@@ -34,7 +32,8 @@ public class WindowModel
             bll = new BllManager();
             search = new Search();
             filtering = new Filtering();
-        } catch (IOException ex)
+        }
+        catch (IOException ex)
         {
             System.out.println(ex.getMessage());
         }
@@ -44,9 +43,12 @@ public class WindowModel
      * Gets a list containing all the companies
      *
      * @return observablelist with companies
+     *
      * @throws IOException
+     * @throws bll.Inn2PowerException
      */
-    public ObservableList<Company> getAllCompanies() throws IOException, Inn2PowerException
+    public ObservableList<Company> getAllCompanies()
+            throws IOException, Inn2PowerException
     {
         CompanyObsArrayList.addAll(bll.getAllCompanies());
         return CompanyObsArrayList;
@@ -57,11 +59,14 @@ public class WindowModel
      * tableview with the observablelist
      *
      * @param searchText
+     *
+     * @throws bll.Inn2PowerException
      */
     public void Search(String searchText) throws Inn2PowerException
     {
         CompanyObsArrayList.clear();
-        List<Company> result = search.getSearchResult(bll.getAllCompanies(), searchText);
+        List<Company> result = search.getSearchResult(bll.getAllCompanies(),
+                                                      searchText);
         CompanyObsArrayList.addAll(result);
     }
 
@@ -70,9 +75,12 @@ public class WindowModel
      * list of companies back which are added to the observable list
      *
      * @param regionCheckboxes
+     *
      * @throws IOException
+     * @throws bll.Inn2PowerException
      */
-    public void filterBox(boolean[] regionCheckboxes) throws IOException, Inn2PowerException
+    public void filterBox(boolean[] regionCheckboxes) throws IOException,
+                                                             Inn2PowerException
     {
         List<Company> filteredList;
 
@@ -84,6 +92,7 @@ public class WindowModel
     /**
      *
      * @param region
+     *
      * @return @throws IOException
      */
     public ObservableList<String> getListCountries(String region) throws IOException
@@ -123,7 +132,8 @@ public class WindowModel
      * Gets the countries from all the companies registered
      *
      * @return Returns and observable list containing all the countries in which
-     * a registered company is located
+     *         a registered company is located
+     *
      * @throws IOException
      */
     public ObservableList<String> getTableCountries() throws IOException, Inn2PowerException
@@ -148,20 +158,21 @@ public class WindowModel
     /**
      * Updates the comboboxCountries' list
      *
-     * @param table A List of all the companies' cuntries
+     * @param table   A List of all the companies' cuntries
      * @param regions A List with all the countries from the selected regions
+     *
      * @return Returns a List containing only the countries where a registered
-     * company is from inside the selected regions
+     *         company is from inside the selected regions
      */
     public ObservableList<String> updateList(ObservableList<String> table,
-            ObservableList<String> regions) throws IOException
+                                             ObservableList<String> regions) throws IOException
     {
         ObservableList<String> newList = FXCollections.observableArrayList();
 
         for (int i = 0; i < table.size(); i++)
         {
             if (regions.isEmpty())
-            {                 
+            {
                 return table;
             }
 
@@ -170,7 +181,7 @@ public class WindowModel
                 newList.add(table.get(i));
             }
         }
-        
+
         return newList;
     }
 

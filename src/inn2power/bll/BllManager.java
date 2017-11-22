@@ -33,7 +33,10 @@ public class BllManager
 
     /**
      * Gets all companies
+     *
      * @return list of all companies
+     *
+     * @throws bll.Inn2PowerException
      */
     public List<Company> getAllCompanies() throws Inn2PowerException
     {
@@ -49,7 +52,7 @@ public class BllManager
     {
         return data.getRelationNetwork(source, depth);
     }
-    
+
     public void createCompany(String name, String address, String country, String website, String supplyChainCat, String businessRole, double lat, double lng, int sme) throws SQLException
     {
         ourCompanyDAO.createCompany(name, address, country, website, supplyChainCat, businessRole, lat, lng, sme);
