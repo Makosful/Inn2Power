@@ -126,7 +126,8 @@ public class Filtering
     
     
     /**
-     * removes the objects which are instances of regionFilter, then if the given checkbox value is true, it adds the filter corresponding to the checkbox 
+     * removes the objects which are instances of regionFilter, then if the given
+     * checkbox value is true, it adds the filter corresponding to the checkbox 
      * @param checkBoxFilters - with booleans, if checked then true  
      * @return the filtered list
      * @throws IOException 
