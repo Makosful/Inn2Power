@@ -13,8 +13,15 @@ import javafx.collections.ObservableList;
  */
 public class CSVReaderCountries
 {
-    // Returns all countries from the companies file, and weird other text, basically not ordered list, and  same countries multiple times.
+    
 
+    /**
+     * Returns all countries from the companies file, and weird other text,
+     * basically not ordered list, and  same countries multiple times. 
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public ObservableList<String> getAllCountries() throws FileNotFoundException, IOException
     {
         ObservableList<String> data = FXCollections.observableArrayList();
