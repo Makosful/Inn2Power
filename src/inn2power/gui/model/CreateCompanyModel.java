@@ -16,14 +16,18 @@ import java.sql.SQLException;
  */
 public class CreateCompanyModel
 {
+
     BllManager bm;
-    
+
     public CreateCompanyModel() throws IOException, Inn2PowerException
     {
         bm = new BllManager();
     }
-    
-    public void createCompany(String name, String address, String country, String website, String supplyChainCat, String businessRole, double lat, double lng, int sme) throws SQLException
+
+    public void createCompany(String name, String address, String country,
+                              String website, String supplyChainCat, 
+                              String businessRole, double lat, double lng,
+                              int sme) throws SQLException
     {
         bm.createCompany(name, address, country, website, supplyChainCat, businessRole, lat, lng, sme);
     }
