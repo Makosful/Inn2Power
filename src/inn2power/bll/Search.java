@@ -25,7 +25,8 @@ public class Search
 
         companies.forEach((company) ->
         {
-            if ((company.getName().toLowerCase()).contains(searchText.toLowerCase()) || (company.getAddress().toLowerCase().contains(searchText.toLowerCase())))
+            if ((company.getName().toLowerCase()).contains(searchText.toLowerCase()) ||
+                (company.getAddress().toLowerCase().contains(searchText.toLowerCase())))
             {
                 searchResult.add(company);
             }
