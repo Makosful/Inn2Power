@@ -196,7 +196,7 @@ public class MainWindowController implements Initializable
     private void setTableContent() throws IOException, Inn2PowerException
     {
         // Fills the table with the cmpanies
-        tableView.setItems(wm.getAllCompanies());
+        tableView.setItems(wm.addAllCompaniesInObsList());
     }
 
     /**

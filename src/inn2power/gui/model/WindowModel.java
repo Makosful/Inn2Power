@@ -47,7 +47,7 @@ public class WindowModel
      * @throws IOException
      * @throws bll.Inn2PowerException
      */
-    public ObservableList<Company> getAllCompanies()
+    public ObservableList<Company> addAllCompaniesInObsList()
             throws IOException, Inn2PowerException
     {
         CompanyObsArrayList.addAll(bll.getAllCompanies());
@@ -142,7 +142,7 @@ public class WindowModel
         ObservableList<String> list = FXCollections.observableArrayList();
 
         // Gets the countries from all the companies
-        ObservableList<Company> allCompanies = getAllCompanies();
+        List<Company> allCompanies = bll.getAllCompanies();
         for (int i = 0; i < allCompanies.size(); i++)
         {
             list.add(allCompanies.get(i).getCountry());
