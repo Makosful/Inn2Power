@@ -31,7 +31,10 @@ public class OurCompanyDAO
         dbConnector = new DataBaseConnector();
     }
 
-    public Company createCompany(String name, String address, String country, String website, String supplyChainCat, String businessRole, double lat, double lng, int isSME) throws SQLServerException, SQLException
+    public Company createCompany(String name, String address, String country,
+                                 String website, String supplyChainCat, 
+                                 String businessRole, double lat, double lng, 
+                                 int isSME) throws SQLServerException, SQLException
     {
         try (Connection con = dbConnector.getConnection())
         {
