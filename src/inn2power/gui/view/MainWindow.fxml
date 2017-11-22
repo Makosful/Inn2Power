@@ -26,7 +26,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@../../css/cssstylesheet.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.MainWindowController">
+<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@../../css/cssstylesheet.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.MainWindowController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
