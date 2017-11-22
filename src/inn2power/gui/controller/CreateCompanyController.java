@@ -133,6 +133,13 @@ public class CreateCompanyController implements Initializable
                                   lat, lng, getSME());
             lblError.setStyle("-fx-text-fill: black");
             lblError.setText("Your company was created");
+
+        ccModel.createCompany(txtCompanyName.getText(), txtAddress.getText(), 
+                            country, txtWebsite.getText(), txtSupplyChainCategory.getText(),
+                            txtBusinessRole.getText(), lat, lng, getSME());
+        lblError.setStyle("-fx-text-fill: black");
+        lblError.setText("Your company was created");
+
         }
     }
 
