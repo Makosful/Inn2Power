@@ -58,7 +58,8 @@ public class OurCompanyDAO
                 ResultSet rs = statement.getGeneratedKeys();
                 rs.next();
                 int id = rs.getInt(1);
-                Company c = new Company(id, name, country, address, website, supplyChainCat, businessRole, lat, lng, isSME);
+                Company c = new Company(id, name, country, address, website, 
+                                        supplyChainCat, businessRole, lat, lng, isSME);
                 return c;
             }
             throw new RuntimeException("Can't create company");
@@ -132,7 +133,8 @@ public class OurCompanyDAO
         double lng = rs.getDouble("Lng");
         int isSME = rs.getInt("IsSME");
         //I create the company object and add it to my list of results:
-        Company company = new Company(id, name, country, address, website, supply, business, lat, lng, isSME);
+        Company company = new Company(id, name, country, address,
+                                      website, supply, business, lat, lng, isSME);
         return company;
     }
 
