@@ -39,15 +39,12 @@ public class Filtering
     public List<Company> filteredList() throws Inn2PowerException
     {
         List<Company> allCompanies = data.getAllCompanies();
-      
+
         List<Company> filteredList;
         filteredList = companyFiltering(allCompanies, filters);
-         
+
         return filteredList;
     }
-
-    
-    
 
     public List<Company> companyFiltering(List<Company> allCompanies, List<ICompanyFilter> filters)
     {
@@ -55,7 +52,7 @@ public class Filtering
         // match. (Country match)
         List<Company> filteredList = new ArrayList();
         // Going through all companies
-        
+
         for (Company company : allCompanies)
         {
             boolean isThereAMatch = true;
@@ -75,12 +72,11 @@ public class Filtering
         }
         return filteredList;
     }
-    
-    
 
     /**
      * Adds country to filter.
-     * @param country 
+     *
+     * @param country
      */
     public void addCountryFilter(String country)
 
@@ -89,30 +85,33 @@ public class Filtering
         removeFilter(cm);
         filters.add(cm);
     }
-    
-    
 
-     /**
+    /**
      * sets the required small buissness filter
+     *
      * @param SME
+     *
      * @return list of companies
      */
-    public List<Company> addSMEFilter(int SME) throws Inn2PowerException{
+    public List<Company> addSMEFilter(int SME) throws Inn2PowerException
+    {
 
         CompanySMEFilter sme = new CompanySMEFilter(1);
         removeFilter(sme);
 
-
-        if(SME == 1)
+        if (SME == 1)
         {
             filters.add(new CompanySMEFilter(SME));
-        }else if(SME == 0)
+        }
+        else if (SME == 0)
         {
             filters.add(new CompanySMEFilter(SME));
-        }else if(SME == -1)
+        }
+        else if (SME == -1)
         {
             filters.add(new CompanySMEFilter(SME));
-        }else if(SME == 3)
+        }
+        else if (SME == 3)
         {
             filters.add(new CompanySMEFilter(SME));
         }
@@ -121,23 +120,24 @@ public class Filtering
 
         return filteredList;
     }
-    
-    
-    
-    
+
     /**
-     * removes the objects which are instances of regionFilter, then if the given
-     * checkbox value is true, it adds the filter corresponding to the checkbox 
-     * @param checkBoxFilters - with booleans, if checked then true  
+     * removes the objects which are instances of regionFilter, then if the
+     * given checkbox value is true, it adds the filter corresponding to the
+     * checkbox
+     *
+     * @param checkBoxFilters - with booleans, if checked then true
+     *
      * @return the filtered list
-     * @throws IOException 
+     *
+     * @throws IOException
+     * @throws bll.Inn2PowerException
      */
     public List<Company> addFilters(boolean[] checkBoxFilters) throws IOException, Inn2PowerException
     {
-        
+
         RegionFiltering regionFilter = new RegionFiltering(filters);
         removeFilter(regionFilter);
-
 
         CSVReaderRegion csv;
         ObservableList<String> regions = FXCollections.observableArrayList();
@@ -147,7 +147,7 @@ public class Filtering
             csv = new CSVReaderRegion("AfricaCountryList");
             ObservableList<String> countries = csv.getAllCountries();
             addCountry(countries, regions);
-            
+
         }
         if (checkBoxFilters[1] == true)
         {
@@ -184,32 +184,26 @@ public class Filtering
             ObservableList<String> countries = csv.getAllCountries();
             addCountry(countries, regions);
         }
-        
-        
+
         filters.add(new RegionFiltering(regions));
-        
-        
-        if(regions.isEmpty())
-        {   
-           
+
+        if (regions.isEmpty())
+        {
+
             CountryFiltering cm = new CountryFiltering("country");
             removeFilter(cm);
         }
-        
+
         List<Company> filteredList = filteredList();
 
-      
-        
         return filteredList;
     }
-    
-    
-   
-    
+
     /**
-     * Adds countries to the list regions 
+     * Adds countries to the list regions
+     *
      * @param countries
-     * @param regions 
+     * @param regions
      */
     private void addCountry(ObservableList<String> countries,
                             ObservableList<String> regions)
@@ -219,13 +213,12 @@ public class Filtering
             regions.add(country);
         });
     }
-    
-    
-    
+
     /**
-     * Remove specific filter, uses the equals method to remove all 
-     * instances of a filter object
-     * @param specificFilter 
+     * Remove specific filter, uses the equals method to remove all instances of
+     * a filter object
+     *
+     * @param specificFilter
      */
     public void removeFilter(ICompanyFilter specificFilter)
     {
@@ -239,6 +232,6 @@ public class Filtering
                 i.remove();
             }
         }
-    
+
     }
 }
