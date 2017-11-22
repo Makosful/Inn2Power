@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,6 +54,7 @@ public class CreateCompanyController implements Initializable
     private TextField txtWebsite;
     
     private CreateCompanyModel ccModel;
+    
 
 
     /**
@@ -61,10 +63,7 @@ public class CreateCompanyController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        initializeComboBoxSME();
-        initializeComboBoxCountry();
-        
-        try
+                try
         {
             ccModel = new CreateCompanyModel();
         }
@@ -76,53 +75,75 @@ public class CreateCompanyController implements Initializable
         {
             Logger.getLogger(CreateCompanyController.class.getName()).log(Level.SEVERE, null, ex);
         }
+                
+        initializeComboBoxSME();
+        try
+        {
+            initializeComboBoxCountry();
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(CreateCompanyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
     }
     /**
      * Initializing the SME ComboBox, setting the two options.
      */
-    private void  initializeComboBoxSME()
+    private void initializeComboBoxSME()
     {
         comboBoxSME.setVisibleRowCount(2);
         comboBoxSME.setItems(FXCollections.observableArrayList("Yes", "No"));
     }
+
     /**
      * Initializing the ComboBox, Country.
      */
-    private void initializeComboBoxCountry()
+    private void initializeComboBoxCountry() throws IOException
     {
-        comboBoxCountry.setItems(FXCollections.observableArrayList("Denmark"));
+       ObservableList<String> allCountries = FXCollections.observableList(ccModel.allCountries());
+       comboBoxCountry.setItems(allCountries.sorted());
     }
+
     /**
      * Creating the company.
+     *
      * @param event
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     @FXML
     private void createCompany(ActionEvent event) throws SQLException
     {
-        if (checkIfFormIsFilled() == false)
+
+        if (registerCompanyEmpty() == false)
         {
+            if (!isDouble(txtLat.getText()) || !isDouble(txtLng.getText()))
+            {
+                lblError.setText("Lng or Lat contains characters");
+                return;
+            }
             String country = comboBoxCountry.getSelectionModel().getSelectedItem();
-        
+
             double lat = Double.parseDouble(txtLat.getText());
             double lng = Double.parseDouble(txtLng.getText());
 
-        ccModel.createCompany(txtCompanyName.getText(), txtAddress.getText(), country , txtWebsite.getText(), txtSupplyChainCategory.getText(), txtBusinessRole.getText(),
-                                                                                                                                    lat, lng, getSME());
-        lblError.setStyle("-fx-text-fill: black");
-        lblError.setText("Your company was created");
+            ccModel.createCompany(txtCompanyName.getText(), txtAddress.getText(), country, txtWebsite.getText(), txtSupplyChainCategory.getText(), txtBusinessRole.getText(),
+                                  lat, lng, getSME());
+            lblError.setStyle("-fx-text-fill: black");
+            lblError.setText("Your company was created");
         }
     }
-    
+
     /**
      * check if the txtfields/comboboxes are empty, returns boolean.
-     * @return 
+     *
+     * @return
      */
-    private boolean checkIfFormIsFilled()
+    private boolean registerCompanyEmpty()
     {
-        Boolean valueEmpty = false;
-        
+
         List<String> txtInput = new ArrayList();
         txtInput.add(txtCompanyName.getText());
         txtInput.add(txtAddress.getText());
@@ -133,34 +154,32 @@ public class CreateCompanyController implements Initializable
         txtInput.add(txtLng.getText());
         txtInput.add(comboBoxCountry.getSelectionModel().getSelectedItem());
         txtInput.add(comboBoxSME.getSelectionModel().getSelectedItem());
-        
-        for (int i = 0;i<txtInput.size();i++)
-        {
-            if(txtInput.get(i).isEmpty())
-            {
-                valueEmpty = true;
-                lblError.setStyle("-fx-text-fill: red");
-                lblError.setText("Error: You need to fill the form out");
-                break;
-            }
-        }
-        return valueEmpty;
+
+        return ccModel.registerCompanyEmpty(txtInput, lblError);
     }
-    
+
+    /**
+     * Returns whether SME is 0 or 1, based on the answer yes, or no.
+     *
+     * @return
+     */
     private int getSME()
-        {
-        int sme = 0;
-            String smeNumber = comboBoxSME.getSelectionModel().getSelectedItem();
-    
-            if(smeNumber.equalsIgnoreCase("Yes"))
-            {
-                sme = 0;
-            }
-            if(smeNumber.equalsIgnoreCase("No"))
-            {
-                sme = 1;
-            }
-            return sme;
+    {
+        String smeNumber = comboBoxSME.getSelectionModel().getSelectedItem();
+        return ccModel.getSME(smeNumber);
     }
+
+    /**
+     * Checks if lat or lng contains characters.
+     *
+     * @param lat
+     *
+     * @return
+     */
+    private boolean isDouble(String lat)
+    {
+        return ccModel.isDouble(lat);
+    }
+    
            
 }

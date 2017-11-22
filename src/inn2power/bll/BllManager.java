@@ -3,8 +3,11 @@ package inn2power.bll;
 import be.Company;
 import be.Relation;
 import bll.Inn2PowerException;
+import inn2power.dal.Countries;
 import inn2power.dal.DataAccess;
 import inn2power.dal.OurCompanyDAO;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -53,5 +56,18 @@ public class BllManager
     public void createCompany(String name, String address, String country, String website, String supplyChainCat, String businessRole, double lat, double lng, int sme) throws SQLException
     {
         ourCompanyDAO.createCompany(name, address, country, website, supplyChainCat, businessRole, lat, lng, sme);
+    }
+    /**
+     * Returns method to add all countries.
+     * @param fileReader
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
+    public List<String> getAllCountries(FileReader fileReader) throws FileNotFoundException, IOException
+    {
+        Countries countries = new Countries();
+        
+        return countries.getAllCountries(fileReader);
     }
 }
