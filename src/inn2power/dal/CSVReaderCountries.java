@@ -19,7 +19,7 @@ public class CSVReaderCountries
     {
         ObservableList<String> data = FXCollections.observableArrayList();
 
-        try (BufferedReader CSVFile = new BufferedReader(new FileReader("companies.csv")))
+        try (BufferedReader CSVFile = new BufferedReader(new FileReader("companies_fix.csv")))
         {
             CSVFile.readLine();// Skip header
             String dataRow = CSVFile.readLine();
