@@ -53,7 +53,7 @@ public class WindowModel
         return CompanyObsArrayList;
     }
 
-    /**
+  /**
      * Gets the companies that contains the searchresult and updates the
      * tableview with the observablelist
      *
@@ -62,7 +62,7 @@ public class WindowModel
     public void Search(String searchText) throws Inn2PowerException
     {
         CompanyObsArrayList.clear();
-        List<Company> result = search.getSearchResult(bll.getAllCompanies(), searchText);
+        List<Company> result = bll.getSearchResult(searchText);
         CompanyObsArrayList.addAll(result);
     }
 

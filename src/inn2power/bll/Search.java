@@ -13,7 +13,7 @@ public class Search
 
     /**
      * Selecte the companies that contains the searched text and returns them as
-     * a list
+     * a list -- IS NOT USED ANYMORE!
      *
      * @param companies
      * @param searchText

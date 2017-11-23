@@ -143,5 +143,76 @@ public class OurCompanyDAO
             statement.execute("DELETE FROM Company WHERE id =" + company.getId());
         }
     }
+    
+    
+    /**
+     * Sends query to db that selects the companies that contains the searchtext
+     * @param searchText
+     * @return List company
+     * @throws SQLServerException
+     * @throws SQLException 
+     */
+    public List<Company> getSearchResult(String searchText) throws SQLServerException, SQLException
+    {
+        if(!searchText.equals("")){
+            try (Connection con = dbConnector.getConnection())
+            {
+                String sql;
+                ResultSet rs;
+                if(isNumeric(searchText))
+                {
+                    sql = "SELECT * FROM Company WHERE id = ?";
+                    PreparedStatement preparedStatement = con.prepareStatement(sql);
+                    preparedStatement.setInt(1, Integer.parseInt(searchText));
+                    rs = preparedStatement.executeQuery();
+                }
+                else
+                {
+                    sql = "SELECT * FROM Company WHERE name LIKE ? OR address LIKE ?";
+                    PreparedStatement preparedStatement = con.prepareStatement(sql);
+                    preparedStatement.setString(1, "%"+searchText+"%");
+                    preparedStatement.setString(2, "%"+searchText+"%");
+                    rs = preparedStatement.executeQuery();
+                }
+               
+
+                List<Company> allCompanies = new ArrayList<>(); 
+
+
+                while (rs.next()) 
+                {
+                    Company company = getCompanyFromResultSetRow(rs);
+                    allCompanies.add(company);
+                }
+                 
+                    
+                return allCompanies;
+                
+
+            }
+        }else{
+        
+            return getAllCompanies();
+        }
+        
+    }
+    
+    /**
+     * Checks if a given string is numeric 
+     * @param str
+     * @return 
+     */
+    public static boolean isNumeric(String str)  
+    {  
+      try  
+      {  
+        double d = Double.parseDouble(str);  
+      }  
+      catch(NumberFormatException nfe)  
+      {  
+        return false;  
+      }  
+      return true;  
+    }
 
 }
