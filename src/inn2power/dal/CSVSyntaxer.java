@@ -35,7 +35,7 @@ public class CSVSyntaxer
                  String line = input.nextLine();
                  String[] split = line.split(",");
                  String out;
-                 if(split.length > 9){
+                 if(split.length > 8){
                      if(split[1].startsWith("\"")){
                          split[1] = split[1].substring(1);
                      }
