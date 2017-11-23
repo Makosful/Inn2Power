@@ -8,6 +8,7 @@ package inn2power.gui.model;
 import be.Company;
 import bll.Inn2PowerException;
 import inn2power.bll.BllManager;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -35,13 +36,13 @@ public class CreateCompanyModel
     public CreateCompanyModel() throws IOException, Inn2PowerException
     {
         bm = new BllManager();
-        
-        fileReaderAfrica = new FileReader("C:\\Users\\Hussain\\Documents\\NetBeansProjects\\testGit\\Inn2Power\\Inn2Power\\regions\\AfricaCountryList.csv");
-        fileReaderEurope = new FileReader("C:\\Users\\Hussain\\Documents\\NetBeansProjects\\testGit\\Inn2Power\\Inn2Power\\regions\\EuropeCountryList.csv");
-        fileReaderSA = new FileReader("C:\\Users\\Hussain\\Documents\\NetBeansProjects\\testGit\\Inn2Power\\Inn2Power\\regions\\SAmericaCountryList.csv");
-        fileReaderOceania = new FileReader("C:\\Users\\Hussain\\Documents\\NetBeansProjects\\testGit\\Inn2Power\\Inn2Power\\regions\\OceaniaCountryList.csv");
-        fileReaderNA = new FileReader("C:\\Users\\Hussain\\Documents\\NetBeansProjects\\testGit\\Inn2Power\\Inn2Power\\regions\\NAmericaCountryList.csv");
-        fileReaderAsia = new FileReader("C:\\Users\\Hussain\\Documents\\NetBeansProjects\\testGit\\Inn2Power\\Inn2Power\\regions\\AsiaCountryList.csv");
+        String st = new File(".").getAbsolutePath();
+        fileReaderAfrica = new FileReader(st+"\\regions\\AfricaCountryList.csv");
+        fileReaderEurope = new FileReader(st+"\\regions\\EuropeCountryList.csv");
+        fileReaderSA = new FileReader(st+"\\regions\\SAmericaCountryList.csv");
+        fileReaderOceania = new FileReader(st+"\\regions\\OceaniaCountryList.csv");
+        fileReaderNA = new FileReader(st+"\\regions\\NAmericaCountryList.csv");
+        fileReaderAsia = new FileReader(st+"\\regions\\AsiaCountryList.csv");
     }
     
     public void createCompany(String name, String address, String country, String website, String supplyChainCat, String businessRole, double lat, double lng, int sme) throws SQLException
