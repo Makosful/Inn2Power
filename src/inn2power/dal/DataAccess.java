@@ -98,5 +98,26 @@ public class DataAccess
     {
         return logic.getRelationalNetwork(source, depth);
     }
+    
+    
+    /**
+     * Return list of companies that contains searchresult from OurCompanyDAO
+     * @param searchText
+     * @return list of 
+     * @throws bll.Inn2PowerException 
+     */
+    public List<Company> getSearchResult(String searchText) throws bll.Inn2PowerException
+    {
+        try
+        {
+            return  ocDAO.getSearchResult(searchText);
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 
 }

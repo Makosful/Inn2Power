@@ -76,4 +76,15 @@ public class BllManager
         ourCompanyDAO.removeCompany(company);
     }
     
+    /**
+     * returns list of companies that contains searchresult 
+     * @param searchText
+     * @return list of companies
+     * @throws Inn2PowerException 
+     */
+    public List<Company> getSearchResult(String searchText) throws Inn2PowerException
+    {
+        return data.getSearchResult(searchText);
+    }
+    
 }
