@@ -1,11 +1,6 @@
 package inn2power;
 
-import inn2power.dal.Countries;
-import inn2power.gui.controller.MainWindowController;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,6 +32,6 @@ public class Inn2Power extends Application
      */
     public static void main(String[] args) throws IOException
     {
-        launch(args);        
+        launch(args);
     }
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="168.0" prefWidth="230.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inn2power.gui.controller.DeleteCompanyConfirmationController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0">
+         <children>
+            <Button layoutX="19.0" layoutY="122.0" mnemonicParsing="false" onAction="#deleteYes" prefWidth="70.0" text="Yes" />
+            <Button layoutX="121.0" layoutY="122.0" mnemonicParsing="false" onAction="#deleteNo" prefWidth="70.0" text="No" />
+            <Label fx:id="lblCompany" layoutX="54.0" layoutY="20.0" text="Company">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="34.0" text="You're about to delete:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="69.0" layoutY="55.0" text="Are you sure?" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

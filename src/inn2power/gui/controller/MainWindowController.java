@@ -51,10 +51,6 @@ import javafx.stage.Stage;
 public class MainWindowController implements Initializable
 {
 
-  
-
-   
-
 //<editor-fold defaultstate="collapsed" desc="FXML elements & Variables">
     @FXML
     private TableView<Company> tableView;
@@ -128,7 +124,7 @@ public class MainWindowController implements Initializable
     private SplitPane splitPane;
     @FXML
     private ComboBox<String> comboBoxCountries;
-    
+
     private Label lblStartCoords;
     private Label lblTargetCoords;
     private ObservableList<String> fileCountries;
@@ -137,7 +133,6 @@ public class MainWindowController implements Initializable
     private String sourceWebsite;
     private String targetWebsite;
 //</editor-fold>
-
 
     /**
      * Constructor
@@ -591,83 +586,81 @@ public class MainWindowController implements Initializable
 
                 //Gets the RadioButton clicked by the user by typecasting the toggle.
                 RadioButton newRb = (RadioButton) newToggle;
-                
-                
-               
-                switch (newRb.getId()) {
-                    case "isSME":
-                {
-                    try
-                    {
-                        wm.setSMEFilter(1);
-                    }
-                    catch (Inn2PowerException ex)
-                    {
-                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                             break;
-                    case "isNotSME":
-                {
-                    try
-                    {
-                        wm.setSMEFilter(0);
-                    }
-                    catch (Inn2PowerException ex)
-                    {
-                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                             break;
-                    case "SMENotDeclared":
-                {
-                    try
-                    {
-                        wm.setSMEFilter(-1);
-                    }
-                    catch (Inn2PowerException ex)
-                    {
-                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                             break;
-                    case "isBothSME":
-                {
-                    try
-                    {
-                        wm.setSMEFilter(3);
-                    }
-                    catch (Inn2PowerException ex)
-                    {
-                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                             break;
-                    case "noSMEFilter":
-                {
-                    try
-                    {
-                        wm.setSMEFilter(2);
-                    }
-                    catch (Inn2PowerException ex)
-                    {
-                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                             break;
-                }
 
+                switch (newRb.getId())
+                {
+                    case "isSME":
+                    {
+                        try
+                        {
+                            wm.setSMEFilter(1);
+                        }
+                        catch (Inn2PowerException ex)
+                        {
+                            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    break;
+                    case "isNotSME":
+                    {
+                        try
+                        {
+                            wm.setSMEFilter(0);
+                        }
+                        catch (Inn2PowerException ex)
+                        {
+                            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    break;
+                    case "SMENotDeclared":
+                    {
+                        try
+                        {
+                            wm.setSMEFilter(-1);
+                        }
+                        catch (Inn2PowerException ex)
+                        {
+                            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    break;
+                    case "isBothSME":
+                    {
+                        try
+                        {
+                            wm.setSMEFilter(3);
+                        }
+                        catch (Inn2PowerException ex)
+                        {
+                            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    break;
+                    case "noSMEFilter":
+                    {
+                        try
+                        {
+                            wm.setSMEFilter(2);
+                        }
+                        catch (Inn2PowerException ex)
+                        {
+                            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    break;
+                }
 
             }
         });
     }
-    
-    
-    
+
     /**
      * Window, to register company.
+     *
      * @param event
-     * @throws IOException 
+     *
+     * @throws IOException
      */
     @FXML
     private void openCompanyRegister(ActionEvent event) throws IOException
@@ -681,20 +674,43 @@ public class MainWindowController implements Initializable
 
             CreateCompanyController controller;
             controller = fxmlLoader.getController();
-            
-            stage.setScene(new Scene(root));  
+
+            stage.setScene(new Scene(root));
             stage.showAndWait();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             System.out.println("todo");
         }
     }
+
     @FXML
     private void removeCompany(ActionEvent event) throws SQLException
     {
-        Company selectedCompany = tableView.getSelectionModel().getSelectedItem();
-        wm.removeCompany(selectedCompany);
+
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inn2power/gui/view/DeleteCompanyConfirmation.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            DeleteCompanyConfirmationController controller;
+            controller = fxmlLoader.getController();
+
+            Company selectedCompany
+                    = tableView.getSelectionModel().getSelectedItem();
+
+            controller.setContextCompany(selectedCompany, wm);
+
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+
     }
 }
-

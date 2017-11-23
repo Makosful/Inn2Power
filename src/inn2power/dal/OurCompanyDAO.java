@@ -7,7 +7,6 @@ package inn2power.dal;
 
 import be.Company;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -67,6 +66,7 @@ public class OurCompanyDAO
      *
      * @param name The name to search for. I sure hope no one would send
      *             malicious data this way...
+     *
      * @return The List of companies that match our search.
      */
     public List<Company> getCompaniesInAnSqlInjectionInsecureWay(String name) throws SQLException
@@ -112,7 +112,9 @@ public class OurCompanyDAO
      * Extracts a single company from the ResultSet at the current row
      *
      * @param rs The result set to work with
+     *
      * @return The Company represented at the current row
+     *
      * @throws SQLException
      */
     private Company getCompanyFromResultSetRow(ResultSet rs) throws SQLException
@@ -132,13 +134,13 @@ public class OurCompanyDAO
         Company company = new Company(id, name, country, address, website, supply, business, lat, lng, isSME);
         return company;
     }
-    
+
     public void removeCompany(Company company) throws SQLServerException, SQLException
     {
         try (Connection con = dbConnector.getConnection())
         {
             Statement statement = con.createStatement();
-            statement.execute("DELETE FROM WHERE id =" + company.getId());
+            statement.execute("DELETE FROM Company WHERE id =" + company.getId());
         }
     }
 
