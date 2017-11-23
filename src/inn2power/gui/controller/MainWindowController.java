@@ -680,7 +680,7 @@ public class MainWindowController implements Initializable
         }
         catch (Exception e)
         {
-            System.out.println("todo");
+            
         }
     }
 
