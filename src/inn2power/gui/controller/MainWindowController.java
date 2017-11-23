@@ -442,13 +442,6 @@ public class MainWindowController implements Initializable
         try
         {
             Company comp = tableView.getSelectionModel().getSelectedItem();
-
-            // Temp code to test relations
-            System.out.println(
-                    wm.getRelationNetwork(comp, 1)
-            );
-            // End of temp code
-
             lblStartId.setText(comp.getId() + "");
             lblStartName.setText(comp.getName());
             lblStartCountry.setText(comp.getCountry());
